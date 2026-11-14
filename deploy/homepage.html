@@ -400,6 +400,46 @@
 
   <!-- Stylesheet -->
   <style>
+    /* Global Viewport & Theme Integration Overrides */
+    html, body, .wp-site-blocks, main, .entry-content, .wp-block-group {
+      background-color: #030605 !important;
+      color: #7df9a6 !important;
+    }
+
+    .wp-block-post-title {
+      display: none !important;
+    }
+
+    header.wp-block-template-part {
+      background-color: #020403 !important;
+      border-bottom: 1px solid #14442a !important;
+      padding: 0 20px !important;
+    }
+
+    .wp-block-site-title a {
+      color: #00ff66 !important;
+      font-family: 'Fira Code', 'Courier New', monospace !important;
+      letter-spacing: 2px !important;
+      text-transform: uppercase !important;
+      text-shadow: 0 0 8px rgba(0, 255, 102, 0.6) !important;
+    }
+
+    .wp-block-navigation .wp-block-navigation-item__content {
+      color: #8ce4a7 !important;
+      font-family: 'Fira Code', 'Courier New', monospace !important;
+      font-size: 0.82rem !important;
+      letter-spacing: 1px !important;
+    }
+
+    .wp-block-navigation .wp-block-navigation-item__content:hover {
+      color: #00ff66 !important;
+      text-shadow: 0 0 8px rgba(0, 255, 102, 0.8) !important;
+    }
+
+    footer.wp-block-template-part {
+      display: none !important;
+    }
+
     #united-beats-terminal {
       background: radial-gradient(circle at 50% 0%, #0d1a15 0%, #040807 70%, #020403 100%);
       color: #7df9a6;
