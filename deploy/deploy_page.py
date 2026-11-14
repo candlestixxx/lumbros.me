@@ -1,6 +1,11 @@
+import os
 import subprocess
 
-with open('/tmp/homepage.html', 'r', encoding='utf-8') as f:
+html_path = '/var/www/lumbros.me/deploy/homepage.html'
+if not os.path.exists(html_path):
+    html_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'homepage.html'))
+
+with open(html_path, 'r', encoding='utf-8') as f:
     raw_html = f.read()
 
 block_content = f"<!-- wp:html -->\n{raw_html}\n<!-- /wp:html -->"
