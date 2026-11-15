@@ -41,6 +41,10 @@ posts_sec = posts_match.group(1) if posts_match else ''
 footer_match = re.search(r'(<footer class="terminal-footer">[\s\S]*?</footer>)', home)
 footer = footer_match.group(1) if footer_match else ''
 
+# Extract YouTube Audio Engine
+audio_hud_match = re.search(r'(<!-- YouTube Audio Engine -->[\s\S]*?<!-- End YouTube Audio Engine -->)', home)
+audio_hud = audio_hud_match.group(1) if audio_hud_match else ''
+
 def build_page(page_title, active_slug, main_content_html):
     return f'''<div class="terminal-wrapper theme-cyberpunk">
   <!-- Top Terminal HUD Banner -->
@@ -82,6 +86,8 @@ def build_page(page_title, active_slug, main_content_html):
   {sub_dock}
 
   {footer}
+
+  {audio_hud}
 
   {styles}
 
