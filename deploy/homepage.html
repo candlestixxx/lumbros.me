@@ -856,43 +856,59 @@
 
     <div class="tech-feature-grid">
       <div class="tech-feature-box">
-        <div class="box-header">
-          <span class="box-num">01</span>
-          <h4>AI-Driven Dynamic Routing</h4>
+        <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+        <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+        <div class="tech-box-inner">
+          <div class="box-header">
+            <span class="box-num">01</span>
+            <h4>AI-Driven Dynamic Routing</h4>
+          </div>
+          <p>
+            Replaces static, brittle routing configurations with an intelligent runtime projection. Upon payload ingestion, the gateway extracts tenant fingerprints via API tokens, custom domain headers, or payload inspection, dispatching requests into dedicated backend pools without code rebuilds.
+          </p>
         </div>
-        <p>
-          Replaces static, brittle routing configurations with an intelligent runtime projection. Upon payload ingestion, the gateway extracts tenant fingerprints via API tokens, custom domain headers, or payload inspection, dispatching requests into dedicated backend pools without code rebuilds.
-        </p>
       </div>
 
       <div class="tech-feature-box">
-        <div class="box-header">
-          <span class="box-num">02</span>
-          <h4>Radial Vector Secret Storage</h4>
+        <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+        <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+        <div class="tech-box-inner">
+          <div class="box-header">
+            <span class="box-num">02</span>
+            <h4>Radial Vector Secret Storage</h4>
+          </div>
+          <p>
+            Tenants occupy designated concentric polar coordinate rings $(r, \theta, z)$. Database URIs, OAuth tokens, and API credentials are encrypted with an envelope cipher, enabling constant-time $O(1)$ spatial lookup and zero cross-tenant credential leakage.
+          </p>
         </div>
-        <p>
-          Tenants occupy designated concentric polar coordinate rings $(r, \theta, z)$. Database URIs, OAuth tokens, and API credentials are encrypted with an envelope cipher, enabling constant-time $O(1)$ spatial lookup and zero cross-tenant credential leakage.
-        </p>
       </div>
 
       <div class="tech-feature-box">
-        <div class="box-header">
-          <span class="box-num">03</span>
-          <h4>Automated Zero-Downtime Onboarding</h4>
+        <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+        <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+        <div class="tech-box-inner">
+          <div class="box-header">
+            <span class="box-num">03</span>
+            <h4>Automated Zero-Downtime Onboarding</h4>
+          </div>
+          <p>
+            Onboarding new enterprises is treated as a simple database write rather than a risky code rollout. The in-memory gateway routing table synchronizes in milliseconds, granting new tenants immediate access to active live traffic.
+          </p>
         </div>
-        <p>
-          Onboarding new enterprises is treated as a simple database write rather than a risky code rollout. The in-memory gateway routing table synchronizes in milliseconds, granting new tenants immediate access to active live traffic.
-        </p>
       </div>
 
       <div class="tech-feature-box">
-        <div class="box-header">
-          <span class="box-num">04</span>
-          <h4>Model Context Protocol (MCP) Mesh</h4>
+        <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+        <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+        <div class="tech-box-inner">
+          <div class="box-header">
+            <span class="box-num">04</span>
+            <h4>Model Context Protocol (MCP) Mesh</h4>
+          </div>
+          <p>
+            Functions natively as a TormentNexus-powered MCP control plane, standardizing how external AI swarms (Claude, Gemini, Hermes, Ollama) interact with corporate tools while enforcing cryptographic role-based access control.
+          </p>
         </div>
-        <p>
-          Functions natively as a TormentNexus-powered MCP control plane, standardizing how external AI swarms (Claude, Gemini, Hermes, Ollama) interact with corporate tools while enforcing cryptographic role-based access control.
-        </p>
       </div>
     </div>
 
@@ -3296,10 +3312,39 @@
     }
 
     .tech-feature-box {
-      background: rgba(0, 20, 10, 0.45);
-      border: 1px solid #174e2d;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 0, 51, 0.12) 0%,
+        rgba(255, 61, 0, 0.12) 9%,
+        rgba(255, 119, 0, 0.12) 18%,
+        rgba(255, 170, 0, 0.12) 27%,
+        rgba(255, 230, 0, 0.12) 36%,
+        rgba(180, 230, 0, 0.16) 45%, /* PEAR */
+        rgba(0, 255, 102, 0.24) 50%, /* GREEN MIDPOINT */
+        rgba(0, 240, 170, 0.16) 55%, /* TEAL */
+        rgba(0, 229, 255, 0.12) 64%,
+        rgba(0, 119, 255, 0.12) 73%,
+        rgba(88, 0, 255, 0.12) 82%,
+        rgba(224, 0, 153, 0.12) 100%
+      );
+      border: 1px solid rgba(0, 255, 102, 0.28);
       border-radius: 8px;
-      padding: 20px;
+      padding: 22px;
+      box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.6);
+      transition: all 0.25s ease;
+    }
+
+    .tech-feature-box:hover {
+      border-color: #00ff66;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8), 0 0 16px rgba(0, 255, 102, 0.35);
+    }
+
+    .tech-box-inner {
+      position: relative;
+      z-index: 3;
     }
 
     .tech-feature-box .box-header {
@@ -5880,7 +5925,8 @@
     body[data-theme="light"] .gh-see-more-btn,
     body[data-theme="light"] .acuity-node-btn,
     body[data-theme="light"] .polarity-btn,
-    body[data-theme="light"] .telem-item {
+    body[data-theme="light"] .telem-item,
+    body[data-theme="light"] .tech-feature-box {
       background: linear-gradient(
         90deg,
         rgba(255, 0, 51, 0.08) 0%,
@@ -5897,6 +5943,20 @@
         rgba(224, 0, 153, 0.08) 100%
       ) !important;
       border-color: #a8d6bc !important;
+    }
+
+    body[data-theme="light"] .tech-feature-box h4 {
+      color: #03140a !important;
+    }
+
+    body[data-theme="light"] .tech-feature-box p {
+      color: #0f3d1e !important;
+    }
+
+    body[data-theme="light"] .tech-feature-box .box-num {
+      background: rgba(0, 122, 48, 0.12) !important;
+      color: #007a30 !important;
+      border-color: #007a30 !important;
     }
 
     body[data-theme="light"] .repo-name {
