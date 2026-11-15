@@ -30,15 +30,82 @@
     </div>
   </header>
 
-  <!-- Navigation / Quick Toggles -->
-  <div class="quick-nav">
-    <a href="#executive-summary" class="nav-chip">◈ 01. EXECUTIVE DIRECTIVE</a>
-    <a href="#founders" class="nav-chip">◈ 02. ARCHITECTS DOSSIER</a>
-    <a href="#architecture" class="nav-chip">◈ 03. SYSTEM TOPOLOGY</a>
-    <a href="#projects" class="nav-chip">◈ 04. ACTIVE DEPLOYMENTS</a>
-    <a href="#market" class="nav-chip">◈ 05. MARKET POSITIONING</a>
-    <a href="#revenue" class="nav-chip">◈ 06. MONETIZATION</a>
+  <!-- Master 12-Color Spectrum HUD Analyzer Bar -->
+  <div class="spectrum-hud-container">
+    <div class="spectrum-hud-header">
+      <span class="hud-tag">⚡ SPECTRUM OSCILLATOR // 12-WAVELENGTH CHROMATIC MATRIX</span>
+      <span class="hud-status">● GREEN-CENTER HARMONIC LOCKED</span>
+    </div>
+    <div class="master-spectrum-track">
+      <span class="master-scan-bar master-bar-left"></span>
+      <div class="center-lock-indicator"><span class="center-pip"></span><span class="center-label">GREEN 50%</span></div>
+      <span class="master-scan-bar master-bar-right"></span>
+    </div>
   </div>
+
+  <!-- 12-Color Spectrum Menu Text Boxes -->
+  <nav class="quick-nav">
+    <a href="#executive-summary" class="nav-chip chip-red">
+      <span class="spectrum-bar bar-left"></span>
+      <span class="spectrum-bar bar-right"></span>
+      <span class="chip-content"><span class="chip-dot"></span>01. DIRECTIVE</span>
+    </a>
+    <a href="#executive-summary" class="nav-chip chip-coral">
+      <span class="spectrum-bar bar-left"></span>
+      <span class="spectrum-bar bar-right"></span>
+      <span class="chip-content"><span class="chip-dot"></span>02. MANIFESTO</span>
+    </a>
+    <a href="#founders" class="nav-chip chip-amber">
+      <span class="spectrum-bar bar-left"></span>
+      <span class="spectrum-bar bar-right"></span>
+      <span class="chip-content"><span class="chip-dot"></span>03. ARCHITECTS</span>
+    </a>
+    <a href="#founders" class="nav-chip chip-gold">
+      <span class="spectrum-bar bar-left"></span>
+      <span class="spectrum-bar bar-right"></span>
+      <span class="chip-content"><span class="chip-dot"></span>04. LEADERSHIP</span>
+    </a>
+    <a href="#architecture" class="nav-chip chip-yellow">
+      <span class="spectrum-bar bar-left"></span>
+      <span class="spectrum-bar bar-right"></span>
+      <span class="chip-content"><span class="chip-dot"></span>05. ENGINE</span>
+    </a>
+    <a href="#architecture" class="nav-chip chip-pear">
+      <span class="spectrum-bar bar-left"></span>
+      <span class="spectrum-bar bar-right"></span>
+      <span class="chip-content"><span class="chip-dot"></span>06. RADIAL VAULT [PEAR]</span>
+    </a>
+    <a href="#architecture" class="nav-chip chip-green is-center-node">
+      <span class="spectrum-bar bar-left"></span>
+      <span class="spectrum-bar bar-right"></span>
+      <span class="chip-content"><span class="chip-dot"></span>07. TOPOLOGY [GREEN-MID]</span>
+    </a>
+    <a href="#projects" class="nav-chip chip-mint">
+      <span class="spectrum-bar bar-left"></span>
+      <span class="spectrum-bar bar-right"></span>
+      <span class="chip-content"><span class="chip-dot"></span>08. DISPATCH</span>
+    </a>
+    <a href="#projects" class="nav-chip chip-cyan">
+      <span class="spectrum-bar bar-left"></span>
+      <span class="spectrum-bar bar-right"></span>
+      <span class="chip-content"><span class="chip-dot"></span>09. DEPLOYMENTS</span>
+    </a>
+    <a href="#projects" class="nav-chip chip-blue">
+      <span class="spectrum-bar bar-left"></span>
+      <span class="spectrum-bar bar-right"></span>
+      <span class="chip-content"><span class="chip-dot"></span>10. GITHUB ECOSYSTEM</span>
+    </a>
+    <a href="#market" class="nav-chip chip-indigo">
+      <span class="spectrum-bar bar-left"></span>
+      <span class="spectrum-bar bar-right"></span>
+      <span class="chip-content"><span class="chip-dot"></span>11. MARKET MATRIX</span>
+    </a>
+    <a href="#revenue" class="nav-chip chip-magenta">
+      <span class="spectrum-bar bar-left"></span>
+      <span class="spectrum-bar bar-right"></span>
+      <span class="chip-content"><span class="chip-dot"></span>12. MONETIZATION</span>
+    </a>
+  </nav>
 
   <!-- Section 1: Executive Summary -->
   <section id="executive-summary" class="terminal-section">
@@ -61,13 +128,21 @@
 
     <div class="founders-grid">
       <!-- Lumbros Profile Card -->
-      <article class="cyber-card">
+      <article class="cyber-card founder-lum-card">
         <div class="card-glow-bar"></div>
         <div class="card-meta">
           <span class="id-tag">ID: ARCH_001</span>
           <span class="clearance-tag">TIER_0 EXECUTIVE</span>
         </div>
-        <h3 class="founder-name">LUMBROS KOURLOS</h3>
+        <div class="founder-headline-container">
+          <div class="prismatic-aura-frame"></div>
+          <h3 class="founder-name">
+            <span class="founder-name-kinetic">
+              <span class="founder-name-chroma">LUMBROS KOURLOS</span>
+              <span class="founder-name-glint"></span>
+            </span>
+          </h3>
+        </div>
         <div class="founder-role">SYS_ARCHITECT | CREATIVE DIRECTOR | CO-FOUNDER</div>
         <div class="founder-bio">
           <p>
@@ -86,13 +161,21 @@
       </article>
 
       <!-- Bob Profile Card -->
-      <article class="cyber-card">
+      <article class="cyber-card founder-bob-card">
         <div class="card-glow-bar"></div>
         <div class="card-meta">
           <span class="id-tag">ID: ENG_001</span>
           <span class="clearance-tag">TIER_0 EXECUTIVE</span>
         </div>
-        <h3 class="founder-name">ROBERT MATTHEW PELLONI</h3>
+        <div class="founder-headline-container">
+          <div class="prismatic-aura-frame"></div>
+          <h3 class="founder-name">
+            <span class="founder-name-kinetic">
+              <span class="founder-name-chroma">ROBERT MATTHEW PELLONI</span>
+              <span class="founder-name-glint"></span>
+            </span>
+          </h3>
+        </div>
         <div class="founder-role">HEAD_DEVELOPER | MATH_ENGINEER | CO-FOUNDER</div>
         <div class="founder-bio">
           <p>
@@ -556,33 +639,283 @@
 
     @keyframes terminal-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-    /* Quick Nav */
-    .quick-nav {
+    /* =========================================================================
+       12-Color Spectrum Menu Boxes with Oscillating Non-Colliding Twin Bars
+       ========================================================================= */
+    .spectrum-hud-container {
+      background: rgba(4, 10, 7, 0.7);
+      border: 1px solid #1c5e37;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .spectrum-hud-header {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-      margin-bottom: 40px;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 0.72rem;
+      letter-spacing: 1.5px;
+      color: #4ef38d;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .hud-status {
+      color: #00ff66;
+      text-shadow: 0 0 8px rgba(0,255,102,0.6);
+    }
+
+    .master-spectrum-track {
+      position: relative;
+      height: 12px;
+      border-radius: 6px;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 0, 51, 0.5) 0%,
+        rgba(255, 61, 0, 0.5) 9%,
+        rgba(255, 119, 0, 0.5) 18%,
+        rgba(255, 170, 0, 0.5) 27%,
+        rgba(255, 230, 0, 0.5) 36%,
+        rgba(180, 230, 0, 0.65) 45%, /* PEAR */
+        rgba(0, 255, 102, 0.85) 50%, /* GREEN IN THE MIDDLE */
+        rgba(0, 240, 170, 0.65) 55%, /* TEAL */
+        rgba(0, 229, 255, 0.5) 64%,
+        rgba(0, 119, 255, 0.5) 73%,
+        rgba(88, 0, 255, 0.5) 82%,
+        rgba(224, 0, 153, 0.5) 100%
+      );
+      overflow: hidden;
+      border: 1px solid #14442a;
+      box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.7);
+    }
+
+    .center-lock-indicator {
+      position: absolute;
+      left: 50%;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: #00ff66;
+      transform: translateX(-50%);
+      box-shadow: 0 0 10px #00ff66, 0 0 20px #00ff66;
+      z-index: 3;
+    }
+
+    .center-label { display: none; }
+
+    .master-scan-bar {
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 4px;
+      border-radius: 2px;
+      pointer-events: none;
+    }
+
+    .master-bar-left {
+      animation: master-scan-left 5.4s ease-in-out infinite alternate;
+    }
+
+    .master-bar-right {
+      animation: master-scan-right 6.8s ease-in-out infinite alternate;
+    }
+
+    @keyframes master-scan-left {
+      0%   { left: 2%;  background-color: #ff0033; box-shadow: 0 0 10px #ff0033, 0 0 18px #ff0033; }
+      20%  { left: 12%; background-color: #ff5500; box-shadow: 0 0 10px #ff5500, 0 0 18px #ff5500; }
+      45%  { left: 24%; background-color: #ffaa00; box-shadow: 0 0 10px #ffaa00, 0 0 18px #ffaa00; }
+      70%  { left: 35%; background-color: #ffe600; box-shadow: 0 0 10px #ffe600, 0 0 18px #ffe600; }
+      88%  { left: 42%; background-color: #b4e600; box-shadow: 0 0 14px #b4e600, 0 0 24px #b4e600; } /* PEAR */
+      100% { left: 47%; background-color: #44ff00; box-shadow: 0 0 14px #44ff00, 0 0 26px #44ff00; }
+    }
+
+    @keyframes master-scan-right {
+      0%   { left: 53%; background-color: #00ff66; box-shadow: 0 0 14px #00ff66, 0 0 26px #00ff66; } /* GREEN CENTER */
+      20%  { left: 61%; background-color: #00f0aa; box-shadow: 0 0 12px #00f0aa, 0 0 22px #00f0aa; } /* MINT/TEAL */
+      45%  { left: 71%; background-color: #00e5ff; box-shadow: 0 0 10px #00e5ff, 0 0 20px #00e5ff; } /* CYAN */
+      68%  { left: 81%; background-color: #0077ff; box-shadow: 0 0 10px #0077ff, 0 0 20px #0077ff; } /* BLUE */
+      88%  { left: 91%; background-color: #5800ff; box-shadow: 0 0 10px #5800ff, 0 0 20px #5800ff; } /* INDIGO */
+      100% { left: 98%; background-color: #e00099; box-shadow: 0 0 10px #e00099, 0 0 20px #e00099; } /* MAGENTA */
+    }
+
+    /* 12 Spectrum Navigation Chips Grid */
+    .quick-nav {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 12px;
+      margin-bottom: 45px;
       position: relative;
       z-index: 2;
     }
 
     .nav-chip {
-      color: #8ce4a7;
-      background: rgba(0, 35, 15, 0.4);
-      border: 1px solid #1c5e37;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 0.78rem;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 1px;
       text-decoration: none;
-      transition: all 0.2s ease;
+      color: #e0ffe6;
+      border: 1px solid rgba(0, 255, 102, 0.2);
+      /* Transparent 12-color spectrum background with GREEN in the center */
+      background: linear-gradient(
+        90deg,
+        rgba(255, 0, 51, 0.12) 0%,
+        rgba(255, 61, 0, 0.12) 9%,
+        rgba(255, 119, 0, 0.12) 18%,
+        rgba(255, 170, 0, 0.12) 27%,
+        rgba(255, 230, 0, 0.12) 36%,
+        rgba(180, 230, 0, 0.16) 45%,  /* PEAR */
+        rgba(0, 255, 102, 0.24) 50%,  /* GREEN IN THE MIDDLE */
+        rgba(0, 240, 170, 0.16) 55%,  /* TEAL */
+        rgba(0, 229, 255, 0.12) 64%,
+        rgba(0, 119, 255, 0.12) 73%,
+        rgba(88, 0, 255, 0.12) 82%,
+        rgba(224, 0, 153, 0.12) 100%
+      );
+      backdrop-filter: blur(4px);
+      transition: all 0.25s ease;
+      min-height: 48px;
+      box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.5);
     }
 
+    .nav-chip .chip-content {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95);
+      pointer-events: none;
+    }
+
+    .chip-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 6px currentColor;
+    }
+
+    /* Individual Color Accents for the 12 Spectrum Nodes */
+    .chip-red     { border-color: rgba(255, 0, 51, 0.45);   color: #ff99aa; }
+    .chip-coral   { border-color: rgba(255, 61, 0, 0.45);   color: #ffb399; }
+    .chip-amber   { border-color: rgba(255, 119, 0, 0.45);  color: #ffcc99; }
+    .chip-gold    { border-color: rgba(255, 170, 0, 0.45);  color: #ffe099; }
+    .chip-yellow  { border-color: rgba(255, 230, 0, 0.45);  color: #ffff99; }
+    .chip-pear    { border-color: rgba(180, 230, 0, 0.55);  color: #e5ff80; } /* PEAR ACCENT */
+    .chip-green   { border-color: rgba(0, 255, 102, 0.7);   color: #80ffbf; } /* GREEN CENTER */
+    .chip-mint    { border-color: rgba(0, 240, 170, 0.45);  color: #80ffe0; }
+    .chip-cyan    { border-color: rgba(0, 229, 255, 0.45);  color: #99f5ff; }
+    .chip-blue    { border-color: rgba(0, 119, 255, 0.45);  color: #99ccff; }
+    .chip-indigo  { border-color: rgba(88, 0, 255, 0.45);   color: #ccb3ff; }
+    .chip-magenta { border-color: rgba(224, 0, 153, 0.45);  color: #ff99dd; }
+
     .nav-chip:hover {
-      color: #00ff66;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8), inset 0 0 25px rgba(0, 255, 102, 0.2);
       border-color: #00ff66;
-      background: rgba(0, 255, 102, 0.1);
-      box-shadow: 0 0 10px rgba(0, 255, 102, 0.25);
+      color: #ffffff;
+    }
+
+    .nav-chip.is-center-node {
+      border-width: 2px;
+      box-shadow: 0 0 18px rgba(0, 255, 102, 0.35), inset 0 0 15px rgba(0, 255, 102, 0.2);
+    }
+
+    /* Twin Floating Oscillating Vertical Bars (Never Colliding) */
+    .spectrum-bar {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.95;
+      border-radius: 2px;
+    }
+
+    /* Left Bar: Moves 2% to 47%, never crossing 50% */
+    .bar-left {
+      animation: chip-scan-left 5.6s ease-in-out infinite alternate;
+    }
+
+    /* Right Bar: Moves 53% to 98%, never crossing 50% */
+    .bar-right {
+      animation: chip-scan-right 7.2s ease-in-out infinite alternate;
+    }
+
+    @keyframes chip-scan-left {
+      0% {
+        left: 2%;
+        background-color: #ff0033;
+        box-shadow: 0 0 10px #ff0033, 0 0 18px rgba(255, 0, 51, 0.8);
+      }
+      22% {
+        left: 12%;
+        background-color: #ff5500;
+        box-shadow: 0 0 10px #ff5500, 0 0 18px rgba(255, 85, 0, 0.8);
+      }
+      45% {
+        left: 24%;
+        background-color: #ffaa00;
+        box-shadow: 0 0 10px #ffaa00, 0 0 18px rgba(255, 170, 0, 0.8);
+      }
+      68% {
+        left: 35%;
+        background-color: #ffe600;
+        box-shadow: 0 0 10px #ffe600, 0 0 18px rgba(255, 230, 0, 0.8);
+      }
+      87% {
+        left: 43%;
+        background-color: #b4e600; /* PEAR / CHARTREUSE HOVER STATE */
+        box-shadow: 0 0 14px #b4e600, 0 0 24px rgba(180, 230, 0, 0.95);
+      }
+      100% {
+        left: 47%;
+        background-color: #44ff00;
+        box-shadow: 0 0 14px #44ff00, 0 0 24px rgba(68, 255, 0, 0.95);
+      }
+    }
+
+    @keyframes chip-scan-right {
+      0% {
+        left: 53%;
+        background-color: #00ff66; /* CENTER GREEN HOVER STATE */
+        box-shadow: 0 0 14px #00ff66, 0 0 26px rgba(0, 255, 102, 0.95);
+      }
+      22% {
+        left: 62%;
+        background-color: #00f0aa; /* MINT / TEAL */
+        box-shadow: 0 0 12px #00f0aa, 0 0 20px rgba(0, 240, 170, 0.85);
+      }
+      46% {
+        left: 72%;
+        background-color: #00e5ff; /* CYAN */
+        box-shadow: 0 0 10px #00e5ff, 0 0 18px rgba(0, 229, 255, 0.85);
+      }
+      70% {
+        left: 82%;
+        background-color: #0077ff; /* BLUE */
+        box-shadow: 0 0 10px #0077ff, 0 0 18px rgba(0, 119, 255, 0.85);
+      }
+      88% {
+        left: 92%;
+        background-color: #5800ff; /* INDIGO */
+        box-shadow: 0 0 10px #5800ff, 0 0 18px rgba(88, 0, 255, 0.85);
+      }
+      100% {
+        left: 98%;
+        background-color: #e00099; /* MAGENTA */
+        box-shadow: 0 0 10px #e00099, 0 0 18px rgba(224, 0, 153, 0.85);
+      }
     }
 
     /* Terminal Sections */
@@ -664,11 +997,173 @@
       margin-bottom: 12px;
     }
 
+    /* =========================================================================
+       Founders Names: 7 Simultaneous Circulating Spectral Patterns
+       ========================================================================= */
+    .founder-headline-container {
+      position: relative;
+      margin: 12px 0 16px 0;
+      padding: 16px 14px;
+      border-radius: 8px;
+      background: rgba(2, 12, 6, 0.7);
+      border: 1px solid rgba(0, 255, 102, 0.25);
+      overflow: hidden;
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Pattern 6: Circulating 7-Color Prismatic Frame Aura */
+    .prismatic-aura-frame {
+      position: absolute;
+      top: -2px; left: -2px; right: -2px; bottom: -2px;
+      border-radius: 10px;
+      padding: 2px;
+      background: conic-gradient(
+        from 0deg,
+        #ff0055 0deg,
+        #ff8800 51.4deg,
+        #ffe600 102.8deg,
+        #b4e600 154.2deg,
+        #00ff66 205.7deg,
+        #00e5ff 257.1deg,
+        #8800ff 308.5deg,
+        #ff0055 360deg
+      );
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: pat6-frame-orbit 8.4s linear infinite;
+      pointer-events: none;
+      opacity: 0.85;
+    }
+
+    @keyframes pat6-frame-orbit {
+      0%   { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
     .founder-name {
-      color: #ffffff;
-      font-size: 1.35rem;
-      margin: 0 0 6px 0;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      margin: 0;
+      font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+      font-weight: 900;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      font-family: 'Fira Code', 'JetBrains Mono', monospace;
+      position: relative;
+      z-index: 2;
+      display: inline-block;
+      width: 100%;
+    }
+
+    /* Pattern 5: Polyrhythmic Kinetic Tracking & Scale Breathing */
+    .founder-name-kinetic {
+      display: inline-block;
+      position: relative;
+      animation: pat5-kinetic-pulse 5.6s ease-in-out infinite;
+    }
+
+    @keyframes pat5-kinetic-pulse {
+      0%, 100% {
+        transform: scale(1.0);
+        letter-spacing: 2px;
+      }
+      50% {
+        transform: scale(1.025);
+        letter-spacing: 3.5px;
+      }
+    }
+
+    /* Pattern 1, 2, 3, 7: Core Chromatic Glyph Rendering */
+    .founder-name-chroma {
+      display: inline-block;
+      /* Pattern 1: 7-Stop Continuous Flowing Spectrum Wave */
+      background: linear-gradient(
+        90deg,
+        #ff0055 0%,
+        #ff7700 14.3%,
+        #ffe600 28.6%,
+        #b4e600 42.9%, /* Pear */
+        #00ff66 57.1%, /* Emerald */
+        #00e5ff 71.4%, /* Cyan */
+        #8800ff 85.7%, /* Violet */
+        #ff0055 100%
+      );
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      
+      /* Pattern 1, 2, 3, 7 Motion */
+      animation: 
+        pat1-spectrum-drift 7.0s linear infinite,
+        pat2-chroma-aura 4.9s ease-in-out infinite,
+        pat3-rotary-hue 14.0s linear infinite,
+        pat7-quantum-shimmer 2.45s ease-in-out infinite alternate;
+    }
+
+    /* Pattern 1 Keyframe: 7-Stop Fluid Spectral Translation */
+    @keyframes pat1-spectrum-drift {
+      0%   { background-position: 0% 50%; }
+      100% { background-position: 300% 50%; }
+    }
+
+    /* Pattern 2 Keyframe: 7-Chord Chromatic Glow Rhythm */
+    @keyframes pat2-chroma-aura {
+      0% {
+        filter: drop-shadow(0 0 14px rgba(0, 255, 102, 0.9)) drop-shadow(0 0 28px rgba(0, 255, 102, 0.45));
+      }
+      14.3% {
+        filter: drop-shadow(0 0 16px rgba(180, 230, 0, 0.95)) drop-shadow(0 0 30px rgba(180, 230, 0, 0.5)); /* Pear Chord */
+      }
+      28.6% {
+        filter: drop-shadow(0 0 14px rgba(255, 170, 0, 0.9)) drop-shadow(0 0 28px rgba(255, 170, 0, 0.45));
+      }
+      42.9% {
+        filter: drop-shadow(0 0 16px rgba(255, 0, 85, 0.95)) drop-shadow(0 0 32px rgba(255, 0, 85, 0.5));
+      }
+      57.1% {
+        filter: drop-shadow(0 0 16px rgba(136, 0, 255, 0.95)) drop-shadow(0 0 30px rgba(136, 0, 255, 0.5));
+      }
+      71.4% {
+        filter: drop-shadow(0 0 14px rgba(0, 119, 255, 0.9)) drop-shadow(0 0 28px rgba(0, 119, 255, 0.45));
+      }
+      85.7% {
+        filter: drop-shadow(0 0 16px rgba(0, 229, 255, 0.95)) drop-shadow(0 0 30px rgba(0, 229, 255, 0.5));
+      }
+      100% {
+        filter: drop-shadow(0 0 14px rgba(0, 255, 102, 0.9)) drop-shadow(0 0 28px rgba(0, 255, 102, 0.45));
+      }
+    }
+
+    /* Pattern 3 Keyframe: 7-Wavelength Angular Continuous Modulation */
+    @keyframes pat3-rotary-hue {
+      0%   { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+
+    /* Pattern 4: 7-Phase Specular Laser Glint Streak */
+    .founder-name-glint {
+      position: absolute;
+      top: 0; left: -100%; width: 60%; height: 100%;
+      background: linear-gradient(
+        120deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.85) 50%,
+        transparent 70%
+      );
+      mix-blend-mode: overlay;
+      pointer-events: none;
+      animation: pat4-laser-glint 3.5s ease-in-out infinite;
+    }
+
+    @keyframes pat4-laser-glint {
+      0%, 30% { left: -100%; }
+      70%, 100% { left: 160%; }
+    }
+
+    /* Pattern 7: Quantum Micro-Luminance Shimmer */
+    @keyframes pat7-quantum-shimmer {
+      0%   { opacity: 0.92; }
+      50%  { opacity: 1.0; }
+      100% { opacity: 0.95; }
     }
 
     .founder-role {
