@@ -34,6 +34,19 @@
   </div>
 
   <section id="live-posts" class="terminal-section live-posts-section">
+    <div class="layer-spectrum-matrix" aria-hidden="true">
+      <svg class="matrix-svg" viewBox="0 0 1200 360" preserveAspectRatio="none">
+        <circle class="geo-shape geo-ring ring-1" cx="160" cy="180" r="130"></circle>
+        <circle class="geo-shape geo-ring ring-2" cx="160" cy="180" r="80"></circle>
+        <circle class="geo-shape geo-node" cx="160" cy="180" r="4"></circle>
+        <line class="geo-line line-h" x1="0" y1="180" x2="1200" y2="180"></line>
+        <line class="geo-line line-v" x1="160" y1="0" x2="160" y2="360"></line>
+        <path class="geo-shape geo-wave" d="M 320,180 Q 440,110 560,180 T 800,180 T 1040,180"></path>
+        <polygon class="geo-shape geo-polygon" points="980,110 1050,180 980,250 910,180"></polygon>
+        <circle class="geo-shape geo-node" cx="980" cy="180" r="5"></circle>
+      </svg>
+      <div class="matrix-grid-pattern"></div>
+    </div>
     <div class="section-badge"><span>[ SECTOR 0x03 ]</span> // LIVE POSTS : TRANSMISSION DIARY &amp; REAL-TIME COMMENTS</div>
     <h2 class="section-title unicode-headline">
       ⟦ 𝗟𝗜𝗩𝗘_𝗣𝗢𝗦𝗧𝗦 // 𝗧𝗥𝗔𝗡𝗦𝗠𝗜𝗦𝗦𝗜𝗢𝗡 𝗗𝗜𝗔𝗥𝗬 &amp; 𝗧𝗜𝗠𝗘 𝗖𝗢𝗡𝗧𝗜𝗡𝗨𝗨𝗠 ⟧
@@ -430,8 +443,8 @@
     }
 
     #united-beats-terminal {
-      background: radial-gradient(circle at 50% 0%, #0d1a15 0%, #040807 70%, #020403 100%);
-      color: #7df9a6;
+      background: var(--terminal-bg, radial-gradient(circle at 50% 0%, #0d1a15 0%, #040807 70%, #020403 100%));
+      color: var(--terminal-color, #7df9a6);
       font-family: 'Fira Code', 'JetBrains Mono', 'SF Mono', Consolas, monospace;
       padding: 40px 30px;
       border-radius: 14px;
@@ -6103,6 +6116,264 @@
       border-color: #a0d8b8 !important;
     }
 
+  
+    /* =========================================================================
+       DYNAMIC SPECTRUM PRESCRIPTION & SIGHT TRANSPARENCY SPECIFICATION
+       ========================================================================= */
+    :root {
+      --spectrum-fill-opacity: 0.16;
+      --spectrum-border-opacity: 0.40;
+      --spectrum-shape-opacity: 0.35;
+      --spectrum-stroke: 1.5px;
+      --spectrum-scan-opacity: 0.85;
+      --border-width-scale: 1.5px;
+      --font-scale: 1.0;
+      --site-contrast: 1.0;
+      --site-brightness: 1.0;
+    }
+
+    body {
+      font-size: calc(15px * var(--font-scale, 1)) !important;
+      transition: background-color 0.25s ease, color 0.25s ease, font-size 0.2s ease;
+    }
+
+    #united-beats-terminal {
+      filter: contrast(var(--site-contrast, 1)) brightness(var(--site-brightness, 1));
+      transition: background 0.25s ease, background-color 0.25s ease, color 0.25s ease, filter 0.2s ease;
+    }
+
+    /* Spectrum Blocks Dynamic Fill, Stroke & Transparency */
+    .nav-chip,
+    .tech-feature-box,
+    .repo-chip,
+    .acuity-node-btn,
+    .polarity-btn,
+    .telem-item,
+    .pillar-card,
+    .pillar-brick {
+      border-width: var(--border-width-scale, 1.5px) !important;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 0, 51, var(--spectrum-fill-opacity, 0.16)) 0%,
+        rgba(255, 61, 0, var(--spectrum-fill-opacity, 0.16)) 9%,
+        rgba(255, 119, 0, var(--spectrum-fill-opacity, 0.16)) 18%,
+        rgba(255, 170, 0, var(--spectrum-fill-opacity, 0.16)) 27%,
+        rgba(255, 230, 0, var(--spectrum-fill-opacity, 0.16)) 36%,
+        rgba(180, 230, 0, calc(var(--spectrum-fill-opacity, 0.16) * 1.3)) 45%, /* PEAR */
+        rgba(0, 255, 102, calc(var(--spectrum-fill-opacity, 0.16) * 1.8)) 50%, /* GREEN MIDPOINT */
+        rgba(0, 240, 170, calc(var(--spectrum-fill-opacity, 0.16) * 1.3)) 55%, /* TEAL */
+        rgba(0, 229, 255, var(--spectrum-fill-opacity, 0.16)) 64%,
+        rgba(0, 119, 255, var(--spectrum-fill-opacity, 0.16)) 73%,
+        rgba(88, 0, 255, var(--spectrum-fill-opacity, 0.16)) 82%,
+        rgba(224, 0, 153, var(--spectrum-fill-opacity, 0.16)) 100%
+      ) !important;
+      border-color: rgba(0, 255, 102, var(--spectrum-border-opacity, 0.40)) !important;
+      transition: background 0.2s ease, border-color 0.2s ease, border-width 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    /* Twin Oscillating Vertical Scanlines Opacity & Width */
+    .spectrum-bar {
+      opacity: var(--spectrum-scan-opacity, 0.85) !important;
+      width: calc(var(--spectrum-stroke, 1.5px) * 1.5) !important;
+    }
+
+    /* Layer Background Mathematical Shapes & Lines Matrix */
+    .layer-spectrum-matrix {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+      opacity: var(--spectrum-shape-opacity, 0.35);
+      transition: opacity 0.25s ease;
+    }
+
+    .matrix-svg {
+      position: absolute;
+      width: 100%; height: 100%;
+      top: 0; left: 0;
+    }
+
+    .geo-shape, .geo-line {
+      fill: none;
+      stroke: var(--layer-color, #00ff66);
+      stroke-width: var(--spectrum-stroke, 1.5px);
+      transition: stroke-width 0.2s ease, opacity 0.2s ease, stroke 0.2s ease;
+    }
+
+    .geo-ring {
+      stroke-dasharray: 4, 4;
+    }
+
+    .geo-wave {
+      stroke-linecap: round;
+    }
+
+    .geo-polygon {
+      fill: rgba(0, 255, 102, calc(var(--spectrum-fill-opacity, 0.16) * 0.4));
+    }
+
+    .geo-node {
+      fill: var(--layer-color, #00ff66);
+    }
+
+    .matrix-grid-pattern {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(0, 255, 102, calc(var(--spectrum-fill-opacity, 0.16) * 0.25)) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 255, 102, calc(var(--spectrum-fill-opacity, 0.16) * 0.25)) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+
+    /* =========================================================================
+       AIRTIGHT MASTER DARK THEME
+       ========================================================================= */
+    html[data-theme="dark"],
+    body[data-theme="dark"],
+    body.theme-dark,
+    html.theme-dark,
+    body:not([data-theme="light"]),
+    body:not([data-theme="light"]) .wp-site-blocks,
+    body:not([data-theme="light"]) main {
+      background-color: #020403 !important;
+      color: #7df9a6 !important;
+    }
+
+    body[data-theme="dark"] #united-beats-terminal,
+    body.theme-dark #united-beats-terminal,
+    body:not([data-theme="light"]) #united-beats-terminal {
+      --terminal-bg: radial-gradient(circle at 50% 0%, #0d1a15 0%, #040807 70%, #020403 100%);
+      --terminal-color: #7df9a6;
+      background: radial-gradient(circle at 50% 0%, #0d1a15 0%, #040807 70%, #020403 100%) !important;
+      color: #7df9a6 !important;
+      border-color: #14442a !important;
+    }
+
+    body[data-theme="dark"] .terminal-section,
+    body:not([data-theme="light"]) .terminal-section {
+      background: rgba(0, 15, 8, 0.65) !important;
+      border: 1px solid #14442a !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7) !important;
+    }
+
+    body[data-theme="dark"] p,
+    body[data-theme="dark"] li,
+    body:not([data-theme="light"]) p,
+    body:not([data-theme="light"]) li {
+      color: #9fe2b5 !important;
+    }
+
+    body[data-theme="dark"] h1,
+    body[data-theme="dark"] h2,
+    body[data-theme="dark"] h3,
+    body[data-theme="dark"] h4,
+    body:not([data-theme="light"]) h1,
+    body:not([data-theme="light"]) h2,
+    body:not([data-theme="light"]) h3,
+    body:not([data-theme="light"]) h4 {
+      color: #ffffff !important;
+    }
+
+    body[data-theme="dark"] .polarity-btn[data-theme="dark"].active {
+      background: rgba(0, 255, 102, 0.28) !important;
+      border-color: #00ff66 !important;
+      box-shadow: 0 0 16px rgba(0, 255, 102, 0.6) !important;
+    }
+
+    body[data-theme="dark"] .polarity-btn[data-theme="light"] {
+      opacity: 0.65;
+    }
+
+    /* =========================================================================
+       AIRTIGHT MASTER LIGHT THEME (REVERSE OPTICAL ALABASTER)
+       ========================================================================= */
+    html[data-theme="light"],
+    body[data-theme="light"],
+    body.theme-light,
+    html.theme-light,
+    body[data-theme="light"] .wp-site-blocks,
+    body[data-theme="light"] main,
+    body[data-theme="light"] .entry-content,
+    body[data-theme="light"] .wp-block-group {
+      background-color: #edf3ef !important;
+      color: #03140a !important;
+    }
+
+    body[data-theme="light"] #united-beats-terminal,
+    body.theme-light #united-beats-terminal,
+    #united-beats-terminal[data-theme="light"],
+    #united-beats-terminal.theme-light {
+      --terminal-bg: #edf3ef;
+      --terminal-color: #03140a;
+      background: #edf3ef !important;
+      color: #03140a !important;
+      border-color: #9cd3b2 !important;
+      box-shadow: 0 4px 30px rgba(0, 80, 30, 0.12) !important;
+    }
+
+    body[data-theme="light"] .terminal-scanlines {
+      display: none !important;
+    }
+
+    body[data-theme="light"] .terminal-section {
+      background: #ffffff !important;
+      border: 1px solid #94d4b1 !important;
+      box-shadow: 0 4px 20px rgba(0, 60, 20, 0.08) !important;
+    }
+
+    body[data-theme="light"] .vision-deck-frame {
+      background: #ffffff !important;
+      border-color: #008a38 !important;
+      box-shadow: 0 4px 24px rgba(0, 80, 30, 0.12) !important;
+    }
+
+    body[data-theme="light"] .vision-module {
+      background: #f7faf8 !important;
+      border-color: #a0d8b8 !important;
+    }
+
+    body[data-theme="light"] p,
+    body[data-theme="light"] li,
+    body[data-theme="light"] span:not(.spectrum-bar):not(.badge):not(.box-num):not(.glow-val) {
+      color: #082112 !important;
+    }
+
+    body[data-theme="light"] h1,
+    body[data-theme="light"] h2,
+    body[data-theme="light"] h3,
+    body[data-theme="light"] h4 {
+      color: #020e06 !important;
+    }
+
+    body[data-theme="light"] .polarity-btn[data-theme="light"].active {
+      background: #dff5e6 !important;
+      border-color: #008a38 !important;
+      box-shadow: 0 0 16px rgba(0, 138, 56, 0.4) !important;
+      opacity: 1 !important;
+    }
+
+    body[data-theme="light"] .polarity-btn[data-theme="dark"] {
+      opacity: 0.65;
+    }
+
+    body[data-theme="light"] .slider-circle-thumb {
+      background: radial-gradient(circle, #ffffff 30%, #008a38 70%, #002208 100%) !important;
+      border-color: #008a38 !important;
+      box-shadow: 0 0 18px rgba(0, 138, 56, 0.5) !important;
+    }
+
+    body[data-theme="light"] .circle-floating-badge {
+      background: #ffffff !important;
+      color: #008a38 !important;
+      border-color: #008a38 !important;
+    }
+
+    body[data-theme="light"] .ascii-art.stationary-green-logo {
+      color: #006622 !important;
+      text-shadow: none !important;
+    }
+
   </style>
 
   <script>
@@ -6325,94 +6596,96 @@
     // Video Game Arcade Vision Engine & Continuous Acuity Drag Dial
     // =========================================================================
     (function initArcadeVisionDial() {
-      var savedTheme = localStorage.getItem('lumbros_vision_theme') || 'dark';
-      var savedAcuityVal = parseInt(localStorage.getItem('lumbros_vision_gauge') || '75', 10);
+      function getStored(key, fallback) {
+        try { return localStorage.getItem(key) || fallback; } catch(e) { return fallback; }
+      }
+      function setStored(key, val) {
+        try { localStorage.setItem(key, val); } catch(e) {}
+      }
 
-      function computeAcuityParameters(val) {
-        var t = val / 100.0;
+      var currentTheme = getStored('lumbros_vision_theme', 'dark');
+      var currentGauge = parseInt(getStored('lumbros_vision_gauge', '75'), 10);
+
+      function computePrescription(val) {
+        var t = Math.max(0, Math.min(100, val)) / 100.0;
+        
+        // Mathematical Transparency & Geometry Formulas based on prescription strength:
+        // Low Vision (20/200, t=0): High Opacity (0.65 fill, 0.95 border, 3.5px stroke, 0.85 shapes)
+        // Standard (20/20, t=0.75): Balanced Opacity (0.16 fill, 0.40 border, 1.5px stroke, 0.35 shapes)
+        // Hyper-Acuity (20/10, t=1.0): High Transparency (0.05 fill, 0.20 border, 0.85px stroke, 0.15 shapes)
+        var fillOpacity = (0.65 - (t * 0.58)).toFixed(3);        // 0.65 down to 0.07
+        var borderOpacity = (0.95 - (t * 0.72)).toFixed(3);      // 0.95 down to 0.23
+        var shapeOpacity = (0.85 - (t * 0.68)).toFixed(3);       // 0.85 down to 0.17
+        var strokeWidth = (3.5 - (t * 2.65)).toFixed(2) + 'px';  // 3.50px down to 0.85px
+        var scanlineOpacity = (0.98 - (t * 0.55)).toFixed(3);    // 0.98 down to 0.43
+        var fontScale = (1.18 - (t * 0.23)).toFixed(3);          // 1.18 down to 0.95
+        var contrastMult = (1.65 - (t * 0.70)).toFixed(3);       // 1.65 down to 0.95
+        var brightnessMult = (1.14 - (t * 0.18)).toFixed(3);     // 1.14 down to 0.96
+
         var snellen = '20/20';
         var diopters = '0.00D (PLANO)';
         var dioptersBrief = '0.00D';
         var grade = '20-20';
-        var mar = '1.0\'';
         var weber = '9.2:1';
         var calib = '100% NOMINAL';
         var power = 'HARMONIC EQUILIBRIUM';
-        
-        // Continuous mathematical parameters
-        var siteContrast = 1.65 - (t * 0.73);     // 1.65 down to 0.92
-        var siteBrightness = 1.15 - (t * 0.19);   // 1.15 down to 0.96
-        var fontScale = 1.18 - (t * 0.23);        // 1.18 down to 0.95
-        var lineHeight = 1.85 - (t * 0.35);       // 1.85 down to 1.50
-        var letterSpacing = (1.0 - t) * 0.8 - (t * 0.2); // +0.8px down to -0.2px
-        var borderWidth = 3.5 - (t * 2.65);       // 3.5px down to 0.85px
-        var matrixStroke = 3.5 - (t * 2.75);      // 3.5px down to 0.75px
-        var matrixOpacity = 0.95 - (t * 0.60);    // 0.95 down to 0.35
-        var laserGlow = Math.round(24 - (t * 18)); // 24px down to 6px
 
-        if (val <= 12) {
+        if (val <= 15) {
           snellen = '20/200';
           grade = '20-200';
           diopters = '-8.50D (HIGH SIGHT ASSIST)';
           dioptersBrief = '-8.50D';
-          mar = '10.0\'';
           weber = '21.0:1';
           calib = '165% MAX CONTRAST';
-          power = 'ULTRA-HIGH CONTRAST SHIELD';
-        } else if (val <= 28) {
+          power = 'DENSE SIGHT SHIELD // MAX OPACITY';
+        } else if (val <= 32) {
           snellen = '20/100';
           grade = '20-100';
           diopters = '-5.50D (HEAVY GLASSES)';
           dioptersBrief = '-5.50D';
-          mar = '5.0\'';
           weber = '16.5:1';
-          calib = '145% BOOSTED CONTRAST';
-          power = 'HIGH MACRO ASSIST';
-        } else if (val <= 48) {
+          calib = '145% BOOSTED';
+          power = 'HIGH MACRO // LOW TRANSPARENCY';
+        } else if (val <= 50) {
           snellen = '20/70';
           grade = '20-70';
           diopters = '-4.00D (MEDIUM GLASSES)';
           dioptersBrief = '-4.00D';
-          mar = '3.5\'';
           weber = '13.5:1';
-          calib = '130% EXPANDED CONTRAST';
-          power = 'EXPANDED SIGHT FIELD';
-        } else if (val <= 65) {
+          calib = '130% EXPANDED';
+          power = 'EXPANDED SPECTRUM FIELD';
+        } else if (val <= 68) {
           snellen = '20/40';
           grade = '20-40';
           diopters = '-2.00D (DRIVING SPEC)';
           dioptersBrief = '-2.00D';
-          mar = '2.0\'';
           weber = '11.2:1';
           calib = '115% STANDARD-PLUS';
-          power = 'BALANCED ENHANCED';
+          power = 'BALANCED SPECTRUM HARMONIC';
         } else if (val <= 85) {
           snellen = '20/20';
           grade = '20-20';
           diopters = '0.00D (PLANO NORMAL)';
           dioptersBrief = '0.00D';
-          mar = '1.0\'';
           weber = '9.2:1';
           calib = '100% NOMINAL';
-          power = 'HARMONIC EQUILIBRIUM';
+          power = 'NOMINAL GOLDEN RATIO';
         } else if (val <= 95) {
           snellen = '20/15';
           grade = '20-15';
           diopters = '+0.50D (SHARP FOCUS)';
           dioptersBrief = '+0.50D';
-          mar = '0.75\'';
           weber = '8.0:1';
           calib = '95% HIGH DENSITY';
-          power = 'PRECISION VECTOR DENSITY';
+          power = 'HIGH TRANSPARENCY // MICRO-VECTOR';
         } else {
           snellen = '20/10';
           grade = '20-10';
           diopters = '+1.00D (EAGLE HYPER)';
           dioptersBrief = '+1.00D';
-          mar = '0.5\'';
           weber = '7.1:1';
-          calib = '92% SUB-PIXEL RAZOR';
-          power = 'HYPER-ACUITY RAZOR';
+          calib = '92% SUB-PIXEL';
+          power = 'HYPER-ACUITY // ULTRA-TRANSPARENT';
         }
 
         return {
@@ -6421,78 +6694,84 @@
           snellen: snellen,
           diopters: diopters,
           dioptersBrief: dioptersBrief,
-          mar: mar,
           weber: weber,
           calib: calib,
           power: power,
-          siteContrast: siteContrast.toFixed(3),
-          siteBrightness: siteBrightness.toFixed(3),
-          fontScale: fontScale.toFixed(3),
-          lineHeight: lineHeight.toFixed(2),
-          letterSpacing: letterSpacing.toFixed(2),
-          borderWidth: borderWidth.toFixed(2),
-          matrixStroke: matrixStroke.toFixed(2),
-          matrixOpacity: matrixOpacity.toFixed(2),
-          laserGlow: laserGlow
+          fillOpacity: fillOpacity,
+          borderOpacity: borderOpacity,
+          shapeOpacity: shapeOpacity,
+          strokeWidth: strokeWidth,
+          scanlineOpacity: scanlineOpacity,
+          fontScale: fontScale,
+          contrastMult: contrastMult,
+          brightnessMult: brightnessMult
         };
       }
 
-      function applyAcuityContinuous(val) {
-        var params = computeAcuityParameters(val);
+      function applyPrescription(val) {
+        currentGauge = val;
+        setStored('lumbros_vision_gauge', val);
+        var p = computePrescription(val);
+
+        var root = document.documentElement;
+        var body = document.body;
+        var term = document.getElementById('united-beats-terminal');
+
+        var targets = [root, body];
+        if (term) targets.push(term);
+
+        targets.forEach(function(el) {
+          el.style.setProperty('--spectrum-fill-opacity', p.fillOpacity);
+          el.style.setProperty('--spectrum-border-opacity', p.borderOpacity);
+          el.style.setProperty('--spectrum-shape-opacity', p.shapeOpacity);
+          el.style.setProperty('--spectrum-stroke', p.strokeWidth);
+          el.style.setProperty('--spectrum-scan-opacity', p.scanlineOpacity);
+          el.style.setProperty('--border-width-scale', p.strokeWidth);
+          el.style.setProperty('--font-scale', p.fontScale);
+          el.style.setProperty('--site-contrast', p.contrastMult);
+          el.style.setProperty('--site-brightness', p.brightnessMult);
+        });
+
+        root.setAttribute('data-acuity-grade', p.grade);
+        body.setAttribute('data-acuity-grade', p.grade);
+        if (term) term.setAttribute('data-acuity-grade', p.grade);
+
+        body.style.fontSize = (p.fontScale * 15) + 'px';
+
+        // Move Circle Thumb & Floating Badge
+        var thumb = document.getElementById('slider-circle-thumb');
+        if (thumb) {
+          thumb.style.left = val + '%';
+        }
+        var badge = document.getElementById('circle-floating-badge');
+        if (badge) {
+          badge.textContent = p.snellen + ' (' + p.dioptersBrief + ')';
+        }
+        var instructionBadge = document.getElementById('gauge-live-fraction');
+        if (instructionBadge) {
+          instructionBadge.textContent = p.snellen + ' [' + p.diopters + '] // WEBER ' + p.weber + ' // ' + p.calib;
+        }
 
         var slider = document.getElementById('acuity-analog-slider');
-        var circleThumb = document.getElementById('slider-circle-thumb');
-        var floatingBadge = document.getElementById('circle-floating-badge');
-        var liveFraction = document.getElementById('gauge-live-fraction');
+        if (slider && parseInt(slider.value, 10) !== val) {
+          slider.value = val;
+        }
+
+        // Update Telemetry Items
         var telemAcuity = document.querySelector('.val-acuity');
         var telemDiopter = document.querySelector('.val-diopter');
         var telemContrast = document.querySelector('.val-contrast');
         var telemCalib = document.querySelector('.val-calib');
         var telemPower = document.querySelector('.val-power');
 
-        // Position Circle Thumb
-        if (circleThumb) {
-          circleThumb.style.left = val + '%';
-        }
-        if (floatingBadge) {
-          floatingBadge.textContent = params.snellen + ' (' + params.dioptersBrief + ')';
-        }
-        if (liveFraction) {
-          liveFraction.textContent = params.snellen + ' [' + params.diopters + '] // WEBER ' + params.weber + ' // ' + params.calib;
-        }
-        if (slider) {
-          slider.value = val;
-        }
+        if (telemAcuity) telemAcuity.textContent = p.snellen;
+        if (telemDiopter) telemDiopter.textContent = p.diopters;
+        if (telemContrast) telemContrast.textContent = p.weber;
+        if (telemCalib) telemCalib.textContent = p.calib;
+        if (telemPower) telemPower.textContent = p.power;
 
-        // Update Telemetry Meters
-        if (telemAcuity) telemAcuity.textContent = params.snellen;
-        if (telemDiopter) telemDiopter.textContent = params.diopters;
-        if (telemContrast) telemContrast.textContent = params.weber;
-        if (telemCalib) telemCalib.textContent = params.calib;
-        if (telemPower) telemPower.textContent = params.power;
-
-        // Apply Grade Attribute to DOM
-        document.documentElement.setAttribute('data-acuity-grade', params.grade);
-        document.body.setAttribute('data-acuity-grade', params.grade);
-
-        // Apply CSS custom properties dynamically across DOM
-        var root = document.documentElement;
-        root.style.setProperty('--site-contrast', params.siteContrast);
-        root.style.setProperty('--site-brightness', params.siteBrightness);
-        root.style.setProperty('--font-scale', params.fontScale);
-        root.style.setProperty('--line-height-scale', params.lineHeight);
-        root.style.setProperty('--letter-spacing-boost', params.letterSpacing + 'px');
-        root.style.setProperty('--border-width-scale', params.borderWidth + 'px');
-        root.style.setProperty('--matrix-stroke', params.matrixStroke + 'px');
-        root.style.setProperty('--matrix-opacity', params.matrixOpacity);
-        root.style.setProperty('--laser-glow-blur', params.laserGlow + 'px');
-
-        // Direct font scale on body
-        document.body.style.fontSize = (params.fontScale * 15) + 'px';
-
-        // Highlight preset buttons if near
-        var presetBtns = document.querySelectorAll('.acuity-node-btn');
-        presetBtns.forEach(function(btn) {
+        // Highlight Preset Buttons
+        document.querySelectorAll('.acuity-node-btn').forEach(function(btn) {
           var btnGauge = parseInt(btn.getAttribute('data-gauge') || '75', 10);
           if (Math.abs(btnGauge - val) <= 15) {
             btn.classList.add('active');
@@ -6501,9 +6780,8 @@
           }
         });
 
-        // Highlight ticks
-        var ticks = document.querySelectorAll('.tick-link');
-        ticks.forEach(function(tick) {
+        // Highlight Ticks
+        document.querySelectorAll('.tick-link').forEach(function(tick) {
           var tickVal = parseInt(tick.getAttribute('data-val') || '0', 10);
           if (Math.abs(tickVal - val) <= 10) {
             tick.classList.add('active');
@@ -6511,14 +6789,16 @@
             tick.classList.remove('active');
           }
         });
-
-        localStorage.setItem('lumbros_vision_gauge', val);
       }
 
-      function applyThemePolarity(theme) {
+      function applyTheme(theme) {
+        currentTheme = theme;
+        setStored('lumbros_vision_theme', theme);
         var isLight = (theme === 'light');
+
         var root = document.documentElement;
         var body = document.body;
+        var term = document.getElementById('united-beats-terminal');
 
         if (isLight) {
           root.setAttribute('data-theme', 'light');
@@ -6527,6 +6807,18 @@
           body.classList.remove('theme-dark');
           root.classList.add('theme-light');
           root.classList.remove('theme-dark');
+
+          body.style.backgroundColor = '#edf3ef';
+          body.style.color = '#03140a';
+
+          if (term) {
+            term.setAttribute('data-theme', 'light');
+            term.classList.add('theme-light');
+            term.classList.remove('theme-dark');
+            term.style.backgroundColor = '#edf3ef';
+            term.style.background = '#edf3ef';
+            term.style.color = '#03140a';
+          }
         } else {
           root.setAttribute('data-theme', 'dark');
           body.setAttribute('data-theme', 'dark');
@@ -6534,6 +6826,18 @@
           body.classList.remove('theme-light');
           root.classList.add('theme-dark');
           root.classList.remove('theme-light');
+
+          body.style.backgroundColor = '#020403';
+          body.style.color = '#7df9a6';
+
+          if (term) {
+            term.setAttribute('data-theme', 'dark');
+            term.classList.add('theme-dark');
+            term.classList.remove('theme-light');
+            term.style.backgroundColor = '#030805';
+            term.style.background = 'radial-gradient(circle at 50% 0%, #0d1a15 0%, #040807 70%, #020403 100%)';
+            term.style.color = '#7df9a6';
+          }
         }
 
         var telemPolarity = document.querySelector('.val-polarity');
@@ -6541,106 +6845,100 @@
           telemPolarity.textContent = isLight ? 'LIGHT_REVERSE_ALABASTER' : 'DARK_OBSIDIAN';
         }
 
-        var themeBtns = document.querySelectorAll('.polarity-btn');
-        themeBtns.forEach(function(btn) {
+        document.querySelectorAll('.polarity-btn').forEach(function(btn) {
           if (btn.getAttribute('data-theme') === theme) {
             btn.classList.add('active');
           } else {
             btn.classList.remove('active');
           }
         });
-
-        localStorage.setItem('lumbros_vision_theme', theme);
       }
 
-      function bootVisionEngine() {
-        applyThemePolarity(savedTheme);
-        applyAcuityContinuous(savedAcuityVal);
+      function initRailDrag() {
+        var rail = document.getElementById('acuity-rail-track');
+        if (!rail) return;
+
+        var dragging = false;
+        function updateFromPointer(e) {
+          var rect = rail.getBoundingClientRect();
+          var clientX = e.clientX;
+          if (e.touches && e.touches.length > 0) clientX = e.touches[0].clientX;
+          var pct = ((clientX - rect.left) / rect.width) * 100;
+          pct = Math.max(0, Math.min(100, pct));
+          applyPrescription(Math.round(pct));
+        }
+
+        rail.addEventListener('pointerdown', function(e) {
+          dragging = true;
+          try { rail.setPointerCapture(e.pointerId); } catch(err) {}
+          updateFromPointer(e);
+        });
+
+        rail.addEventListener('pointermove', function(e) {
+          if (dragging) updateFromPointer(e);
+        });
+
+        rail.addEventListener('pointerup', function(e) {
+          dragging = false;
+        });
+
+        rail.addEventListener('pointercancel', function(e) {
+          dragging = false;
+        });
 
         var slider = document.getElementById('acuity-analog-slider');
-        var railTrack = document.getElementById('acuity-rail-track');
-
-        // Native range input slider event
         if (slider) {
           slider.addEventListener('input', function() {
-            applyAcuityContinuous(parseInt(this.value, 10));
+            applyPrescription(parseInt(this.value, 10));
           });
           slider.addEventListener('change', function() {
-            applyAcuityContinuous(parseInt(this.value, 10));
+            applyPrescription(parseInt(this.value, 10));
           });
         }
+      }
 
-        // Direct Touch & Pointer Drag on the Rail Track
-        if (railTrack) {
-          var dragging = false;
-          function handleTrackPointer(e) {
-            var rect = railTrack.getBoundingClientRect();
-            var clientX = e.clientX;
-            if (e.touches && e.touches.length > 0) clientX = e.touches[0].clientX;
-            var pct = ((clientX - rect.left) / rect.width) * 100;
-            if (pct < 0) pct = 0;
-            if (pct > 100) pct = 100;
-            applyAcuityContinuous(Math.round(pct));
-          }
-
-          railTrack.addEventListener('pointerdown', function(e) {
-            dragging = true;
-            try { railTrack.setPointerCapture(e.pointerId); } catch(err) {}
-            handleTrackPointer(e);
-          });
-
-          railTrack.addEventListener('pointermove', function(e) {
-            if (dragging) handleTrackPointer(e);
-          });
-
-          railTrack.addEventListener('pointerup', function(e) {
-            dragging = false;
-          });
-
-          railTrack.addEventListener('pointercancel', function(e) {
-            dragging = false;
-          });
+      // Universal Event Delegation on document for all buttons
+      document.addEventListener('click', function(e) {
+        var polBtn = e.target.closest('.polarity-btn');
+        if (polBtn) {
+          e.preventDefault();
+          var selTheme = polBtn.getAttribute('data-theme');
+          if (selTheme) applyTheme(selTheme);
+          return;
         }
 
-        // Preset Button clicks
-        var presetBtns = document.querySelectorAll('.acuity-node-btn');
-        presetBtns.forEach(function(btn) {
-          btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            var targetGauge = parseInt(this.getAttribute('data-gauge') || '75', 10);
-            applyAcuityContinuous(targetGauge);
-          });
-        });
+        var acuityBtn = e.target.closest('.acuity-node-btn');
+        if (acuityBtn) {
+          e.preventDefault();
+          var tGauge = parseInt(acuityBtn.getAttribute('data-gauge') || '75', 10);
+          applyPrescription(tGauge);
+          return;
+        }
 
-        // Tick link clicks
-        var tickLinks = document.querySelectorAll('.tick-link');
-        tickLinks.forEach(function(tick) {
-          tick.addEventListener('click', function(e) {
-            e.preventDefault();
-            var targetGauge = parseInt(this.getAttribute('data-val') || '75', 10);
-            applyAcuityContinuous(targetGauge);
-          });
-        });
+        var tick = e.target.closest('.tick-link');
+        if (tick) {
+          e.preventDefault();
+          var tVal = parseInt(tick.getAttribute('data-val') || '75', 10);
+          applyPrescription(tVal);
+          return;
+        }
+      });
 
-        // Theme Polarity buttons
-        var themeBtns = document.querySelectorAll('.polarity-btn');
-        themeBtns.forEach(function(btn) {
-          btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            var selectedTheme = this.getAttribute('data-theme');
-            applyThemePolarity(selectedTheme);
-          });
-        });
+      function boot() {
+        applyTheme(currentTheme);
+        applyPrescription(currentGauge);
+        initRailDrag();
       }
 
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', bootVisionEngine);
+        document.addEventListener('DOMContentLoaded', boot);
       } else {
-        bootVisionEngine();
+        boot();
       }
 
-      // Initial theme setup immediately
-      applyThemePolarity(savedTheme);
+      // Run immediate initial styling
+      applyTheme(currentTheme);
+      applyPrescription(currentGauge);
     })();
 
   
