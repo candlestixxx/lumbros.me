@@ -44,6 +44,11 @@
         <path class="geo-shape geo-wave" d="M 320,180 Q 440,110 560,180 T 800,180 T 1040,180"></path>
         <polygon class="geo-shape geo-polygon" points="980,110 1050,180 980,250 910,180"></polygon>
         <circle class="geo-shape geo-node" cx="980" cy="180" r="5"></circle>
+        <!-- Psychological Archetypes: Infinity Lemniscate & Heartbeat Rhythm -->
+        <path class="geo-archetype geo-infinity-vec" d="M 600,180 C 565,135 505,135 505,180 C 505,225 565,225 600,180 C 635,135 695,135 695,180 C 695,225 635,225 600,180 Z"></path>
+        <circle class="geo-archetype" cx="505" cy="180" r="4"></circle>
+        <circle class="geo-archetype" cx="695" cy="180" r="4"></circle>
+    
       </svg>
       <div class="matrix-grid-pattern"></div>
     </div>
@@ -6374,7 +6379,213 @@
       text-shadow: none !important;
     }
 
-  </style>
+  
+
+    /* =========================================================================
+       MODULE 3: PSYCHOLOGICAL ARCHETYPE SPECTRUM RESONANCE MATRIX & SHAPES
+       ========================================================================= */
+    .vision-archetype-module {
+      grid-column: 1 / -1;
+      margin-top: 14px;
+      background: rgba(3, 10, 6, 0.85);
+      border: 1px solid rgba(0, 255, 102, 0.35);
+      border-radius: 6px;
+      padding: 14px 16px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .mod-header-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .mod-header-text .mod-sub {
+      font-size: 9.5px;
+      color: #7df9a6;
+      opacity: 0.8;
+      letter-spacing: 0.5px;
+    }
+
+    .archetype-grid-12 {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 1100px) {
+      .archetype-grid-12 {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+    @media (max-width: 768px) {
+      .archetype-grid-12 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .archetype-card {
+      position: relative;
+      background: rgba(4, 12, 8, 0.9);
+      border: 1px solid var(--arch-color, #00ff66);
+      border-radius: 6px;
+      padding: 10px 6px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    .archetype-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.6), 0 0 12px var(--arch-glow, rgba(0, 255, 102, 0.3));
+      border-color: #ffffff;
+    }
+
+    .archetype-card.active {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(0, 0, 0, 0.6) 100%), rgba(6, 18, 12, 0.95);
+      border-width: 2px;
+      border-color: #ffffff;
+      box-shadow: 0 0 16px var(--arch-glow, rgba(0, 255, 102, 0.6)), inset 0 0 8px var(--arch-glow, rgba(0, 255, 102, 0.4));
+    }
+
+    .archetype-card.active .arch-badge {
+      background: #ffffff;
+      color: #020403;
+      font-weight: 800;
+    }
+
+    .arch-icon-box {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 6px;
+    }
+
+    .arch-icon-box svg {
+      width: 38px;
+      height: 38px;
+      stroke: var(--arch-color, #00ff66);
+      fill: none;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 0 3px var(--arch-glow, rgba(0,255,102,0.4)));
+    }
+
+    .arch-badge {
+      font-family: 'Space Mono', 'Consolas', monospace;
+      font-size: 8.5px;
+      padding: 1px 5px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--arch-color, #00ff66);
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .arch-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #ffffff;
+      margin-bottom: 3px;
+      line-height: 1.2;
+    }
+
+    .arch-meaning {
+      font-family: 'Space Mono', 'Consolas', monospace;
+      font-size: 8px;
+      color: #9cd4ad;
+      letter-spacing: 0.2px;
+      line-height: 1.2;
+    }
+
+    /* Psychological Archetype Background SVG Vectors */
+    .geo-archetype {
+      fill: none;
+      stroke: var(--layer-color, #00ff66);
+      stroke-width: var(--spectrum-stroke, 1.5px);
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: var(--spectrum-shape-opacity, 0.35);
+      transition: all 0.25s ease;
+    }
+
+    .geo-eye-vec { stroke-width: calc(var(--spectrum-stroke, 1.5px) * 1.15); }
+    .geo-heart-vec { stroke-width: calc(var(--spectrum-stroke, 1.5px) * 1.25); }
+    .geo-spiral-vec { stroke-dasharray: 6 3; }
+    .geo-infinity-vec { stroke-width: calc(var(--spectrum-stroke, 1.5px) * 1.2); }
+    .geo-shield-vec { stroke-width: calc(var(--spectrum-stroke, 1.5px) * 1.2); }
+    .geo-crown-vec { stroke-width: calc(var(--spectrum-stroke, 1.5px) * 1.15); }
+    .geo-compass-vec { stroke-width: calc(var(--spectrum-stroke, 1.5px) * 1.1); }
+    .geo-ecg-vec { stroke-width: calc(var(--spectrum-stroke, 1.5px) * 1.3); }
+
+    /* Light Mode Overrides for Module 3 and Archetype Shapes */
+    body.theme-light .vision-archetype-module,
+    html[data-theme="light"] .vision-archetype-module {
+      background: #ffffff;
+      border-color: #b5cebd;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    body.theme-light .mod-header-text .mod-sub,
+    html[data-theme="light"] .mod-header-text .mod-sub {
+      color: #274c36;
+    }
+
+    body.theme-light .archetype-card,
+    html[data-theme="light"] .archetype-card {
+      background: #f7faf8;
+      border-color: var(--arch-color-light, #177239);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
+    }
+
+    body.theme-light .archetype-card:hover,
+    html[data-theme="light"] .archetype-card:hover {
+      border-color: #03140a;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    }
+
+    body.theme-light .archetype-card.active,
+    html[data-theme="light"] .archetype-card.active {
+      background: #ffffff;
+      border-color: #03140a;
+      border-width: 2px;
+      box-shadow: 0 0 12px var(--arch-glow-light, rgba(0, 0, 0, 0.25));
+    }
+
+    body.theme-light .arch-title,
+    html[data-theme="light"] .arch-title {
+      color: #03140a;
+    }
+
+    body.theme-light .arch-meaning,
+    html[data-theme="light"] .arch-meaning {
+      color: #274c36;
+    }
+
+    body.theme-light .arch-icon-box svg,
+    html[data-theme="light"] .arch-icon-box svg {
+      stroke: var(--arch-color-light, #177239);
+      filter: none;
+    }
+
+    body.theme-light .geo-archetype,
+    html[data-theme="light"] .geo-archetype {
+      stroke: var(--layer-color, #008033);
+    }
+
+</style>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -6600,6 +6811,11 @@
 // Game/Calculator Engine for Lumbros.me and UnitedBeats.online
 // Representing all 12 colors of the optical spectrum through mathematics and God
 // =========================================================================
+// =========================================================================
+// OPTICAL SPECTRUM PRESCRIPTION CALIBRATOR AND THEME ENGINE (v4.2)
+// Game/Calculator Engine for Lumbros.me and UnitedBeats.online
+// Representing all 12 colors of the optical spectrum through mathematics and God
+// =========================================================================
 (function initSpectrumGameEngine() {
   function getStored(key, fallback) {
     try {
@@ -6619,6 +6835,7 @@
 
   var currentTheme = getStored('lumbros_vision_theme', 'dark');
   var currentGauge = parseInt(getStored('lumbros_vision_gauge', '75'), 10);
+  var currentArchetype = getStored('lumbros_active_archetype', 'heart');
 
   function computePrescription(val) {
     var clamped = Math.max(0, Math.min(100, val));
@@ -6813,6 +7030,55 @@
     }
   }
 
+  
+  function applyArchetype(archId) {
+    if (!archId) archId = 'heart';
+    currentArchetype = archId;
+    setStored('lumbros_active_archetype', archId);
+
+    var cards = document.querySelectorAll('.archetype-card');
+    var activeCard = null;
+    for (var i = 0; i < cards.length; i++) {
+      var c = cards[i];
+      if (c.getAttribute('data-arch-id') === archId) {
+        c.classList.add('active');
+        activeCard = c;
+      } else {
+        c.classList.remove('active');
+      }
+    }
+
+    if (!activeCard) {
+      if (cards.length > 0) {
+        activeCard = cards[0];
+        activeCard.classList.add('active');
+      }
+    }
+
+    if (activeCard) {
+      var color = activeCard.getAttribute('data-color') || '#00ff66';
+      var name = activeCard.getAttribute('data-name') || 'THE HARMONIC HEART';
+      var wave = activeCard.getAttribute('data-wave') || '550nm (50%)';
+      var psych = activeCard.getAttribute('data-psych') || 'TRUST & EQUILIBRIUM';
+
+      var root = document.documentElement;
+      var body = document.body;
+      var term = document.getElementById('united-beats-terminal');
+      var targets = [root, body];
+      if (term) targets.push(term);
+
+      for (var t = 0; t < targets.length; t++) {
+        targets[t].style.setProperty('--active-archetype-color', color);
+        targets[t].style.setProperty('--active-archetype-id', archId);
+      }
+
+      var telemArchetype = document.querySelector('.val-archetype');
+      if (telemArchetype) {
+        telemArchetype.innerHTML = '<span style="color:' + color + '">● ' + name + '</span> [' + wave + '] // ' + psych;
+      }
+    }
+  }
+
   function applyTheme(theme) {
     currentTheme = theme;
     setStored('lumbros_vision_theme', theme);
@@ -6935,6 +7201,14 @@
   document.addEventListener('click', function(e) {
     if (!e || !e.target) return;
     
+        var archCard = e.target.closest ? e.target.closest('.archetype-card') : null;
+    if (archCard) {
+      e.preventDefault();
+      var archId = archCard.getAttribute('data-arch-id');
+      if (archId) applyArchetype(archId);
+      return;
+    }
+
     var polBtn = e.target.closest ? e.target.closest('.polarity-btn') : null;
     if (polBtn) {
       e.preventDefault();
@@ -6963,6 +7237,7 @@
   function boot() {
     applyTheme(currentTheme);
     applyPrescription(currentGauge);
+    applyArchetype(currentArchetype);
     initRailDrag();
   }
 
@@ -6975,6 +7250,7 @@
   // Immediate styling
   applyTheme(currentTheme);
   applyPrescription(currentGauge);
+  applyArchetype(currentArchetype);
 })();
 
 

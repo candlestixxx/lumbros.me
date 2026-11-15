@@ -22,6 +22,7 @@
 
   var currentTheme = getStored('lumbros_vision_theme', 'dark');
   var currentGauge = parseInt(getStored('lumbros_vision_gauge', '75'), 10);
+  var currentArchetype = getStored('lumbros_active_archetype', 'heart');
 
   function computePrescription(val) {
     var clamped = Math.max(0, Math.min(100, val));
@@ -216,6 +217,55 @@
     }
   }
 
+  
+  function applyArchetype(archId) {
+    if (!archId) archId = 'heart';
+    currentArchetype = archId;
+    setStored('lumbros_active_archetype', archId);
+
+    var cards = document.querySelectorAll('.archetype-card');
+    var activeCard = null;
+    for (var i = 0; i < cards.length; i++) {
+      var c = cards[i];
+      if (c.getAttribute('data-arch-id') === archId) {
+        c.classList.add('active');
+        activeCard = c;
+      } else {
+        c.classList.remove('active');
+      }
+    }
+
+    if (!activeCard) {
+      if (cards.length > 0) {
+        activeCard = cards[0];
+        activeCard.classList.add('active');
+      }
+    }
+
+    if (activeCard) {
+      var color = activeCard.getAttribute('data-color') || '#00ff66';
+      var name = activeCard.getAttribute('data-name') || 'THE HARMONIC HEART';
+      var wave = activeCard.getAttribute('data-wave') || '550nm (50%)';
+      var psych = activeCard.getAttribute('data-psych') || 'TRUST & EQUILIBRIUM';
+
+      var root = document.documentElement;
+      var body = document.body;
+      var term = document.getElementById('united-beats-terminal');
+      var targets = [root, body];
+      if (term) targets.push(term);
+
+      for (var t = 0; t < targets.length; t++) {
+        targets[t].style.setProperty('--active-archetype-color', color);
+        targets[t].style.setProperty('--active-archetype-id', archId);
+      }
+
+      var telemArchetype = document.querySelector('.val-archetype');
+      if (telemArchetype) {
+        telemArchetype.innerHTML = '<span style="color:' + color + '">● ' + name + '</span> [' + wave + '] // ' + psych;
+      }
+    }
+  }
+
   function applyTheme(theme) {
     currentTheme = theme;
     setStored('lumbros_vision_theme', theme);
@@ -338,6 +388,14 @@
   document.addEventListener('click', function(e) {
     if (!e || !e.target) return;
     
+        var archCard = e.target.closest ? e.target.closest('.archetype-card') : null;
+    if (archCard) {
+      e.preventDefault();
+      var archId = archCard.getAttribute('data-arch-id');
+      if (archId) applyArchetype(archId);
+      return;
+    }
+
     var polBtn = e.target.closest ? e.target.closest('.polarity-btn') : null;
     if (polBtn) {
       e.preventDefault();
@@ -366,6 +424,7 @@
   function boot() {
     applyTheme(currentTheme);
     applyPrescription(currentGauge);
+    applyArchetype(currentArchetype);
     initRailDrag();
   }
 
@@ -378,4 +437,5 @@
   // Immediate styling
   applyTheme(currentTheme);
   applyPrescription(currentGauge);
+  applyArchetype(currentArchetype);
 })();
