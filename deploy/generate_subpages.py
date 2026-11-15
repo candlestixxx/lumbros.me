@@ -14,8 +14,12 @@ script_match = re.search(r'(<script>[\s\S]*?</script>)', home)
 scripts = script_match.group(1) if script_match else ''
 
 # Extract ASCII Header
-header_match = re.search(r'(<header class="terminal-header">[\s\S]*?</header>)', home)
+header_match = re.search(r'(<header class="ascii-hero">[\s\S]*?</header>)', home)
 ascii_header = header_match.group(1) if header_match else ''
+
+# Extract Top Pillars Navigation Rail
+pillars_match = re.search(r'(<nav class="solid-line-pillars" id="top-pillars-rail"[\s\S]*?</nav>)', home)
+top_pillars_rail = pillars_match.group(1) if pillars_match else ''
 
 # Extract Sub-Dock
 sub_dock_match = re.search(r'(<section id="sub-dock"[\s\S]*?</section>)', home)
@@ -55,6 +59,8 @@ def build_page(page_title, active_slug, main_content_html):
       <a href="/posts/" class="hud-link {'active' if active_slug=='posts' else ''}">LIVE POSTS</a>
     </div>
   </div>
+
+  {top_pillars_rail}
 
   {ascii_header}
 
