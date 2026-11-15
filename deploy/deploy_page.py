@@ -59,6 +59,12 @@ private_id = deploy_single_page('private', 'UNITED BEATS // PRIVATE SECTOR // CL
 # 4. Live Posts Diary Page
 posts_id = deploy_single_page('posts', 'UNITED BEATS // LIVE POSTS // TRANSMISSION DIARY', 'posts.html')
 
+# 5. Dedicated Shadertoy Game Page
+shadertoy_id = deploy_single_page('shadertoy', 'UNITED BEATS // SHADERTOY 3D EARTH // BEAUTYPI TRIBUTE GAME', 'shadertoy.html')
+
+# 6. Spectrum Vision Game Dev Plan & Monopoly Simulator Page
+spectrum_vision_id = deploy_single_page('spectrum-vision', 'UNITED BEATS // SPECTRUM VISION // GAME DEV PLAN & MONOPOLY', 'spectrum_vision.html')
+
 # Configure static front page
 subprocess.run(['sudo', '-u', 'www-data', 'wp', f'--path={wp_path}', 'option', 'update', 'show_on_front', 'page'], check=True)
 subprocess.run(['sudo', '-u', 'www-data', 'wp', f'--path={wp_path}', 'option', 'update', 'page_on_front', front_id], check=True)
@@ -80,4 +86,4 @@ subprocess.run([
     'db', 'export', os.path.join(base_dir, 'database.sql')
 ], check=True)
 
-print(f"SUCCESS: Front Page, Public, Private, and Posts pages deployed in {wp_path}!")
+print(f"SUCCESS: Front Page, Public, Private, Posts, Shadertoy, and Spectrum Vision deployed in {wp_path}!")
