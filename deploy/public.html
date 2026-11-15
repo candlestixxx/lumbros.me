@@ -5689,6 +5689,108 @@
       color: #082112 !important;
     }
 
+  
+    /* =========================================================================
+       DYNAMIC SPECTRUM CONTRAST & PRESCRIPTION CALIBRATION ENGINE
+       ========================================================================= */
+    :root {
+      --site-contrast: 1;
+      --site-brightness: 1;
+      --font-scale: 1;
+      --line-height-scale: 1.6;
+      --letter-spacing-boost: 0px;
+      --border-width-scale: 1.5px;
+      --matrix-stroke: 1.4px;
+      --matrix-opacity: 0.55;
+      --laser-glow-blur: 14px;
+    }
+
+    body {
+      font-size: calc(15px * var(--font-scale, 1)) !important;
+      line-height: var(--line-height-scale, 1.6) !important;
+      letter-spacing: var(--letter-spacing-boost, 0px) !important;
+      transition: background-color 0.25s ease, color 0.25s ease, font-size 0.2s ease, filter 0.2s ease;
+    }
+
+    .nexus-terminal {
+      filter: contrast(var(--site-contrast, 1)) brightness(var(--site-brightness, 1));
+      transition: filter 0.2s ease, background 0.25s ease, color 0.25s ease;
+    }
+
+    .gauge-diopter-subscale {
+      text-align: center;
+      margin-top: 6px;
+      font-size: 0.58rem;
+      letter-spacing: 1px;
+      color: #00ff66;
+      opacity: 0.8;
+      font-weight: 700;
+    }
+
+    /* Dynamic Border Width on Interactive & Information Blocks */
+    .tech-feature-box,
+    .repo-chip,
+    .acuity-node-btn,
+    .polarity-btn,
+    .telem-item,
+    .nav-chip,
+    .pillar-card,
+    .pillar-brick,
+    .terminal-section,
+    .topology-diagram,
+    .github-ecosystem-box,
+    .vision-module,
+    .vision-deck-frame,
+    .spectrum-menubox-container {
+      border-width: var(--border-width-scale, 1.5px) !important;
+    }
+
+    /* 20/200 Poorest Vision / Low Vision Assist Mode */
+    body[data-acuity-grade="20-200"],
+    html[data-acuity-grade="20-200"] {
+      --text-bright: #ffffff !important;
+      --text-main: #ffffff !important;
+    }
+
+    body[data-acuity-grade="20-200"] p,
+    body[data-acuity-grade="20-200"] li,
+    body[data-acuity-grade="20-200"] span {
+      font-weight: 700 !important;
+    }
+
+    body[data-acuity-grade="20-200"] h1,
+    body[data-acuity-grade="20-200"] h2,
+    body[data-acuity-grade="20-200"] h3,
+    body[data-acuity-grade="20-200"] h4 {
+      font-weight: 900 !important;
+      text-shadow: 0 0 6px rgba(0, 255, 102, 0.9) !important;
+    }
+
+    body[data-acuity-grade="20-200"] .tech-feature-box,
+    body[data-acuity-grade="20-200"] .repo-chip,
+    body[data-acuity-grade="20-200"] .acuity-node-btn,
+    body[data-acuity-grade="20-200"] .polarity-btn,
+    body[data-acuity-grade="20-200"] .telem-item {
+      box-shadow: 0 0 var(--laser-glow-blur, 20px) rgba(0, 255, 102, 0.65), inset 0 0 16px rgba(0, 255, 102, 0.25) !important;
+    }
+
+    /* Light Theme Adjustments */
+    body[data-theme="light"][data-acuity-grade="20-200"] {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+    }
+
+    body[data-theme="light"][data-acuity-grade="20-200"] p,
+    body[data-theme="light"][data-acuity-grade="20-200"] li,
+    body[data-theme="light"][data-acuity-grade="20-200"] h1,
+    body[data-theme="light"][data-acuity-grade="20-200"] h2,
+    body[data-theme="light"][data-acuity-grade="20-200"] h3,
+    body[data-theme="light"][data-acuity-grade="20-200"] h4,
+    body[data-theme="light"][data-acuity-grade="20-200"] span {
+      color: #000000 !important;
+      font-weight: 800 !important;
+    }
+
   </style>
 
   <script>
@@ -6008,144 +6110,168 @@
       var savedTheme = localStorage.getItem('lumbros_vision_theme') || 'dark';
       var savedAcuityVal = parseInt(localStorage.getItem('lumbros_vision_gauge') || '75', 10);
 
-      var slider = document.getElementById('acuity-analog-slider');
-      var circleThumb = document.getElementById('slider-circle-thumb');
-      var floatingBadge = document.getElementById('circle-floating-badge');
-      var liveFraction = document.getElementById('gauge-live-fraction');
-      var telemAcuity = document.querySelector('.val-acuity');
-      var telemPolarity = document.querySelector('.val-polarity');
-      var telemContrast = document.querySelector('.val-contrast');
-      var telemPower = document.querySelector('.val-power');
-
-      // Mathematical Mapping of Slider Position [0..100] to Snellen Acuity, Stroke & Contrast
       function computeAcuityParameters(val) {
         var t = val / 100.0;
         var snellen = '20/20';
+        var diopters = '0.00D (PLANO)';
+        var dioptersBrief = '0.00D';
+        var grade = '20-20';
         var mar = '1.0\'';
         var weber = '9.2:1';
-        var power = 'NOMINAL';
-        var fontScale = 1.0;
-        var weightBoost = 0;
-        var letterSpacing = 0;
-        var lineHeight = 1.6;
-        var borderWidth = 1.5;
+        var calib = '100% NOMINAL';
+        var power = 'HARMONIC EQUILIBRIUM';
+        
+        // Continuous mathematical parameters
+        var siteContrast = 1.65 - (t * 0.73);     // 1.65 down to 0.92
+        var siteBrightness = 1.15 - (t * 0.19);   // 1.15 down to 0.96
+        var fontScale = 1.18 - (t * 0.23);        // 1.18 down to 0.95
+        var lineHeight = 1.85 - (t * 0.35);       // 1.85 down to 1.50
+        var letterSpacing = (1.0 - t) * 0.8 - (t * 0.2); // +0.8px down to -0.2px
+        var borderWidth = 3.5 - (t * 2.65);       // 3.5px down to 0.85px
+        var matrixStroke = 3.5 - (t * 2.75);      // 3.5px down to 0.75px
+        var matrixOpacity = 0.95 - (t * 0.60);    // 0.95 down to 0.35
+        var laserGlow = Math.round(24 - (t * 18)); // 24px down to 6px
 
         if (val <= 12) {
           snellen = '20/200';
+          grade = '20-200';
+          diopters = '-8.50D (HIGH SIGHT ASSIST)';
+          dioptersBrief = '-8.50D';
           mar = '10.0\'';
-          weber = '18.5:1';
-          power = 'ULTRA-HIGH CONTRAST';
-          fontScale = 1.15;
-          weightBoost = 250;
-          letterSpacing = 0.8;
-          lineHeight = 1.9;
-          borderWidth = 3.0;
+          weber = '21.0:1';
+          calib = '165% MAX CONTRAST';
+          power = 'ULTRA-HIGH CONTRAST SHIELD';
         } else if (val <= 28) {
           snellen = '20/100';
+          grade = '20-100';
+          diopters = '-5.50D (HEAVY GLASSES)';
+          dioptersBrief = '-5.50D';
           mar = '5.0\'';
-          weber = '15.2:1';
-          power = 'HIGH MACRO';
-          fontScale = 1.10;
-          weightBoost = 200;
-          letterSpacing = 0.6;
-          lineHeight = 1.8;
-          borderWidth = 2.6;
-        } else if (val <= 45) {
+          weber = '16.5:1';
+          calib = '145% BOOSTED CONTRAST';
+          power = 'HIGH MACRO ASSIST';
+        } else if (val <= 48) {
           snellen = '20/70';
+          grade = '20-70';
+          diopters = '-4.00D (MEDIUM GLASSES)';
+          dioptersBrief = '-4.00D';
           mar = '3.5\'';
-          weber = '13.0:1';
-          power = 'EXPANDED';
-          fontScale = 1.06;
-          weightBoost = 150;
-          letterSpacing = 0.4;
-          lineHeight = 1.75;
-          borderWidth = 2.2;
-        } else if (val <= 60) {
+          weber = '13.5:1';
+          calib = '130% EXPANDED CONTRAST';
+          power = 'EXPANDED SIGHT FIELD';
+        } else if (val <= 65) {
           snellen = '20/40';
+          grade = '20-40';
+          diopters = '-2.00D (DRIVING SPEC)';
+          dioptersBrief = '-2.00D';
           mar = '2.0\'';
-          weber = '11.5:1';
-          power = 'STANDARD-PLUS';
-          fontScale = 1.03;
-          weightBoost = 100;
-          letterSpacing = 0.2;
-          lineHeight = 1.7;
-          borderWidth = 1.8;
+          weber = '11.2:1';
+          calib = '115% STANDARD-PLUS';
+          power = 'BALANCED ENHANCED';
         } else if (val <= 85) {
           snellen = '20/20';
+          grade = '20-20';
+          diopters = '0.00D (PLANO NORMAL)';
+          dioptersBrief = '0.00D';
           mar = '1.0\'';
           weber = '9.2:1';
+          calib = '100% NOMINAL';
           power = 'HARMONIC EQUILIBRIUM';
-          fontScale = 1.0;
-          weightBoost = 0;
-          letterSpacing = 0;
-          lineHeight = 1.6;
-          borderWidth = 1.5;
         } else if (val <= 95) {
           snellen = '20/15';
+          grade = '20-15';
+          diopters = '+0.50D (SHARP FOCUS)';
+          dioptersBrief = '+0.50D';
           mar = '0.75\'';
           weber = '8.0:1';
-          power = 'HIGH DENSITY';
-          fontScale = 0.98;
-          weightBoost = 0;
-          letterSpacing = -0.1;
-          lineHeight = 1.55;
-          borderWidth = 1.2;
+          calib = '95% HIGH DENSITY';
+          power = 'PRECISION VECTOR DENSITY';
         } else {
           snellen = '20/10';
+          grade = '20-10';
+          diopters = '+1.00D (EAGLE HYPER)';
+          dioptersBrief = '+1.00D';
           mar = '0.5\'';
           weber = '7.1:1';
+          calib = '92% SUB-PIXEL RAZOR';
           power = 'HYPER-ACUITY RAZOR';
-          fontScale = 0.95;
-          weightBoost = 0;
-          letterSpacing = -0.2;
-          lineHeight = 1.5;
-          borderWidth = 0.85;
         }
 
         return {
+          val: val,
+          grade: grade,
           snellen: snellen,
+          diopters: diopters,
+          dioptersBrief: dioptersBrief,
           mar: mar,
           weber: weber,
+          calib: calib,
           power: power,
-          fontScale: fontScale,
-          weightBoost: weightBoost,
-          letterSpacing: letterSpacing,
-          lineHeight: lineHeight,
-          borderWidth: borderWidth
+          siteContrast: siteContrast.toFixed(3),
+          siteBrightness: siteBrightness.toFixed(3),
+          fontScale: fontScale.toFixed(3),
+          lineHeight: lineHeight.toFixed(2),
+          letterSpacing: letterSpacing.toFixed(2),
+          borderWidth: borderWidth.toFixed(2),
+          matrixStroke: matrixStroke.toFixed(2),
+          matrixOpacity: matrixOpacity.toFixed(2),
+          laserGlow: laserGlow
         };
       }
 
       function applyAcuityContinuous(val) {
         var params = computeAcuityParameters(val);
 
+        var slider = document.getElementById('acuity-analog-slider');
+        var circleThumb = document.getElementById('slider-circle-thumb');
+        var floatingBadge = document.getElementById('circle-floating-badge');
+        var liveFraction = document.getElementById('gauge-live-fraction');
+        var telemAcuity = document.querySelector('.val-acuity');
+        var telemDiopter = document.querySelector('.val-diopter');
+        var telemPolarity = document.querySelector('.val-polarity');
+        var telemContrast = document.querySelector('.val-contrast');
+        var telemCalib = document.querySelector('.val-calib');
+        var telemPower = document.querySelector('.val-power');
+
         // Position Circle Thumb
         if (circleThumb) {
           circleThumb.style.left = val + '%';
         }
         if (floatingBadge) {
-          floatingBadge.textContent = params.snellen;
+          floatingBadge.textContent = params.snellen + ' (' + params.dioptersBrief + ')';
         }
         if (liveFraction) {
-          liveFraction.textContent = params.snellen + ' (MAR ' + params.mar + ')';
+          liveFraction.textContent = params.snellen + ' [' + params.diopters + '] // WEBER ' + params.weber + ' // ' + params.calib;
         }
         if (slider) {
           slider.value = val;
         }
 
-        // Update Telemetry
+        // Update Telemetry Meters
         if (telemAcuity) telemAcuity.textContent = params.snellen;
+        if (telemDiopter) telemDiopter.textContent = params.diopters;
         if (telemContrast) telemContrast.textContent = params.weber;
+        if (telemCalib) telemCalib.textContent = params.calib;
         if (telemPower) telemPower.textContent = params.power;
+
+        // Apply Grade Attribute to DOM
+        document.documentElement.setAttribute('data-acuity-grade', params.grade);
+        document.body.setAttribute('data-acuity-grade', params.grade);
 
         // Apply CSS custom properties dynamically across DOM
         var root = document.documentElement;
+        root.style.setProperty('--site-contrast', params.siteContrast);
+        root.style.setProperty('--site-brightness', params.siteBrightness);
         root.style.setProperty('--font-scale', params.fontScale);
         root.style.setProperty('--line-height-scale', params.lineHeight);
         root.style.setProperty('--letter-spacing-boost', params.letterSpacing + 'px');
         root.style.setProperty('--border-width-scale', params.borderWidth + 'px');
+        root.style.setProperty('--matrix-stroke', params.matrixStroke + 'px');
+        root.style.setProperty('--matrix-opacity', params.matrixOpacity);
+        root.style.setProperty('--laser-glow-blur', params.laserGlow + 'px');
 
-        // Apply font scale and line height to body
-        document.body.style.fontSize = (params.fontScale * 100) + '%';
+        // Apply direct font scale to body
+        document.body.style.fontSize = (params.fontScale * 15) + 'px';
 
         // Highlight preset buttons if near
         var presetBtns = document.querySelectorAll('.acuity-node-btn');
@@ -6162,7 +6288,7 @@
         var ticks = document.querySelectorAll('.tick-link');
         ticks.forEach(function(tick) {
           var tickVal = parseInt(tick.getAttribute('data-val') || '0', 10);
-          if (Math.abs(tickVal - val) <= 12) {
+          if (Math.abs(tickVal - val) <= 10) {
             tick.classList.add('active');
           } else {
             tick.classList.remove('active');
@@ -6175,6 +6301,7 @@
       function applyThemePolarity(theme) {
         document.documentElement.setAttribute('data-theme', theme);
         document.body.setAttribute('data-theme', theme);
+        var telemPolarity = document.querySelector('.val-polarity');
         if (theme === 'light') {
           document.body.classList.add('theme-light');
           document.body.classList.remove('theme-dark');
@@ -6197,21 +6324,60 @@
         localStorage.setItem('lumbros_vision_theme', theme);
       }
 
-      document.addEventListener('DOMContentLoaded', function() {
+      function bootVisionEngine() {
         applyThemePolarity(savedTheme);
         applyAcuityContinuous(savedAcuityVal);
+
+        var slider = document.getElementById('acuity-analog-slider');
+        var railTrack = document.getElementById('acuity-rail-track');
 
         // Native range input slider event
         if (slider) {
           slider.addEventListener('input', function() {
             applyAcuityContinuous(parseInt(this.value, 10));
           });
+          slider.addEventListener('change', function() {
+            applyAcuityContinuous(parseInt(this.value, 10));
+          });
+        }
+
+        // Direct Touch & Pointer Drag on the Rail Track
+        if (railTrack) {
+          var dragging = false;
+          function handleTrackPointer(e) {
+            var rect = railTrack.getBoundingClientRect();
+            var clientX = e.clientX;
+            if (e.touches && e.touches.length > 0) clientX = e.touches[0].clientX;
+            var pct = ((clientX - rect.left) / rect.width) * 100;
+            if (pct < 0) pct = 0;
+            if (pct > 100) pct = 100;
+            applyAcuityContinuous(Math.round(pct));
+          }
+
+          railTrack.addEventListener('pointerdown', function(e) {
+            dragging = true;
+            try { railTrack.setPointerCapture(e.pointerId); } catch(err) {}
+            handleTrackPointer(e);
+          });
+
+          railTrack.addEventListener('pointermove', function(e) {
+            if (dragging) handleTrackPointer(e);
+          });
+
+          railTrack.addEventListener('pointerup', function(e) {
+            dragging = false;
+          });
+
+          railTrack.addEventListener('pointercancel', function(e) {
+            dragging = false;
+          });
         }
 
         // Preset Button clicks
         var presetBtns = document.querySelectorAll('.acuity-node-btn');
         presetBtns.forEach(function(btn) {
-          btn.addEventListener('click', function() {
+          btn.addEventListener('click', function(e) {
+            e.preventDefault();
             var targetGauge = parseInt(this.getAttribute('data-gauge') || '75', 10);
             applyAcuityContinuous(targetGauge);
           });
@@ -6220,7 +6386,8 @@
         // Tick link clicks
         var tickLinks = document.querySelectorAll('.tick-link');
         tickLinks.forEach(function(tick) {
-          tick.addEventListener('click', function() {
+          tick.addEventListener('click', function(e) {
+            e.preventDefault();
             var targetGauge = parseInt(this.getAttribute('data-val') || '75', 10);
             applyAcuityContinuous(targetGauge);
           });
@@ -6229,14 +6396,21 @@
         // Theme Polarity buttons
         var themeBtns = document.querySelectorAll('.polarity-btn');
         themeBtns.forEach(function(btn) {
-          btn.addEventListener('click', function() {
+          btn.addEventListener('click', function(e) {
+            e.preventDefault();
             var selectedTheme = this.getAttribute('data-theme');
             applyThemePolarity(selectedTheme);
           });
         });
-      });
+      }
 
-      // Apply initial theme immediately
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', bootVisionEngine);
+      } else {
+        bootVisionEngine();
+      }
+
+      // Initial theme setup immediately
       applyThemePolarity(savedTheme);
     })();
 
