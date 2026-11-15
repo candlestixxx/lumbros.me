@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Lumbros Network Uplink & Contact Handler
- * Description: Handles networking inquiries, storing them in WordPress and relaying to UnitedBeatsLLC@gmail.com.
- * Version: 1.0.0
+ * Plugin Name: Lumbros Network Uplink & Diary Handler
+ * Description: Handles networking inquiries and live diary transmissions, storing them in WordPress and relaying to UnitedBeatsLLC@gmail.com.
+ * Version: 1.1.0
  * Author: Lumbros Kourlos & Robert Matthew Pelloni
  */
 
@@ -11,10 +11,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 add_action( 'rest_api_init', function () {
+    // 1. General Network Uplink
     register_rest_route( 'lumbros/v1', '/contact', array(
         'methods'             => 'POST',
         'callback'            => 'lumbros_handle_contact_submission',
         'permission_callback' => '__return_true',
+    ) );
+
+    // 2. Live Posts Diary Stream & Comments
+    register_rest_route( 'lumbros/v1', '/diary', array(
+        array(
+            'methods'             => 'GET',
+            'callback'            => 'lumbros_get_diary_comments',
+            'permission_callback' => '__return_true',
+        ),
+        array(
+            'methods'             => 'POST',
+            'callback'            => 'lumbros_add_diary_comment',
+            'permission_callback' => '__return_true',
+        ),
     ) );
 } );
 
@@ -101,10 +116,106 @@ function lumbros_handle_contact_submission( WP_REST_Request $request ) {
 }
 
 function lumbros_ajax_contact_submission() {
-    $result = lumbros_process_contact_data( $_POST );
+    $params = $_POST;
+    $result = lumbros_process_contact_data( $params );
     if ( $result['success'] ) {
         wp_send_json_success( $result );
     } else {
-        wp_send_json_error( $result );
+        wp_send_json_error( $result, 400 );
     }
+}
+
+// -----------------------------------------------------------------------------
+// Live Diary Feed & Live Comments REST API
+// -----------------------------------------------------------------------------
+
+function lumbros_get_diary_comments( WP_REST_Request $request ) {
+    $comments = get_option( 'lumbros_diary_comments', array() );
+    if ( ! is_array( $comments ) || empty( $comments ) ) {
+        // Default seed transmissions
+        $comments = array(
+            array(
+                'id'        => 'sig-003',
+                'name'      => 'Aether_Coder',
+                'location'  => 'Sector 04 // Athens Node',
+                'timestamp' => '2026-11-15 01:12:44',
+                'comment'   => 'The convergence of 1974 unix logic and radial vectors is stunning. Honored to witness the signal.',
+            ),
+            array(
+                'id'        => 'sig-002',
+                'name'      => 'Kassandra_V',
+                'location'  => 'Detroit // Harmonic Studio',
+                'timestamp' => '2026-11-14 22:45:19',
+                'comment'   => 'Sound frequencies, color wavelengths, and digital code are one continuous spectrum. United Beats embodies this!',
+            ),
+            array(
+                'id'        => 'sig-001',
+                'name'      => 'CyberSage_74',
+                'location'  => 'Bell Labs Legacy Net',
+                'timestamp' => '2026-11-14 18:30:00',
+                'comment'   => 'Ken Thompson and Dennis Ritchie would smile at this terminal. Pure respect to the continuous epoch.',
+            ),
+        );
+    }
+    return new WP_REST_Response( array( 'success' => true, 'comments' => $comments ), 200 );
+}
+
+function lumbros_add_diary_comment( WP_REST_Request $request ) {
+    $params = $request->get_json_params();
+    if ( empty( $params ) ) {
+        $params = $request->get_body_params();
+    }
+
+    $name     = isset( $params['name'] ) ? sanitize_text_field( trim( $params['name'] ) ) : 'Cosmic Nomad';
+    $location = isset( $params['location'] ) ? sanitize_text_field( trim( $params['location'] ) ) : 'Earth Continuum';
+    $comment  = isset( $params['comment'] ) ? sanitize_textarea_field( trim( $params['comment'] ) ) : '';
+    $email    = isset( $params['email'] ) ? sanitize_email( trim( $params['email'] ) ) : '';
+
+    if ( empty( $comment ) ) {
+        return new WP_REST_Response( array( 'success' => false, 'message' => 'Comment transmission cannot be empty.' ), 400 );
+    }
+
+    $timestamp = current_time( 'mysql' );
+    $entry = array(
+        'id'        => 'sig-' . substr( md5( uniqid( rand(), true ) ), 0, 6 ),
+        'name'      => ! empty( $name ) ? $name : 'Anonymous Signal',
+        'location'  => ! empty( $location ) ? $location : 'Global Frequency',
+        'email'     => $email,
+        'comment'   => $comment,
+        'timestamp' => $timestamp,
+        'ip'        => isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( $_SERVER['REMOTE_ADDR'] ) : 'Unknown',
+    );
+
+    $comments = get_option( 'lumbros_diary_comments', array() );
+    if ( ! is_array( $comments ) ) {
+        $comments = array();
+    }
+    array_unshift( $comments, $entry );
+    if ( count( $comments ) > 150 ) {
+        $comments = array_slice( $comments, 0, 150 );
+    }
+    update_option( 'lumbros_diary_comments', $comments, false );
+
+    // Notify via email to UnitedBeatsLLC@gmail.com
+    $to      = 'UnitedBeatsLLC@gmail.com';
+    $subject = "[lumbros.me Diary] New Live Comment Transmission from {$entry['name']}";
+    $body    = "=== LIVE POSTS DIARY TRANSMISSION ===\n\n";
+    $body   .= "Timestamp : {$timestamp}\n";
+    $body   .= "Author    : {$entry['name']}\n";
+    $body   .= "Location  : {$entry['location']}\n";
+    $body   .= "Email     : " . ( ! empty( $email ) ? $email : 'None provided' ) . "\n\n";
+    $body   .= "Comment:\n{$comment}\n\n";
+    $body   .= "======================================\n";
+    
+    $headers = array(
+        'From: lumbros.me Diary <noreply@lumbros.me>',
+        'Content-Type: text/plain; charset=UTF-8',
+    );
+    @wp_mail( $to, $subject, $body, $headers );
+
+    return new WP_REST_Response( array(
+        'success'   => true,
+        'message'   => 'TRANSMISSION RECORDED IN CONTINUUM DIARY.',
+        'entry'     => $entry,
+    ), 200 );
 }
