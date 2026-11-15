@@ -39,10 +39,26 @@
 
         <!-- Real-time Mathematical Telemetry -->
         <div class="vision-telemetry-hud" id="vision-live-telemetry">
-          <div class="telem-item"><span class="telem-k">OPTICAL_PRESCRIPTION:</span> <span class="val-acuity glow-val">20/20</span></div>
-          <div class="telem-item"><span class="telem-k">SPECTRUM_POLARITY:</span> <span class="val-polarity glow-val">DARK_OBSIDIAN</span></div>
-          <div class="telem-item"><span class="telem-k">WEBER_CONTRAST:</span> <span class="val-contrast glow-val">9.2:1</span></div>
-          <div class="telem-item"><span class="telem-k">RETINAL_POWER:</span> <span class="val-power glow-val">NOMINAL</span></div>
+          <div class="telem-item">
+            <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+            <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+            <div class="telem-inner"><span class="telem-k">OPTICAL_PRESCRIPTION:</span> <span class="val-acuity glow-val">20/20</span></div>
+          </div>
+          <div class="telem-item">
+            <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+            <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+            <div class="telem-inner"><span class="telem-k">SPECTRUM_POLARITY:</span> <span class="val-polarity glow-val">DARK_OBSIDIAN</span></div>
+          </div>
+          <div class="telem-item">
+            <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+            <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+            <div class="telem-inner"><span class="telem-k">WEBER_CONTRAST:</span> <span class="val-contrast glow-val">9.2:1</span></div>
+          </div>
+          <div class="telem-item">
+            <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+            <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+            <div class="telem-inner"><span class="telem-k">RETINAL_POWER:</span> <span class="val-power glow-val">NOMINAL</span></div>
+          </div>
         </div>
       </div>
 
@@ -60,21 +76,33 @@
           <!-- 3 Quick Focus Preset Buttons -->
           <div class="acuity-gauge-track">
             <button type="button" class="acuity-node-btn" data-acuity="20-200" data-gauge="0" title="High-Contrast Macro Mode for Low Vision / Eye Fatigue (20/200 to 20/70)">
-              <span class="node-grade">20/200</span>
-              <span class="node-name">MACRO CONTRAST</span>
-              <span class="node-spec">High Stroke // Anti-Strain</span>
+              <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+              <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+              <div class="acuity-node-inner">
+                <span class="node-grade">20/200</span>
+                <span class="node-name">MACRO CONTRAST</span>
+                <span class="node-spec">High Stroke // Anti-Strain</span>
+              </div>
             </button>
 
             <button type="button" class="acuity-node-btn active" data-acuity="20-20" data-gauge="75" title="Standard Harmonic Spectrum for 20/20 Corrected Vision">
-              <span class="node-grade">20/20</span>
-              <span class="node-name">BALANCED EQUILIBRIUM</span>
-              <span class="node-spec">Nominal Dispersion</span>
+              <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+              <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+              <div class="acuity-node-inner">
+                <span class="node-grade">20/20</span>
+                <span class="node-name">BALANCED EQUILIBRIUM</span>
+                <span class="node-spec">Nominal Dispersion</span>
+              </div>
             </button>
 
             <button type="button" class="acuity-node-btn" data-acuity="20-10" data-gauge="100" title="Hyper-Acuity Laser Focus for 20/10 Vision &amp; High-DPI Displays">
-              <span class="node-grade">20/10</span>
-              <span class="node-name">HYPER-ACUITY</span>
-              <span class="node-spec">Razor Micro-Vector</span>
+              <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+              <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+              <div class="acuity-node-inner">
+                <span class="node-grade">20/10</span>
+                <span class="node-name">HYPER-ACUITY</span>
+                <span class="node-spec">Razor Micro-Vector</span>
+              </div>
             </button>
           </div>
 
@@ -134,18 +162,26 @@
 
           <div class="polarity-toggle-group">
             <button type="button" class="polarity-btn active" data-theme="dark" title="Dark Spectrum: Deep obsidian background with phosphor neon laser illumination">
-              <span class="pol-icon">☾</span>
-              <div class="pol-info">
-                <span class="pol-title">DARK SPECTRUM</span>
-                <span class="pol-desc">Obsidian Phosphor // Cyber Terminal</span>
+              <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+              <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+              <div class="pol-inner" style="position:relative; z-index:3; display:flex; align-items:center; gap:8px;">
+                <span class="pol-icon">☾</span>
+                <div class="pol-info">
+                  <span class="pol-title">DARK SPECTRUM</span>
+                  <span class="pol-desc">Obsidian Phosphor // Cyber Terminal</span>
+                </div>
               </div>
             </button>
 
             <button type="button" class="polarity-btn" data-theme="light" title="Light Spectrum: Eye-soothing reverse optical alabaster contrast with jewel-tone spectrum">
-              <span class="pol-icon">☼</span>
-              <div class="pol-info">
-                <span class="pol-title">LIGHT SPECTRUM</span>
-                <span class="pol-desc">Reverse Optical Alabaster // Zero-Glare</span>
+              <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+              <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+              <div class="pol-inner" style="position:relative; z-index:3; display:flex; align-items:center; gap:8px;">
+                <span class="pol-icon">☼</span>
+                <div class="pol-info">
+                  <span class="pol-title">LIGHT SPECTRUM</span>
+                  <span class="pol-desc">Reverse Optical Alabaster // Zero-Glare</span>
+                </div>
               </div>
             </button>
           </div>
@@ -167,51 +203,6 @@
           </div>
           <div class="spectrum-center-label">
             <span>◄ 12-COLOR SPECTRUM // HARMONIC CENTER: 550nm GREEN ►</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-        <!-- Module 2: Luminance Spectrum Polarity (Dark Obsidian vs Reverse Light Alabaster) -->
-        <div class="vision-module vision-polarity-module">
-          <div class="module-label">
-            <span class="mod-icon">◐</span>
-            <span>SPECTRUM LUMINANCE POLARITY:</span>
-          </div>
-
-          <div class="polarity-toggle-group">
-            <button type="button" class="polarity-btn active" data-theme="dark" title="Dark Spectrum: Deep obsidian background with phosphor neon laser illumination">
-              <span class="pol-icon">☾</span>
-              <div class="pol-info">
-                <span class="pol-title">DARK SPECTRUM</span>
-                <span class="pol-desc">Obsidian Phosphor // Cyber Terminal</span>
-              </div>
-            </button>
-
-            <button type="button" class="polarity-btn" data-theme="light" title="Light Spectrum: Eye-soothing reverse optical alabaster contrast with jewel-tone spectrum">
-              <span class="pol-icon">☼</span>
-              <div class="pol-info">
-                <span class="pol-title">LIGHT SPECTRUM</span>
-                <span class="pol-desc">Reverse Optical Alabaster // Zero-Glare</span>
-              </div>
-            </button>
-          </div>
-
-          <div class="polarity-spectrum-preview">
-            <span class="spectrum-dot dot-1"></span>
-            <span class="spectrum-dot dot-2"></span>
-            <span class="spectrum-dot dot-3"></span>
-            <span class="spectrum-dot dot-4"></span>
-            <span class="spectrum-dot dot-5"></span>
-            <span class="spectrum-dot dot-6" title="Green Center Anchor 50%"></span>
-            <span class="spectrum-dot dot-7"></span>
-            <span class="spectrum-dot dot-8"></span>
-            <span class="spectrum-dot dot-9"></span>
-            <span class="spectrum-dot dot-10"></span>
-            <span class="spectrum-dot dot-11"></span>
-            <span class="spectrum-dot dot-12"></span>
           </div>
         </div>
 
@@ -614,49 +605,185 @@
         <!-- Candlestixxx GitHub Ecosystem Showcase -->
         <div class="github-ecosystem-box">
           <div class="gh-header">
-            <div class="gh-title">
-              <span class="gh-icon">⬢</span>
-              <span>GITHUB // CANDLESTIXXX REPOSITORY ECOSYSTEM</span>
+            <div class="gh-title-wrap">
+              <div class="gh-title">
+                <span class="gh-icon">⬢</span>
+                <span>GITHUB // CANDLESTIXXX REPOSITORY ECOSYSTEM</span>
+              </div>
+              <div class="gh-live-badge">
+                <span class="gh-live-pip"></span>
+                <span id="gh-repo-count-text">LIVE REPOSITORIES: 17 REPOS // SYNCED @CANDLESTIXXX</span>
+              </div>
             </div>
-            <a href="https://github.com/candlestixxx" target="_blank" rel="noopener noreferrer" class="gh-profile-btn">
-              <span>VIEW @candlestixxx</span>
+            <a href="https://github.com/candlestixxx" target="_blank" rel="noopener noreferrer" class="gh-profile-btn" title="View Full GitHub Profile @candlestixxx">
+              <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+              <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+              <span class="gh-btn-text">VIEW @CANDLESTIXXX</span>
               <span>→</span>
             </a>
           </div>
           
+          <!-- Primary Featured Repositories Grid -->
           <div class="repo-chips-grid">
             <a href="https://github.com/candlestixxx/HyperNexus-VRL-1" target="_blank" rel="noopener noreferrer" class="repo-chip">
-              <span class="repo-name">HyperNexus-VRL-1</span>
-              <span class="repo-tag">Core API Gateway</span>
+              <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+              <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+              <div class="repo-chip-inner">
+                <div class="repo-row-top"><span class="repo-name">HyperNexus-VRL-1</span> <span class="repo-lang py">PYTHON</span></div>
+                <span class="repo-tag">Core API Gateway &amp; Control Plane</span>
+              </div>
             </a>
-            <a href="https://github.com/candlestixxx/ddacc" target="_blank" rel="noopener noreferrer" class="repo-chip">
-              <span class="repo-name">ddacc</span>
-              <span class="repo-tag">Detroit Digital Arts</span>
-            </a>
-            <a href="https://github.com/candlestixxx/Thresh" target="_blank" rel="noopener noreferrer" class="repo-chip">
-              <span class="repo-name">Thresh</span>
-              <span class="repo-tag">Mutual-Aid Network</span>
-            </a>
-            <a href="https://github.com/candlestixxx/techno_platform_detroit" target="_blank" rel="noopener noreferrer" class="repo-chip">
-              <span class="repo-name">techno_platform_detroit</span>
-              <span class="repo-tag">Music Matrix</span>
-            </a>
-            <a href="https://github.com/candlestixxx/pulse-dashboard" target="_blank" rel="noopener noreferrer" class="repo-chip">
-              <span class="repo-name">pulse-dashboard</span>
-              <span class="repo-tag">Telemetry UI</span>
-            </a>
-            <a href="https://github.com/candlestixxx/psychedelic-speech-engine" target="_blank" rel="noopener noreferrer" class="repo-chip">
-              <span class="repo-name">psychedelic-speech</span>
-              <span class="repo-tag">Audio Synthesis</span>
+            <a href="https://github.com/candlestixxx/lumbros.me" target="_blank" rel="noopener noreferrer" class="repo-chip">
+              <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+              <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+              <div class="repo-chip-inner">
+                <div class="repo-row-top"><span class="repo-name">lumbros.me</span> <span class="repo-lang php">PHP</span></div>
+                <span class="repo-tag">WordPress &amp; Terminal Engine</span>
+              </div>
             </a>
             <a href="https://github.com/candlestixxx/workspace" target="_blank" rel="noopener noreferrer" class="repo-chip">
-              <span class="repo-name">workspace</span>
-              <span class="repo-tag">Monorepo Central</span>
+              <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+              <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+              <div class="repo-chip-inner">
+                <div class="repo-row-top"><span class="repo-name">workspace</span> <span class="repo-lang bat">SUBMODULES</span></div>
+                <span class="repo-tag">Central Monorepo Hub</span>
+              </div>
             </a>
-            <a href="https://github.com/candlestixxx/p2p_service_marketplace" target="_blank" rel="noopener noreferrer" class="repo-chip">
-              <span class="repo-name">p2p_marketplace</span>
-              <span class="repo-tag">Decentralized Mesh</span>
+            <a href="https://github.com/candlestixxx/skillzhub" target="_blank" rel="noopener noreferrer" class="repo-chip">
+              <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+              <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+              <div class="repo-chip-inner">
+                <div class="repo-row-top"><span class="repo-name">skillzhub</span> <span class="repo-lang ts">TYPESCRIPT</span></div>
+                <span class="repo-tag">Agent Skills Marketplace</span>
+              </div>
             </a>
+            <a href="https://github.com/candlestixxx/suno-api" target="_blank" rel="noopener noreferrer" class="repo-chip">
+              <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+              <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+              <div class="repo-chip-inner">
+                <div class="repo-row-top"><span class="repo-name">suno-api</span> <span class="repo-lang ts">TYPESCRIPT</span></div>
+                <span class="repo-tag">Music Gen AI Integration</span>
+              </div>
+            </a>
+            <a href="https://github.com/candlestixxx/techno_platform_detroit" target="_blank" rel="noopener noreferrer" class="repo-chip">
+              <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+              <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+              <div class="repo-chip-inner">
+                <div class="repo-row-top"><span class="repo-name">techno_platform</span> <span class="repo-lang ts">TYPESCRIPT</span></div>
+                <span class="repo-tag">Detroit Music Matrix</span>
+              </div>
+            </a>
+            <a href="https://github.com/candlestixxx/pulse-dashboard" target="_blank" rel="noopener noreferrer" class="repo-chip">
+              <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+              <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+              <div class="repo-chip-inner">
+                <div class="repo-row-top"><span class="repo-name">pulse-dashboard</span> <span class="repo-lang js">JAVASCRIPT</span></div>
+                <span class="repo-tag">Telemetry UI Engine</span>
+              </div>
+            </a>
+            <a href="https://github.com/candlestixxx/psychedelic-speech-engine" target="_blank" rel="noopener noreferrer" class="repo-chip">
+              <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+              <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+              <div class="repo-chip-inner">
+                <div class="repo-row-top"><span class="repo-name">psychedelic-speech</span> <span class="repo-lang py">PYTHON</span></div>
+                <span class="repo-tag">Audio Neural Synthesis</span>
+              </div>
+            </a>
+          </div>
+
+          <!-- SEE MORE REPOS Expandable Drawer Button -->
+          <div class="gh-expand-bar">
+            <button type="button" class="gh-see-more-btn" id="gh-see-more-btn" title="Click to View All Candlestixxx Repositories">
+              <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+              <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+              <span class="btn-inner" style="position:relative; z-index:3; display:inline-flex; align-items:center; gap:8px;">
+                <span>⬢ SEE MORE REPOS (EXPAND FULL 17+ ARCHIVE)</span>
+                <span id="gh-more-arrow">▼</span>
+              </span>
+            </button>
+          </div>
+
+          <!-- Expanded Full Archive Grid (Initially Hidden) -->
+          <div class="gh-expanded-drawer" id="gh-expanded-drawer" style="display: none;">
+            <div class="gh-drawer-header">
+              <span class="drawer-tag">ARCHIVE EXPANSION // ALL PUBLIC REPOSITORIES</span>
+              <span class="drawer-stats" id="drawer-stats-count">SHOWING ALL 17 REPOSITORIES</span>
+            </div>
+            <div class="repo-chips-grid expanded-grid">
+              <a href="https://github.com/candlestixxx/p2p_service_marketplace" target="_blank" rel="noopener noreferrer" class="repo-chip">
+                <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+                <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+                <div class="repo-chip-inner">
+                  <div class="repo-row-top"><span class="repo-name">p2p_marketplace</span> <span class="repo-lang ts">TYPESCRIPT</span></div>
+                  <span class="repo-tag">Decentralized Mesh Network</span>
+                </div>
+              </a>
+              <a href="https://github.com/candlestixxx/hyperharness" target="_blank" rel="noopener noreferrer" class="repo-chip">
+                <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+                <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+                <div class="repo-chip-inner">
+                  <div class="repo-row-top"><span class="repo-name">hyperharness</span> <span class="repo-lang ts">TYPESCRIPT</span></div>
+                  <span class="repo-tag">Swarm Test &amp; Benchmark</span>
+                </div>
+              </a>
+              <a href="https://github.com/candlestixxx/Prank-Deck-AI" target="_blank" rel="noopener noreferrer" class="repo-chip">
+                <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+                <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+                <div class="repo-chip-inner">
+                  <div class="repo-row-top"><span class="repo-name">Prank-Deck-AI</span> <span class="repo-lang ts">TYPESCRIPT</span></div>
+                  <span class="repo-tag">Generative Audio Interaction</span>
+                </div>
+              </a>
+              <a href="https://github.com/candlestixxx/crowdsourced_dance_club" target="_blank" rel="noopener noreferrer" class="repo-chip">
+                <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+                <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+                <div class="repo-chip-inner">
+                  <div class="repo-row-top"><span class="repo-name">crowdsourced_club</span> <span class="repo-lang py">PYTHON</span></div>
+                  <span class="repo-tag">Sonic Choreography Engine</span>
+                </div>
+              </a>
+              <a href="https://github.com/candlestixxx/theta-data-api" target="_blank" rel="noopener noreferrer" class="repo-chip">
+                <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+                <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+                <div class="repo-chip-inner">
+                  <div class="repo-row-top"><span class="repo-name">theta-data-api</span> <span class="repo-lang ts">TYPESCRIPT</span></div>
+                  <span class="repo-tag">Market Telemetry Stream</span>
+                </div>
+              </a>
+              <a href="https://github.com/candlestixxx/bobgui" target="_blank" rel="noopener noreferrer" class="repo-chip">
+                <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+                <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+                <div class="repo-chip-inner">
+                  <div class="repo-row-top"><span class="repo-name">bobgui</span> <span class="repo-lang c">C</span></div>
+                  <span class="repo-tag">Low-Latency Kernel GUI</span>
+                </div>
+              </a>
+              <a href="https://github.com/candlestixxx/explorerexedecompiled" target="_blank" rel="noopener noreferrer" class="repo-chip">
+                <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+                <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+                <div class="repo-chip-inner">
+                  <div class="repo-row-top"><span class="repo-name">explorerexedecompiled</span> <span class="repo-lang py">PYTHON</span></div>
+                  <span class="repo-tag">Binary Decompilation Analysis</span>
+                </div>
+              </a>
+              <a href="https://github.com/candlestixxx/Thresh" target="_blank" rel="noopener noreferrer" class="repo-chip">
+                <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+                <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+                <div class="repo-chip-inner">
+                  <div class="repo-row-top"><span class="repo-name">Thresh</span> <span class="repo-lang arch">SPEC</span></div>
+                  <span class="repo-tag">Threshold Vector Bounds</span>
+                </div>
+              </a>
+              <a href="https://github.com/candlestixxx/ddacc" target="_blank" rel="noopener noreferrer" class="repo-chip">
+                <span class="spectrum-bar bar-left" aria-hidden="true"></span>
+                <span class="spectrum-bar bar-right" aria-hidden="true"></span>
+                <div class="repo-chip-inner">
+                  <div class="repo-row-top"><span class="repo-name">ddacc</span> <span class="repo-lang ts">TYPESCRIPT</span></div>
+                  <span class="repo-tag">High-Frequency Audio DSP</span>
+                </div>
+              </a>
+            </div>
+          </div>
           </div>
         </div>
 
@@ -3697,10 +3824,16 @@
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       margin-bottom: 14px;
       padding-bottom: 10px;
       border-bottom: 1px solid #14442a;
+    }
+
+    .gh-title-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
 
     .gh-title {
@@ -3713,13 +3846,49 @@
       gap: 6px;
     }
 
+    .gh-live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.64rem;
+      color: #00ff66;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .gh-live-pip {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #00ff66;
+      box-shadow: 0 0 8px #00ff66;
+      animation: terminal-blink 1.2s infinite;
+    }
+
     .gh-icon { color: #00ff66; }
 
     .gh-profile-btn {
+      position: relative;
+      overflow: hidden;
       color: #00ff66;
       border: 1px solid #00ff66;
-      background: rgba(0, 255, 102, 0.1);
-      padding: 4px 10px;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 0, 51, 0.12) 0%,
+        rgba(255, 61, 0, 0.12) 9%,
+        rgba(255, 119, 0, 0.12) 18%,
+        rgba(255, 170, 0, 0.12) 27%,
+        rgba(255, 230, 0, 0.12) 36%,
+        rgba(180, 230, 0, 0.16) 45%, /* PEAR */
+        rgba(0, 255, 102, 0.24) 50%, /* GREEN MIDPOINT */
+        rgba(0, 240, 170, 0.16) 55%, /* TEAL */
+        rgba(0, 229, 255, 0.12) 64%,
+        rgba(0, 119, 255, 0.12) 73%,
+        rgba(88, 0, 255, 0.12) 82%,
+        rgba(224, 0, 153, 0.12) 100%
+      );
+      padding: 6px 12px;
       border-radius: 4px;
       font-size: 0.72rem;
       font-weight: 700;
@@ -3733,31 +3902,69 @@
     .gh-profile-btn:hover {
       background: #00ff66;
       color: #000;
-      box-shadow: 0 0 12px #00ff66;
+      box-shadow: 0 0 16px #00ff66;
+    }
+
+    .gh-btn-text {
+      position: relative;
+      z-index: 3;
     }
 
     .repo-chips-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: 8px;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
     }
 
     .repo-chip {
-      background: rgba(0, 25, 12, 0.6);
-      border: 1px solid #174e2d;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 0, 51, 0.12) 0%,
+        rgba(255, 61, 0, 0.12) 9%,
+        rgba(255, 119, 0, 0.12) 18%,
+        rgba(255, 170, 0, 0.12) 27%,
+        rgba(255, 230, 0, 0.12) 36%,
+        rgba(180, 230, 0, 0.16) 45%, /* PEAR */
+        rgba(0, 255, 102, 0.24) 50%, /* GREEN MIDPOINT */
+        rgba(0, 240, 170, 0.16) 55%, /* TEAL */
+        rgba(0, 229, 255, 0.12) 64%,
+        rgba(0, 119, 255, 0.12) 73%,
+        rgba(88, 0, 255, 0.12) 82%,
+        rgba(224, 0, 153, 0.12) 100%
+      );
+      border: 1px solid rgba(0, 255, 102, 0.28);
       border-radius: 6px;
-      padding: 8px 10px;
+      padding: 10px 12px;
       text-decoration: none;
       display: flex;
       flex-direction: column;
-      gap: 2px;
-      transition: all 0.2s ease;
+      gap: 3px;
+      transition: all 0.25s ease;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6);
     }
 
     .repo-chip:hover {
       border-color: #00ff66;
-      background: rgba(0, 255, 102, 0.1);
       transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.8), 0 0 12px rgba(0, 255, 102, 0.4);
+    }
+
+    .repo-chip-inner {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      pointer-events: none;
+    }
+
+    .repo-row-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
     }
 
     .repo-name {
@@ -3766,10 +3973,95 @@
       font-weight: 700;
     }
 
+    .repo-lang {
+      font-size: 0.55rem;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .repo-lang.py   { background: rgba(0, 229, 255, 0.2); color: #00e5ff; border: 1px solid rgba(0, 229, 255, 0.4); }
+    .repo-lang.ts   { background: rgba(0, 119, 255, 0.2); color: #80c0ff; border: 1px solid rgba(0, 119, 255, 0.4); }
+    .repo-lang.php  { background: rgba(180, 230, 0, 0.2); color: #b4e600; border: 1px solid rgba(180, 230, 0, 0.4); }
+    .repo-lang.js   { background: rgba(255, 230, 0, 0.2); color: #ffe600; border: 1px solid rgba(255, 230, 0, 0.4); }
+    .repo-lang.c    { background: rgba(255, 61, 0, 0.2); color: #ff7744; border: 1px solid rgba(255, 61, 0, 0.4); }
+    .repo-lang.bat  { background: rgba(224, 0, 153, 0.2); color: #ff66cc; border: 1px solid rgba(224, 0, 153, 0.4); }
+    .repo-lang.arch { background: rgba(0, 255, 102, 0.2); color: #00ff66; border: 1px solid rgba(0, 255, 102, 0.4); }
+
     .repo-tag {
       color: #7df9a6;
       font-size: 0.65rem;
     }
+
+    /* SEE MORE REPOS Expandable Bar */
+    .gh-expand-bar {
+      margin-top: 12px;
+    }
+
+    .gh-see-more-btn {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      padding: 10px 14px;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 0, 51, 0.12) 0%,
+        rgba(255, 61, 0, 0.12) 9%,
+        rgba(255, 119, 0, 0.12) 18%,
+        rgba(255, 170, 0, 0.12) 27%,
+        rgba(255, 230, 0, 0.12) 36%,
+        rgba(180, 230, 0, 0.16) 45%, /* PEAR */
+        rgba(0, 255, 102, 0.24) 50%, /* GREEN MIDPOINT */
+        rgba(0, 240, 170, 0.16) 55%, /* TEAL */
+        rgba(0, 229, 255, 0.12) 64%,
+        rgba(0, 119, 255, 0.12) 73%,
+        rgba(88, 0, 255, 0.12) 82%,
+        rgba(224, 0, 153, 0.12) 100%
+      );
+      border: 1px solid rgba(0, 255, 102, 0.4);
+      border-radius: 6px;
+      color: #00ff66;
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.25s;
+    }
+
+    .gh-see-more-btn:hover {
+      border-color: #00ff66;
+      box-shadow: 0 0 16px rgba(0, 255, 102, 0.45);
+      transform: translateY(-1px);
+      color: #ffffff;
+    }
+
+    .gh-expanded-drawer {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(0, 255, 102, 0.3);
+      animation: drawer-reveal 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes drawer-reveal {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .gh-drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .drawer-tag { color: #00e5ff; }
+    .drawer-stats { color: #00ff66; }
 
     /* Quantum Uplink Form */
     .form-hud-container {
@@ -5151,8 +5443,24 @@
     }
 
     .acuity-node-btn {
-      background: rgba(0, 20, 10, 0.85);
-      border: 1px solid #1c5e37;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 0, 51, 0.12) 0%,
+        rgba(255, 61, 0, 0.12) 9%,
+        rgba(255, 119, 0, 0.12) 18%,
+        rgba(255, 170, 0, 0.12) 27%,
+        rgba(255, 230, 0, 0.12) 36%,
+        rgba(180, 230, 0, 0.16) 45%, /* PEAR */
+        rgba(0, 255, 102, 0.24) 50%, /* GREEN MIDPOINT */
+        rgba(0, 240, 170, 0.16) 55%, /* TEAL */
+        rgba(0, 229, 255, 0.12) 64%,
+        rgba(0, 119, 255, 0.12) 73%,
+        rgba(88, 0, 255, 0.12) 82%,
+        rgba(224, 0, 153, 0.12) 100%
+      );
+      border: 1px solid rgba(0, 255, 102, 0.28);
       border-radius: 4px;
       padding: 8px 6px;
       display: flex;
@@ -5162,18 +5470,27 @@
       cursor: pointer;
       transition: all 0.2s ease;
       font-family: inherit;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6);
+    }
+
+    .acuity-node-inner {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      pointer-events: none;
     }
 
     .acuity-node-btn:hover {
       border-color: #00ff66;
-      box-shadow: 0 0 12px rgba(0, 255, 102, 0.3);
+      box-shadow: 0 0 16px rgba(0, 255, 102, 0.45);
       transform: translateY(-1px);
     }
 
     .acuity-node-btn.active {
-      background: rgba(0, 255, 102, 0.18);
       border-color: #00ff66;
-      box-shadow: 0 0 15px rgba(0, 255, 102, 0.4), inset 0 0 10px rgba(0, 255, 102, 0.2);
+      box-shadow: 0 0 18px rgba(0, 255, 102, 0.5), inset 0 0 15px rgba(0, 255, 102, 0.3);
     }
 
     .node-grade {
@@ -5247,29 +5564,45 @@
     }
 
     .polarity-btn {
+      position: relative;
+      overflow: hidden;
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 10px 12px;
+      padding: 10px 14px;
       border-radius: 6px;
-      background: rgba(0, 20, 10, 0.85);
-      border: 1px solid #1c5e37;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 0, 51, 0.12) 0%,
+        rgba(255, 61, 0, 0.12) 9%,
+        rgba(255, 119, 0, 0.12) 18%,
+        rgba(255, 170, 0, 0.12) 27%,
+        rgba(255, 230, 0, 0.12) 36%,
+        rgba(180, 230, 0, 0.16) 45%, /* PEAR */
+        rgba(0, 255, 102, 0.24) 50%, /* GREEN MIDPOINT */
+        rgba(0, 240, 170, 0.16) 55%, /* TEAL */
+        rgba(0, 229, 255, 0.12) 64%,
+        rgba(0, 119, 255, 0.12) 73%,
+        rgba(88, 0, 255, 0.12) 82%,
+        rgba(224, 0, 153, 0.12) 100%
+      );
+      border: 1px solid rgba(0, 255, 102, 0.28);
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
       font-family: inherit;
       text-align: left;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6);
     }
 
     .polarity-btn:hover {
       border-color: #00ff66;
-      box-shadow: 0 0 12px rgba(0, 255, 102, 0.3);
+      box-shadow: 0 0 16px rgba(0, 255, 102, 0.45);
       transform: translateY(-1px);
     }
 
     .polarity-btn.active {
       border-color: #00ff66;
-      background: rgba(0, 255, 102, 0.18);
-      box-shadow: 0 0 16px rgba(0, 255, 102, 0.4), inset 0 0 10px rgba(0, 255, 102, 0.2);
+      box-shadow: 0 0 18px rgba(0, 255, 102, 0.5), inset 0 0 15px rgba(0, 255, 102, 0.3);
     }
 
     .pol-icon {
@@ -5536,6 +5869,54 @@
     body[data-theme="light"] .menubox-center-pip {
       background: #007a30 !important;
       box-shadow: 0 0 6px #007a30 !important;
+    }
+
+    body[data-theme="light"] .github-ecosystem-box {
+      background: #ffffff !important;
+      border-color: #8ecea8 !important;
+    }
+
+    body[data-theme="light"] .repo-chip,
+    body[data-theme="light"] .gh-see-more-btn,
+    body[data-theme="light"] .acuity-node-btn,
+    body[data-theme="light"] .polarity-btn,
+    body[data-theme="light"] .telem-item {
+      background: linear-gradient(
+        90deg,
+        rgba(255, 0, 51, 0.08) 0%,
+        rgba(255, 61, 0, 0.08) 9%,
+        rgba(255, 119, 0, 0.08) 18%,
+        rgba(255, 170, 0, 0.08) 27%,
+        rgba(255, 230, 0, 0.08) 36%,
+        rgba(180, 230, 0, 0.12) 45%, /* PEAR */
+        rgba(0, 255, 102, 0.16) 50%, /* GREEN MIDPOINT */
+        rgba(0, 240, 170, 0.12) 55%, /* TEAL */
+        rgba(0, 229, 255, 0.08) 64%,
+        rgba(0, 119, 255, 0.08) 73%,
+        rgba(88, 0, 255, 0.08) 82%,
+        rgba(224, 0, 153, 0.08) 100%
+      ) !important;
+      border-color: #a8d6bc !important;
+    }
+
+    body[data-theme="light"] .repo-name {
+      color: #03140a !important;
+    }
+
+    body[data-theme="light"] .repo-tag {
+      color: #006b2b !important;
+    }
+
+    body[data-theme="light"] .gh-title {
+      color: #007799 !important;
+    }
+
+    body[data-theme="light"] .gh-live-badge {
+      color: #007a30 !important;
+    }
+
+    body[data-theme="light"] .gh-see-more-btn {
+      color: #007a30 !important;
     }
 
     body[data-theme="light"] .hero-tagline {
@@ -5873,6 +6254,45 @@
       font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 1px;
+    }
+
+    .telem-item {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 0, 51, 0.12) 0%,
+        rgba(255, 61, 0, 0.12) 9%,
+        rgba(255, 119, 0, 0.12) 18%,
+        rgba(255, 170, 0, 0.12) 27%,
+        rgba(255, 230, 0, 0.12) 36%,
+        rgba(180, 230, 0, 0.16) 45%, /* PEAR */
+        rgba(0, 255, 102, 0.24) 50%, /* GREEN MIDPOINT */
+        rgba(0, 240, 170, 0.16) 55%, /* TEAL */
+        rgba(0, 229, 255, 0.12) 64%,
+        rgba(0, 119, 255, 0.12) 73%,
+        rgba(88, 0, 255, 0.12) 82%,
+        rgba(224, 0, 153, 0.12) 100%
+      );
+      border: 1px solid rgba(0, 255, 102, 0.28);
+      border-radius: 4px;
+      padding: 4px 10px;
+      box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
+      transition: all 0.2s ease;
+    }
+
+    .telem-item:hover {
+      border-color: #00ff66;
+      box-shadow: 0 0 10px rgba(0, 255, 102, 0.35);
+    }
+
+    .telem-inner {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      pointer-events: none;
     }
 
     .telem-k {
@@ -7929,6 +8349,46 @@
       // Initial UI Sync
       syncUiState();
     })();
+
+    // =========================================================================
+    // GitHub Candlestixxx Live Repositories & Expandable Archive Drawer
+    // =========================================================================
+    document.addEventListener('DOMContentLoaded', function() {
+      var seeMoreBtn = document.getElementById('gh-see-more-btn');
+      var drawer = document.getElementById('gh-expanded-drawer');
+      var arrow = document.getElementById('gh-more-arrow');
+      var repoCountEl = document.getElementById('gh-repo-count-text');
+      var drawerStats = document.getElementById('drawer-stats-count');
+
+      if (seeMoreBtn && drawer) {
+        seeMoreBtn.addEventListener('click', function() {
+          var isHidden = drawer.style.display === 'none' || drawer.style.display === '';
+          drawer.style.display = isHidden ? 'block' : 'none';
+          if (arrow) arrow.textContent = isHidden ? '▲' : '▼';
+        });
+      }
+
+      // Live fetch repository count from GitHub API
+      fetch('https://api.github.com/users/candlestixxx')
+        .then(function(res) {
+          if (!res.ok) throw new Error('Status ' + res.status);
+          return res.json();
+        })
+        .then(function(data) {
+          if (data && typeof data.public_repos === 'number') {
+            var count = data.public_repos;
+            if (repoCountEl) {
+              repoCountEl.textContent = 'LIVE REPOSITORY COUNT: ' + count + ' REPOSITORIES // SYNCED @CANDLESTIXXX';
+            }
+            if (drawerStats) {
+              drawerStats.textContent = 'SHOWING ALL ' + count + ' REPOSITORIES';
+            }
+          }
+        })
+        .catch(function(err) {
+          console.log('[GitHub Telemetry] Using cached archive count (17+ repos):', err);
+        });
+    });
 
   </script>
 </div>

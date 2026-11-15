@@ -2057,10 +2057,16 @@
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       margin-bottom: 14px;
       padding-bottom: 10px;
       border-bottom: 1px solid #14442a;
+    }
+
+    .gh-title-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
 
     .gh-title {
@@ -2073,13 +2079,49 @@
       gap: 6px;
     }
 
+    .gh-live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.64rem;
+      color: #00ff66;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .gh-live-pip {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #00ff66;
+      box-shadow: 0 0 8px #00ff66;
+      animation: terminal-blink 1.2s infinite;
+    }
+
     .gh-icon { color: #00ff66; }
 
     .gh-profile-btn {
+      position: relative;
+      overflow: hidden;
       color: #00ff66;
       border: 1px solid #00ff66;
-      background: rgba(0, 255, 102, 0.1);
-      padding: 4px 10px;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 0, 51, 0.12) 0%,
+        rgba(255, 61, 0, 0.12) 9%,
+        rgba(255, 119, 0, 0.12) 18%,
+        rgba(255, 170, 0, 0.12) 27%,
+        rgba(255, 230, 0, 0.12) 36%,
+        rgba(180, 230, 0, 0.16) 45%, /* PEAR */
+        rgba(0, 255, 102, 0.24) 50%, /* GREEN MIDPOINT */
+        rgba(0, 240, 170, 0.16) 55%, /* TEAL */
+        rgba(0, 229, 255, 0.12) 64%,
+        rgba(0, 119, 255, 0.12) 73%,
+        rgba(88, 0, 255, 0.12) 82%,
+        rgba(224, 0, 153, 0.12) 100%
+      );
+      padding: 6px 12px;
       border-radius: 4px;
       font-size: 0.72rem;
       font-weight: 700;
@@ -2093,31 +2135,69 @@
     .gh-profile-btn:hover {
       background: #00ff66;
       color: #000;
-      box-shadow: 0 0 12px #00ff66;
+      box-shadow: 0 0 16px #00ff66;
+    }
+
+    .gh-btn-text {
+      position: relative;
+      z-index: 3;
     }
 
     .repo-chips-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: 8px;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
     }
 
     .repo-chip {
-      background: rgba(0, 25, 12, 0.6);
-      border: 1px solid #174e2d;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 0, 51, 0.12) 0%,
+        rgba(255, 61, 0, 0.12) 9%,
+        rgba(255, 119, 0, 0.12) 18%,
+        rgba(255, 170, 0, 0.12) 27%,
+        rgba(255, 230, 0, 0.12) 36%,
+        rgba(180, 230, 0, 0.16) 45%, /* PEAR */
+        rgba(0, 255, 102, 0.24) 50%, /* GREEN MIDPOINT */
+        rgba(0, 240, 170, 0.16) 55%, /* TEAL */
+        rgba(0, 229, 255, 0.12) 64%,
+        rgba(0, 119, 255, 0.12) 73%,
+        rgba(88, 0, 255, 0.12) 82%,
+        rgba(224, 0, 153, 0.12) 100%
+      );
+      border: 1px solid rgba(0, 255, 102, 0.28);
       border-radius: 6px;
-      padding: 8px 10px;
+      padding: 10px 12px;
       text-decoration: none;
       display: flex;
       flex-direction: column;
-      gap: 2px;
-      transition: all 0.2s ease;
+      gap: 3px;
+      transition: all 0.25s ease;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6);
     }
 
     .repo-chip:hover {
       border-color: #00ff66;
-      background: rgba(0, 255, 102, 0.1);
       transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.8), 0 0 12px rgba(0, 255, 102, 0.4);
+    }
+
+    .repo-chip-inner {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      pointer-events: none;
+    }
+
+    .repo-row-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
     }
 
     .repo-name {
@@ -2126,10 +2206,95 @@
       font-weight: 700;
     }
 
+    .repo-lang {
+      font-size: 0.55rem;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .repo-lang.py   { background: rgba(0, 229, 255, 0.2); color: #00e5ff; border: 1px solid rgba(0, 229, 255, 0.4); }
+    .repo-lang.ts   { background: rgba(0, 119, 255, 0.2); color: #80c0ff; border: 1px solid rgba(0, 119, 255, 0.4); }
+    .repo-lang.php  { background: rgba(180, 230, 0, 0.2); color: #b4e600; border: 1px solid rgba(180, 230, 0, 0.4); }
+    .repo-lang.js   { background: rgba(255, 230, 0, 0.2); color: #ffe600; border: 1px solid rgba(255, 230, 0, 0.4); }
+    .repo-lang.c    { background: rgba(255, 61, 0, 0.2); color: #ff7744; border: 1px solid rgba(255, 61, 0, 0.4); }
+    .repo-lang.bat  { background: rgba(224, 0, 153, 0.2); color: #ff66cc; border: 1px solid rgba(224, 0, 153, 0.4); }
+    .repo-lang.arch { background: rgba(0, 255, 102, 0.2); color: #00ff66; border: 1px solid rgba(0, 255, 102, 0.4); }
+
     .repo-tag {
       color: #7df9a6;
       font-size: 0.65rem;
     }
+
+    /* SEE MORE REPOS Expandable Bar */
+    .gh-expand-bar {
+      margin-top: 12px;
+    }
+
+    .gh-see-more-btn {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      padding: 10px 14px;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 0, 51, 0.12) 0%,
+        rgba(255, 61, 0, 0.12) 9%,
+        rgba(255, 119, 0, 0.12) 18%,
+        rgba(255, 170, 0, 0.12) 27%,
+        rgba(255, 230, 0, 0.12) 36%,
+        rgba(180, 230, 0, 0.16) 45%, /* PEAR */
+        rgba(0, 255, 102, 0.24) 50%, /* GREEN MIDPOINT */
+        rgba(0, 240, 170, 0.16) 55%, /* TEAL */
+        rgba(0, 229, 255, 0.12) 64%,
+        rgba(0, 119, 255, 0.12) 73%,
+        rgba(88, 0, 255, 0.12) 82%,
+        rgba(224, 0, 153, 0.12) 100%
+      );
+      border: 1px solid rgba(0, 255, 102, 0.4);
+      border-radius: 6px;
+      color: #00ff66;
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.25s;
+    }
+
+    .gh-see-more-btn:hover {
+      border-color: #00ff66;
+      box-shadow: 0 0 16px rgba(0, 255, 102, 0.45);
+      transform: translateY(-1px);
+      color: #ffffff;
+    }
+
+    .gh-expanded-drawer {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(0, 255, 102, 0.3);
+      animation: drawer-reveal 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes drawer-reveal {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .gh-drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .drawer-tag { color: #00e5ff; }
+    .drawer-stats { color: #00ff66; }
 
     /* Quantum Uplink Form */
     .form-hud-container {
@@ -3511,8 +3676,24 @@
     }
 
     .acuity-node-btn {
-      background: rgba(0, 20, 10, 0.85);
-      border: 1px solid #1c5e37;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 0, 51, 0.12) 0%,
+        rgba(255, 61, 0, 0.12) 9%,
+        rgba(255, 119, 0, 0.12) 18%,
+        rgba(255, 170, 0, 0.12) 27%,
+        rgba(255, 230, 0, 0.12) 36%,
+        rgba(180, 230, 0, 0.16) 45%, /* PEAR */
+        rgba(0, 255, 102, 0.24) 50%, /* GREEN MIDPOINT */
+        rgba(0, 240, 170, 0.16) 55%, /* TEAL */
+        rgba(0, 229, 255, 0.12) 64%,
+        rgba(0, 119, 255, 0.12) 73%,
+        rgba(88, 0, 255, 0.12) 82%,
+        rgba(224, 0, 153, 0.12) 100%
+      );
+      border: 1px solid rgba(0, 255, 102, 0.28);
       border-radius: 4px;
       padding: 8px 6px;
       display: flex;
@@ -3522,18 +3703,27 @@
       cursor: pointer;
       transition: all 0.2s ease;
       font-family: inherit;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6);
+    }
+
+    .acuity-node-inner {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      pointer-events: none;
     }
 
     .acuity-node-btn:hover {
       border-color: #00ff66;
-      box-shadow: 0 0 12px rgba(0, 255, 102, 0.3);
+      box-shadow: 0 0 16px rgba(0, 255, 102, 0.45);
       transform: translateY(-1px);
     }
 
     .acuity-node-btn.active {
-      background: rgba(0, 255, 102, 0.18);
       border-color: #00ff66;
-      box-shadow: 0 0 15px rgba(0, 255, 102, 0.4), inset 0 0 10px rgba(0, 255, 102, 0.2);
+      box-shadow: 0 0 18px rgba(0, 255, 102, 0.5), inset 0 0 15px rgba(0, 255, 102, 0.3);
     }
 
     .node-grade {
@@ -3607,29 +3797,45 @@
     }
 
     .polarity-btn {
+      position: relative;
+      overflow: hidden;
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 10px 12px;
+      padding: 10px 14px;
       border-radius: 6px;
-      background: rgba(0, 20, 10, 0.85);
-      border: 1px solid #1c5e37;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 0, 51, 0.12) 0%,
+        rgba(255, 61, 0, 0.12) 9%,
+        rgba(255, 119, 0, 0.12) 18%,
+        rgba(255, 170, 0, 0.12) 27%,
+        rgba(255, 230, 0, 0.12) 36%,
+        rgba(180, 230, 0, 0.16) 45%, /* PEAR */
+        rgba(0, 255, 102, 0.24) 50%, /* GREEN MIDPOINT */
+        rgba(0, 240, 170, 0.16) 55%, /* TEAL */
+        rgba(0, 229, 255, 0.12) 64%,
+        rgba(0, 119, 255, 0.12) 73%,
+        rgba(88, 0, 255, 0.12) 82%,
+        rgba(224, 0, 153, 0.12) 100%
+      );
+      border: 1px solid rgba(0, 255, 102, 0.28);
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
       font-family: inherit;
       text-align: left;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6);
     }
 
     .polarity-btn:hover {
       border-color: #00ff66;
-      box-shadow: 0 0 12px rgba(0, 255, 102, 0.3);
+      box-shadow: 0 0 16px rgba(0, 255, 102, 0.45);
       transform: translateY(-1px);
     }
 
     .polarity-btn.active {
       border-color: #00ff66;
-      background: rgba(0, 255, 102, 0.18);
-      box-shadow: 0 0 16px rgba(0, 255, 102, 0.4), inset 0 0 10px rgba(0, 255, 102, 0.2);
+      box-shadow: 0 0 18px rgba(0, 255, 102, 0.5), inset 0 0 15px rgba(0, 255, 102, 0.3);
     }
 
     .pol-icon {
@@ -3896,6 +4102,54 @@
     body[data-theme="light"] .menubox-center-pip {
       background: #007a30 !important;
       box-shadow: 0 0 6px #007a30 !important;
+    }
+
+    body[data-theme="light"] .github-ecosystem-box {
+      background: #ffffff !important;
+      border-color: #8ecea8 !important;
+    }
+
+    body[data-theme="light"] .repo-chip,
+    body[data-theme="light"] .gh-see-more-btn,
+    body[data-theme="light"] .acuity-node-btn,
+    body[data-theme="light"] .polarity-btn,
+    body[data-theme="light"] .telem-item {
+      background: linear-gradient(
+        90deg,
+        rgba(255, 0, 51, 0.08) 0%,
+        rgba(255, 61, 0, 0.08) 9%,
+        rgba(255, 119, 0, 0.08) 18%,
+        rgba(255, 170, 0, 0.08) 27%,
+        rgba(255, 230, 0, 0.08) 36%,
+        rgba(180, 230, 0, 0.12) 45%, /* PEAR */
+        rgba(0, 255, 102, 0.16) 50%, /* GREEN MIDPOINT */
+        rgba(0, 240, 170, 0.12) 55%, /* TEAL */
+        rgba(0, 229, 255, 0.08) 64%,
+        rgba(0, 119, 255, 0.08) 73%,
+        rgba(88, 0, 255, 0.08) 82%,
+        rgba(224, 0, 153, 0.08) 100%
+      ) !important;
+      border-color: #a8d6bc !important;
+    }
+
+    body[data-theme="light"] .repo-name {
+      color: #03140a !important;
+    }
+
+    body[data-theme="light"] .repo-tag {
+      color: #006b2b !important;
+    }
+
+    body[data-theme="light"] .gh-title {
+      color: #007799 !important;
+    }
+
+    body[data-theme="light"] .gh-live-badge {
+      color: #007a30 !important;
+    }
+
+    body[data-theme="light"] .gh-see-more-btn {
+      color: #007a30 !important;
     }
 
     body[data-theme="light"] .hero-tagline {
@@ -4233,6 +4487,45 @@
       font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 1px;
+    }
+
+    .telem-item {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 0, 51, 0.12) 0%,
+        rgba(255, 61, 0, 0.12) 9%,
+        rgba(255, 119, 0, 0.12) 18%,
+        rgba(255, 170, 0, 0.12) 27%,
+        rgba(255, 230, 0, 0.12) 36%,
+        rgba(180, 230, 0, 0.16) 45%, /* PEAR */
+        rgba(0, 255, 102, 0.24) 50%, /* GREEN MIDPOINT */
+        rgba(0, 240, 170, 0.16) 55%, /* TEAL */
+        rgba(0, 229, 255, 0.12) 64%,
+        rgba(0, 119, 255, 0.12) 73%,
+        rgba(88, 0, 255, 0.12) 82%,
+        rgba(224, 0, 153, 0.12) 100%
+      );
+      border: 1px solid rgba(0, 255, 102, 0.28);
+      border-radius: 4px;
+      padding: 4px 10px;
+      box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
+      transition: all 0.2s ease;
+    }
+
+    .telem-item:hover {
+      border-color: #00ff66;
+      box-shadow: 0 0 10px rgba(0, 255, 102, 0.35);
+    }
+
+    .telem-inner {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      pointer-events: none;
     }
 
     .telem-k {
@@ -6288,6 +6581,46 @@
       // Initial UI Sync
       syncUiState();
     })();
+
+    // =========================================================================
+    // GitHub Candlestixxx Live Repositories & Expandable Archive Drawer
+    // =========================================================================
+    document.addEventListener('DOMContentLoaded', function() {
+      var seeMoreBtn = document.getElementById('gh-see-more-btn');
+      var drawer = document.getElementById('gh-expanded-drawer');
+      var arrow = document.getElementById('gh-more-arrow');
+      var repoCountEl = document.getElementById('gh-repo-count-text');
+      var drawerStats = document.getElementById('drawer-stats-count');
+
+      if (seeMoreBtn && drawer) {
+        seeMoreBtn.addEventListener('click', function() {
+          var isHidden = drawer.style.display === 'none' || drawer.style.display === '';
+          drawer.style.display = isHidden ? 'block' : 'none';
+          if (arrow) arrow.textContent = isHidden ? '▲' : '▼';
+        });
+      }
+
+      // Live fetch repository count from GitHub API
+      fetch('https://api.github.com/users/candlestixxx')
+        .then(function(res) {
+          if (!res.ok) throw new Error('Status ' + res.status);
+          return res.json();
+        })
+        .then(function(data) {
+          if (data && typeof data.public_repos === 'number') {
+            var count = data.public_repos;
+            if (repoCountEl) {
+              repoCountEl.textContent = 'LIVE REPOSITORY COUNT: ' + count + ' REPOSITORIES // SYNCED @CANDLESTIXXX';
+            }
+            if (drawerStats) {
+              drawerStats.textContent = 'SHOWING ALL ' + count + ' REPOSITORIES';
+            }
+          }
+        })
+        .catch(function(err) {
+          console.log('[GitHub Telemetry] Using cached archive count (17+ repos):', err);
+        });
+    });
 
   </script>
 </div>
