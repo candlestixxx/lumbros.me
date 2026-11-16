@@ -421,78 +421,11 @@
     }
   });
 
-  
-  // =========================================================================
-  // SPECTRUM SUB-MENU EXPANSION DRAWER LOGIC (LIKE LIVE EQ & MUSIC BUTTON)
-  // Lures user to open/collapse deep optical sight controls
-  // =========================================================================
-  function initSpectrumSubmenuDrawer() {
-    var toggleBtn = document.getElementById('spectrum-submenu-toggle');
-    var drawer = document.getElementById('spectrum-submenu-drawer');
-    var closeTopBtn = document.getElementById('drawer-close-top-btn');
-    var closeBottomBtn = document.getElementById('drawer-close-bottom-btn');
-    var chevron = document.getElementById('lure-chevron');
-    if (!toggleBtn) return;
-    if (!drawer) return;
-
-    var isOpen = false;
-    var storedOpen = getStored('lumbros_spectrum_submenu_open', '0');
-    if (storedOpen === '1') {
-      isOpen = true;
-    }
-
-    function setDrawerState(open) {
-      isOpen = open;
-      setStored('lumbros_spectrum_submenu_open', open ? '1' : '0');
-      if (open) {
-        drawer.style.display = 'block';
-        toggleBtn.setAttribute('aria-expanded', 'true');
-        if (chevron) chevron.textContent = '▲';
-        var mainTitle = toggleBtn.querySelector('.lure-main-title');
-        if (mainTitle) mainTitle.textContent = '⚙ COLLAPSE DEEP SPECTRUM CONTROLS & SIGHT WORKSHOP';
-      } else {
-        drawer.style.display = 'none';
-        toggleBtn.setAttribute('aria-expanded', 'false');
-        if (chevron) chevron.textContent = '▼';
-        var mainTitle2 = toggleBtn.querySelector('.lure-main-title');
-        if (mainTitle2) mainTitle2.textContent = '⚙ OPEN DEEP SPECTRUM CONTROLS & SIGHT WORKSHOP';
-      }
-    }
-
-    // Initialize state
-    setDrawerState(isOpen);
-
-    toggleBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      setDrawerState(!isOpen);
-    });
-
-    if (closeTopBtn) {
-      closeTopBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        setDrawerState(false);
-      });
-    }
-
-    if (closeBottomBtn) {
-      closeBottomBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        setDrawerState(false);
-        // Smoothly scroll back to the featured showcase
-        var showcase = document.getElementById('featured-spectrum-showcase');
-        if (showcase) {
-          showcase.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-      });
-    }
-  }
-
   function boot() {
     applyTheme(currentTheme);
     applyPrescription(currentGauge);
     applyArchetype(currentArchetype);
     initRailDrag();
-    initSpectrumSubmenuDrawer();
       }
 
   if (document.readyState === 'loading') {
