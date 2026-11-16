@@ -159,8 +159,95 @@ print("Generated deploy/spectrum_vision.html")
 if os.path.exists(os.path.join(BASE_DIR, 'archetypes.html')):
     print("deploy/archetypes.html exists and is synced.")
 
-# 7. Read and sync games.html
-if os.path.exists(os.path.join(BASE_DIR, 'games.html')):
-    print("deploy/games.html exists and is synced.")
+# 7. Generate deploy/games.html
+games_page_html = f'''<div class="terminal-wrapper theme-cyberpunk">
+  <!-- Top Terminal HUD Banner -->
+  <div class="hud-top-bar">
+    <div class="hud-status-badge">
+      <span class="live-dot-pulse"></span>
+      <span>SYSTEM OPERATIONAL // NODE: LUMBROS.ME // GAMES &amp; MIND PUZZLES</span>
+    </div>
+    <div class="hud-nav-links">
+      <a href="/" class="hud-link">⌂ ROOT SYSTEM</a>
+      <span class="hud-sep">|</span>
+      <a href="/public/" class="hud-link">PUBLIC</a>
+      <span class="hud-sep">|</span>
+      <a href="/games/" class="hud-link active" style="color: #00ff66;">🎮 GAMES</a>
+      <span class="hud-sep">|</span>
+      <a href="/archetypes/" class="hud-link" style="color: #d500f9;">👁️ ARCHETYPES</a>
+      <span class="hud-sep">|</span>
+      <a href="/private/" class="hud-link">PRIVATE</a>
+      <span class="hud-sep">|</span>
+      <a href="/posts/" class="hud-link">LIVE POSTS</a>
+    </div>
+  </div>
+
+  {top_pillars_rail}
+
+  {ascii_header}
+
+  {main_menu}
+
+  <!-- Page Breadcrumbs -->
+  <div class="terminal-section" style="margin-bottom: 20px; padding: 12px 20px; border-left: 3px solid #00ff66;">
+    <div style="font-size: 0.76rem; letter-spacing: 1.5px; color: #8ce4a7; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+      <div>
+        <a href="/" style="color: #00ff66; text-decoration: none;">ROOT</a> / 
+        <a href="/public/" style="color: #00e5ff; text-decoration: none;">PUBLIC</a> / 
+        <span style="color: #ffffff; font-weight: 800;">COOL MIND PUZZLE &amp; VISION SPECTRUM GAMES</span>
+      </div>
+      <div style="color: #00ff66; font-weight: 700;">
+        CONTINUUM EPOCH: +1794703800s // HARMONIC CENTER: 532nm
+      </div>
+    </div>
+  </div>
+
+  <!-- Games Suite Hero Directive -->
+  <section class="terminal-section" style="margin-bottom: 25px; border-left: 3px solid #00ff66;">
+    <div class="section-badge">
+      <span class="badge-num">GAMES-01</span>
+      <span class="badge-tag">SERIOUS GAMES LAB</span>
+      <span class="badge-title">COOL MIND PUZZLE &amp; VISION SPECTRUM GAMES LAB // DESIGNED BY LUM</span>
+    </div>
+
+    <div style="font-size: 0.86rem; color: #e0f2fe; line-height: 1.7; margin-bottom: 18px;">
+      Welcome to the <strong>Cool Mind Puzzle &amp; Vision Spectrum Games Lab</strong> created by <strong>Lum (Lumbros Kourlos)</strong>. This suite bridges <strong>serious games</strong>, <strong>mathematical wave mechanics (Euler's Identity e^{{i&pi;}} + 1 = 0)</strong>, and <strong>optical phototherapy</strong>. Here, players explore real-world economics, planetary survival (Environment, Humanity, Resources), Keplerian orbital 3D physics, dual-screen digital human animation, the entire soul calculator, and bonus Shadertoy procedural world-shading.
+    </div>
+
+    <!-- Quick Switcher Jump Rail -->
+    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;">
+      <a href="#shadertoy-tribute" class="cyber-btn sm" style="border-color: #00ffcc; color: #00ffcc;">
+        <span>🎮 JUMP TO SHADERTOY 3D EARTH</span> <span>↓</span>
+      </a>
+      <a href="#spectrum-monopoly" class="cyber-btn sm" style="border-color: #00ff66; color: #00ff66;">
+        <span>🌐 JUMP TO SPECTRUM MONOPOLY SIM</span> <span>↓</span>
+      </a>
+      <a href="/shadertoy/" class="cyber-btn sm" style="border-color: #00e5ff; color: #00e5ff;">
+        <span>🚀 FULLSCREEN SHADERTOY ARENA</span> <span>↗</span>
+      </a>
+      <a href="/spectrum-vision/" class="cyber-btn sm" style="border-color: #ffaa00; color: #ffaa00;">
+        <span>📜 SPECTRUM VISION DEV PLAN</span> <span>↗</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Game 1: Shadertoy 3D Earth -->
+  {shadertoy_sec}
+
+  <!-- Game 2: The New Monopoly / Spectrum Vision Simulator & Bonus Studio -->
+  {monopoly_sec}
+
+  {footer}
+
+  {audio_hud}
+
+  {styles}
+
+  {scripts}
+</div>'''
+
+with open(os.path.join(BASE_DIR, 'games.html'), 'w', encoding='utf-8') as f:
+    f.write(games_page_html)
+print("Generated deploy/games.html")
 
 print("ALL SUBPAGES REGENERATED AND SYNCED SUCCESSFULLY!")
