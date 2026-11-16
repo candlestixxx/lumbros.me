@@ -9672,7 +9672,278 @@
     letter-spacing: 1px;
   }
 
-  </style>
+  
+
+    /* =========================================================================
+       INVISIBLE SPECTRUM BACKGROUND RETICLE & DUAL HORIZONTAL LASER TRACKERS
+       ========================================================================= */
+    .invisible-spectrum-backplane {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+      opacity: calc(var(--spectrum-shape-opacity, 0.35) * 0.7);
+      transition: opacity 0.3s ease;
+    }
+
+    .spectrum-band-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .spectrum-band-rect {
+      flex: 1;
+      position: relative;
+      border-top: 1px dashed rgba(0, 255, 102, 0.08);
+      transition: background 0.25s ease, opacity 0.25s ease, box-shadow 0.25s ease;
+      opacity: 0.12;
+    }
+
+    .spectrum-band-rect.midpoint-green {
+      border-top: 1px solid rgba(0, 255, 102, 0.22);
+      border-bottom: 1px solid rgba(0, 255, 102, 0.22);
+    }
+
+    .spectrum-band-rect.active-band {
+      opacity: 0.85;
+      background: linear-gradient(
+        90deg,
+        rgba(var(--band-rgb, 0, 255, 102), 0.14) 0%,
+        transparent 18%,
+        transparent 82%,
+        rgba(var(--band-rgb, 0, 255, 102), 0.14) 100%
+      );
+      box-shadow: inset 0 0 16px rgba(var(--band-rgb, 0, 255, 102), 0.18);
+    }
+
+    /* Dual Horizontal Laser Trackers (Fixed to Viewport, Gliding with Cursor Y) */
+    .spectrum-cursor-tracker {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 0;
+      pointer-events: none;
+      z-index: 9999;
+      will-change: transform;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .spectrum-cursor-tracker.active {
+      opacity: 1;
+    }
+
+    .tracker-wing {
+      position: absolute;
+      height: 4px;
+      display: flex;
+      align-items: center;
+      transition: color 0.15s ease, filter 0.15s ease;
+    }
+
+    .wing-left {
+      left: 0;
+      width: 15vw;
+      min-width: 90px;
+      max-width: 240px;
+    }
+
+    .wing-right {
+      right: 0;
+      width: 15vw;
+      min-width: 90px;
+      max-width: 240px;
+      flex-direction: row-reverse;
+    }
+
+    .wing-laser-beam {
+      width: 100%;
+      height: 3.5px;
+      border-radius: 2px;
+      background: linear-gradient(to right, var(--cursor-spectrum-color, #00ff66) 35%, transparent 100%);
+      box-shadow: 0 0 10px var(--cursor-spectrum-color, #00ff66), 0 0 20px var(--cursor-spectrum-color, #00ff66);
+      position: relative;
+    }
+
+    .wing-right .wing-laser-beam {
+      background: linear-gradient(to left, var(--cursor-spectrum-color, #00ff66) 35%, transparent 100%);
+    }
+
+    .wing-bracket {
+      font-family: 'Space Mono', 'Consolas', monospace;
+      font-size: 11px;
+      color: var(--cursor-spectrum-color, #00ff66);
+      text-shadow: 0 0 8px var(--cursor-spectrum-color, #00ff66);
+      margin: 0 5px;
+      font-weight: 800;
+    }
+
+    .wing-hud-readout {
+      font-family: 'Space Mono', 'Consolas', monospace;
+      font-size: 8.5px;
+      letter-spacing: 0.5px;
+      color: var(--cursor-spectrum-color, #00ff66);
+      text-shadow: 0 0 5px var(--cursor-spectrum-color, #00ff66);
+      background: rgba(2, 6, 4, 0.85);
+      padding: 1px 6px;
+      border-radius: 3px;
+      border: 1px solid var(--cursor-spectrum-color, #00ff66);
+      white-space: nowrap;
+      opacity: 0.95;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .tracker-cross-ray {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        var(--cursor-spectrum-color, #00ff66) 0%,
+        rgba(var(--cursor-spectrum-rgb, 0, 255, 102), 0.2) 20%,
+        rgba(var(--cursor-spectrum-rgb, 0, 255, 102), 0.08) 50%,
+        rgba(var(--cursor-spectrum-rgb, 0, 255, 102), 0.2) 80%,
+        var(--cursor-spectrum-color, #00ff66) 100%
+      );
+      opacity: 0.45;
+    }
+
+    /* Light Theme adaptation for Cursor Tracker */
+    body.theme-light .wing-hud-readout,
+    html[data-theme="light"] .wing-hud-readout {
+      background: rgba(255, 255, 255, 0.95);
+      border-color: var(--cursor-spectrum-color, #008033);
+      color: var(--cursor-spectrum-color, #008033);
+      text-shadow: none;
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    body.theme-light .tracker-cross-ray,
+    html[data-theme="light"] .tracker-cross-ray {
+      opacity: 0.35;
+    }
+
+    /* =========================================================================
+       DIGITAL MOVEMENT & TACTILE LASER PULSE FOR ALL CHOICE BUTTONS ON HOVER
+       ========================================================================= */
+    @keyframes digitalJitterHover {
+      0% {
+        transform: translateY(0) scale(1);
+      }
+      18% {
+        transform: translateY(-2px) scale(1.018) skewX(-0.3deg);
+      }
+      38% {
+        transform: translateY(-3.5px) scale(1.025) skewX(0.3deg);
+      }
+      60% {
+        transform: translateY(-2.8px) scale(1.02) skewX(-0.15deg);
+      }
+      82% {
+        transform: translateY(-3.2px) scale(1.022);
+      }
+      100% {
+        transform: translateY(-3px) scale(1.02);
+      }
+    }
+
+    @keyframes digitalLaserSweep {
+      0% {
+        left: -120%;
+        opacity: 0;
+      }
+      25% {
+        opacity: 0.85;
+      }
+      75% {
+        opacity: 0.85;
+      }
+      100% {
+        left: 220%;
+        opacity: 0;
+      }
+    }
+
+    /* Apply digital movement to all choice buttons */
+    .archetype-card,
+    .polarity-btn,
+    .acuity-node-btn,
+    .choice-btn,
+    .pillar-shape-btn,
+    .btn-terminal,
+    .audio-preset-btn {
+      position: relative;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .archetype-card:hover,
+    .polarity-btn:hover,
+    .acuity-node-btn:hover,
+    .choice-btn:hover,
+    .pillar-shape-btn:hover,
+    .audio-preset-btn:hover {
+      animation: digitalJitterHover 0.28s cubic-bezier(0.2, 0.9, 0.3, 1.2) forwards;
+      border-color: #ffffff !important;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.65), 0 0 14px var(--arch-glow, rgba(0, 255, 102, 0.5)) !important;
+    }
+
+    .archetype-card::after,
+    .polarity-btn::after,
+    .acuity-node-btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -120%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.2) 50%,
+        transparent 100%
+      );
+      transform: skewX(-20deg);
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .archetype-card:hover::after,
+    .polarity-btn:hover::after,
+    .acuity-node-btn:hover::after {
+      animation: digitalLaserSweep 0.55s ease forwards;
+    }
+
+    .archetype-card:active,
+    .polarity-btn:active,
+    .acuity-node-btn:active,
+    .choice-btn:active,
+    .pillar-shape-btn:active {
+      transform: translateY(-1px) scale(0.99) !important;
+      transition: transform 0.06s ease;
+    }
+
+    body.theme-light .archetype-card:hover,
+    body.theme-light .polarity-btn:hover,
+    body.theme-light .acuity-node-btn:hover,
+    html[data-theme="light"] .archetype-card:hover,
+    html[data-theme="light"] .polarity-btn:hover,
+    html[data-theme="light"] .acuity-node-btn:hover {
+      border-color: #03140a !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18), 0 0 10px rgba(0, 128, 51, 0.3) !important;
+    }
+
+</style>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
