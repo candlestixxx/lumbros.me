@@ -62,6 +62,12 @@ posts_id = deploy_single_page('posts', 'UNITED BEATS // LIVE POSTS // TRANSMISSI
 # 5. Dedicated Shadertoy Game Page
 shadertoy_id = deploy_single_page('shadertoy', 'UNITED BEATS // SHADERTOY 3D EARTH // BEAUTYPI TRIBUTE GAME', 'shadertoy.html')
 
+# 7. Dedicated Psychological Archetypes Page
+archetypes_id = deploy_single_page('archetypes', 'UNITED BEATS // PSYCHOLOGICAL ARCHETYPE SPECTRUM MATRIX', 'archetypes.html')
+
+# 8. Cool Mind Puzzle & Vision Spectrum Games Page
+games_id = deploy_single_page('games', 'UNITED BEATS // COOL MIND PUZZLE & VISION SPECTRUM GAMES', 'games.html')
+
 # 6. Spectrum Vision Game Dev Plan & Monopoly Simulator Page
 spectrum_vision_id = deploy_single_page('spectrum-vision', 'UNITED BEATS // SPECTRUM VISION // GAME DEV PLAN & MONOPOLY', 'spectrum_vision.html')
 
