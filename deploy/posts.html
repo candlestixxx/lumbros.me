@@ -12585,5 +12585,84 @@
       });
     })();
 
+  
+    // =========================================================================
+    // INTERACTIVE OCULAR ALIGNMENT GAME OF SUCCESS JAVASCRIPT ENGINE
+    // REAL-TIME RETICLE LOCK // 100% SIGHT HARMONY // IN-GAME TROPHY TRIGGER
+    // =========================================================================
+    (function initOcularAlignmentGame() {
+      var targetPip = document.getElementById('ocular-target-pip');
+      var scoreBadge = document.getElementById('alignment-score-badge');
+      var progressFill = document.getElementById('alignment-progress-fill');
+      var victoryText = document.getElementById('alignment-victory-text');
+      var rewardBanner = document.getElementById('alignment-reward-banner');
+
+      // Hook into gauge updates
+      window.updateOcularAlignmentScore = function(gaugeVal) {
+        // gaugeVal: 0 (20/200) to 100 (20/10), with 75 being 20/20 Plano Center
+        // Any choice (20/200, 20/20, 20/10) is a valid calibrated prescription!
+        // We calculate distance to nearest calibrated node: 0, 75, or 100
+        var distTo200 = Math.abs(gaugeVal - 0);
+        var distTo20 = Math.abs(gaugeVal - 75);
+        var distTo10 = Math.abs(gaugeVal - 100);
+        var minDist = Math.min(distTo200, distTo20, distTo10);
+
+        // Alignment score from 70% to 100%
+        var score = Math.max(70, Math.floor(100 - minDist * 1.2));
+        if (minDist <= 3) score = 100;
+
+        if (scoreBadge) {
+          scoreBadge.textContent = score + '% ' + (score === 100 ? '[PERFECT HARMONIC LOCK]' : '[CALIBRATING]');
+          scoreBadge.style.color = (score >= 95 ? '#00ff66' : (score >= 85 ? '#00e5ff' : '#ffaa00'));
+        }
+
+        if (progressFill) {
+          progressFill.style.width = score + '%';
+        }
+
+        // Move target reticle pip smoothly towards center (0, 0)
+        if (targetPip) {
+          var offsetX = (minDist * 0.8) * (gaugeVal > 75 ? 1 : -1);
+          var offsetY = (minDist * 0.4) * (gaugeVal % 2 === 0 ? 1 : -1);
+          if (score === 100) {
+            offsetX = 0;
+            offsetY = 0;
+            targetPip.style.boxShadow = '0 0 24px #00ff66, 0 0 35px #ffffff';
+            targetPip.style.background = '#00ff66';
+          } else {
+            targetPip.style.boxShadow = '0 0 10px #00e5ff';
+            targetPip.style.background = '#00e5ff';
+          }
+          targetPip.style.transform = 'translate(' + offsetX.toFixed(1) + 'px, ' + offsetY.toFixed(1) + 'px)';
+        }
+
+        // Victory text feedback
+        if (victoryText) {
+          if (score === 100) {
+            victoryText.innerHTML = '✨ SIGHT EQUILIBRIUM ACHIEVED // 532nm GREEN HARMONIC CENTER LOCKED';
+            victoryText.style.color = '#00ff66';
+            if (rewardBanner) rewardBanner.style.opacity = '1';
+          } else {
+            victoryText.innerHTML = '◄ DIAL TO 20/200, 20/20 OR 20/10 TO ACHIEVE PERFECT OCULAR LOCK ►';
+            victoryText.style.color = '#8ce4a7';
+          }
+        }
+      };
+
+      // Initial score calculation
+      window.updateOcularAlignmentScore(75);
+
+      // Hook preset buttons
+      var presetBtns = document.querySelectorAll('.acuity-node-btn');
+      for (var b = 0; b < presetBtns.length; b++) {
+        presetBtns[b].addEventListener('click', function() {
+          var gVal = parseInt(this.getAttribute('data-gauge') || '75', 10);
+          setTimeout(function() {
+            window.updateOcularAlignmentScore(gVal);
+          }, 30);
+        });
+      }
+    })();
+
   </script>
 </div>
