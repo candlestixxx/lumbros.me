@@ -2441,7 +2441,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
   </footer>
 
   <!-- YouTube Audio Engine -->
-  <!-- Invisible Audio Host Frame (Playlist: PLM2VfNfvggIE // 60 Tracks) -->
+  <!-- Invisible Audio Host Frame (Multi-Playlist YouTube Audio Continuum) -->
   <div id="yt-audio-container" class="yt-invisible-audio-frame" aria-hidden="true">
     <div id="yt-audio-player"></div>
   </div>
@@ -2459,7 +2459,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
         <span class="wave-bar wb-5"></span>
       </div>
       <div class="pill-info">
-        <span class="pill-title">♫ MY LIFE SOUNDS</span>
+        <span class="pill-title" id="pill-title-text">♫ MY LIFE SOUNDS</span>
         <span class="pill-meta" id="pill-db-readout">52 dB // TRUST OPTIMA</span>
       </div>
       <button type="button" class="pill-quick-btn" id="pill-quick-play" title="Play / Pause Audio Stream">▶</button>
@@ -2473,14 +2473,29 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
       <div class="audio-panel-header">
         <div class="audio-badge">
           <span class="audio-live-dot"></span>
-          <span>ACOUSTIC KERNEL // 60-TRACK CYCLIC CONTINUUM</span>
+          <span id="audio-live-badge-text">ACOUSTIC KERNEL // MULTI-PLAYLIST CONTINUUM</span>
         </div>
         <button type="button" class="audio-collapse-btn" id="audio-collapse-btn" title="Collapse Panel">▼</button>
       </div>
 
       <div class="audio-title-block">
-        <h4 class="audio-h4">⚡ ⟦ MY LIFE SOUNDS ⟧ // YOUTUBE CONTINUOUS AUDIO</h4>
-        <div class="audio-creator-tag">PLAYLIST: PLM2VfNfvggIE // lk2243 (@lumbros2243) // 432Hz HARMONIC BIAS</div>
+        <h4 class="audio-h4" id="audio-h4-title">⚡ ⟦ MY LIFE SOUNDS ⟧ // YOUTUBE AUDIO CONTINUUM</h4>
+        <div class="audio-creator-tag" id="audio-creator-tag">PLAYLIST: PLM2VfNfvggIE // lk2243 (@lumbros2243) // 432Hz HARMONIC BIAS</div>
+      </div>
+
+      <!-- Multi-Playlist Switcher & Custom URL Adder -->
+      <div class="audio-playlist-module">
+        <div class="playlist-section-header">
+          <span class="playlist-section-lbl">CHOOSE / ADD YOUTUBE PLAYLIST:</span>
+          <span class="playlist-current-indicator" id="playlist-current-indicator">PLAYLIST 1 OF 1</span>
+        </div>
+        <div class="playlist-chips-bar" id="playlist-chips-bar">
+          <!-- Dynamic Playlist Chips inserted here by JS -->
+        </div>
+        <div class="playlist-input-container">
+          <input type="text" id="custom-playlist-input" class="custom-playlist-input" placeholder="Paste YouTube Playlist URL or ID (e.g. https://... or PL...)" aria-label="YouTube Playlist URL or ID">
+          <button type="button" class="custom-playlist-btn" id="custom-playlist-btn" title="Add and Play YouTube Playlist">+ ADD LIST</button>
+        </div>
       </div>
 
       <!-- 12-Band Graphic Equalizer Spectrum Waveform -->
@@ -2503,11 +2518,11 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
       <div class="audio-telemetry-row">
         <div class="telemetry-item">
           <span class="tele-lbl">STATUS:</span>
-          <span class="tele-val glow-green" id="tele-state-val">AUTOPLAY ARMED (CLICK ANYWHERE TO UNMUTE)</span>
+          <span class="tele-val glow-green" id="tele-state-val">AUTOPLAY ARMED</span>
         </div>
         <div class="telemetry-item">
           <span class="tele-lbl">TRACK:</span>
-          <span class="tele-val glow-cyan" id="tele-track-val">CYCLING 01 / 60</span>
+          <span class="tele-val glow-cyan" id="tele-track-val">CYCLING 01</span>
         </div>
       </div>
 
@@ -2518,6 +2533,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
           <span id="audio-play-icon">▶</span> <span id="audio-play-text">PLAY STREAM</span>
         </button>
         <button type="button" class="audio-btn" id="audio-next-btn" title="Next Track in Playlist">NEXT ⏭</button>
+        <button type="button" class="audio-btn audio-btn-cycle" id="audio-cycle-list-btn" title="Cycle to Next Playlist">↻ LIST</button>
         <button type="button" class="audio-btn audio-btn-mute" id="audio-mute-btn" title="Toggle Mute">
           <span id="audio-mute-icon">🔊</span>
         </button>
@@ -7432,14 +7448,13 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
        ========================================================================= */
     .yt-invisible-audio-frame {
       position: fixed;
-      top: -9999px;
-      left: -9999px;
-      width: 1px;
-      height: 1px;
-      opacity: 0;
+      bottom: 0;
+      right: 0;
+      width: 200px;
+      height: 200px;
+      opacity: 0.001;
       pointer-events: none;
-      visibility: hidden;
-      z-index: -100;
+      z-index: -10;
     }
 
     .harmonic-audio-hud {
@@ -7552,9 +7567,9 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
 
     /* 2. Expanded Audio HUD Panel */
     .audio-expanded-panel {
-      width: 360px;
+      width: 380px;
       max-width: calc(100vw - 32px);
-      background: rgba(2, 12, 6, 0.95);
+      background: rgba(2, 12, 6, 0.96);
       border: 2px solid #00ff66;
       border-radius: 12px;
       padding: 18px 20px 16px;
@@ -7616,7 +7631,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     }
 
     .audio-title-block {
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .audio-h4 {
@@ -7632,6 +7647,136 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
       font-size: 0.62rem;
       color: #7ef2aa;
       letter-spacing: 0.8px;
+    }
+
+    /* Multi-Playlist UI in Expanded HUD */
+    .audio-playlist-module {
+      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(0, 255, 102, 0.25);
+      border-radius: 6px;
+      padding: 8px 10px;
+      margin-bottom: 10px;
+    }
+
+    .playlist-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      font-size: 0.6rem;
+      letter-spacing: 0.8px;
+    }
+
+    .playlist-section-lbl {
+      color: #88be99;
+      font-weight: 700;
+    }
+
+    .playlist-current-indicator {
+      color: #00ff66;
+      font-weight: 800;
+    }
+
+    .playlist-chips-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 8px;
+      max-height: 85px;
+      overflow-y: auto;
+    }
+
+    .playlist-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(0, 255, 102, 0.08);
+      border: 1px solid rgba(0, 255, 102, 0.35);
+      color: #a3ffd0;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 0.58rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      max-width: 100%;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .playlist-chip:hover {
+      background: rgba(0, 255, 102, 0.2);
+      border-color: #00ff66;
+      color: #ffffff;
+    }
+
+    .playlist-chip.active {
+      background: rgba(0, 255, 102, 0.28);
+      border-color: #00ff66;
+      color: #00ff66;
+      box-shadow: 0 0 8px rgba(0, 255, 102, 0.4);
+      font-weight: 800;
+    }
+
+    .playlist-chip-del {
+      margin-left: 3px;
+      color: #ff5577;
+      font-size: 0.65rem;
+      font-weight: bold;
+      cursor: pointer;
+      opacity: 0.7;
+    }
+    .playlist-chip-del:hover {
+      opacity: 1;
+      color: #ff0033;
+    }
+
+    .playlist-input-container {
+      display: flex;
+      gap: 5px;
+    }
+
+    .custom-playlist-input {
+      flex: 1;
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(0, 255, 102, 0.35);
+      border-radius: 4px;
+      color: #ffffff;
+      padding: 4px 8px;
+      font-size: 0.62rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .custom-playlist-input:focus {
+      border-color: #00ff66;
+      box-shadow: 0 0 6px rgba(0, 255, 102, 0.4);
+    }
+
+    .custom-playlist-input::placeholder {
+      color: rgba(163, 255, 208, 0.45);
+    }
+
+    .custom-playlist-btn {
+      background: rgba(0, 255, 102, 0.2);
+      border: 1px solid #00ff66;
+      color: #00ff66;
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .custom-playlist-btn:hover {
+      background: #00ff66;
+      color: #020704;
+      box-shadow: 0 0 8px #00ff66;
     }
 
     /* 12-Band Equalizer Visualizer */
@@ -7711,11 +7856,11 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
       background: rgba(0, 255, 102, 0.08);
       border: 1px solid rgba(0, 255, 102, 0.4);
       color: #7df9a6;
-      padding: 7px 8px;
+      padding: 7px 6px;
       border-radius: 6px;
-      font-size: 0.68rem;
+      font-size: 0.66rem;
       font-weight: 700;
-      letter-spacing: 1px;
+      letter-spacing: 0.8px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
@@ -7732,7 +7877,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     }
 
     .audio-btn-play {
-      flex: 1.4;
+      flex: 1.3;
       background: rgba(0, 255, 102, 0.2);
       border-color: #00ff66;
       color: #00ff66;
@@ -7744,8 +7889,20 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
       box-shadow: 0 0 14px #00ff66;
     }
 
+    .audio-btn-cycle {
+      flex: 0.85;
+      color: #00e5ff;
+      border-color: rgba(0, 229, 255, 0.4);
+    }
+    .audio-btn-cycle:hover {
+      background: rgba(0, 229, 255, 0.2);
+      border-color: #00e5ff;
+      color: #ffffff;
+      box-shadow: 0 0 10px rgba(0, 229, 255, 0.35);
+    }
+
     .audio-btn-mute {
-      flex: 0.6;
+      flex: 0.55;
       font-size: 0.85rem;
     }
 
@@ -12835,12 +12992,23 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     });
 
     // =========================================================================
-    // YouTube Audio Engine & Harmonic Psychoacoustic Controller Logic
+        // =========================================================================
+    // YouTube Audio Engine & Harmonic Psychoacoustic Multi-Playlist Continuum
     // Playlist: "My Life Sounds" (PLM2VfNfvggIE // 60 Tracks) by @lumbros2243
-    // Calibrated to 52 dB SPL (Optimal Human Algorithm Trust Resonance)
+    // Multi-Playlist Switcher + User Dynamic YouTube Playlist Input + 52 dB Optima
     // =========================================================================
     (function() {
-      var playlistId = 'PLM2VfNfvggIE';
+      // Default Curated Playlists
+      var defaultPlaylists = [
+        {
+          id: 'PLM2VfNfvggIE',
+          title: 'MY LIFE SOUNDS (60)',
+          subtitle: 'lk2243 (@lumbros2243) // Detroit Techno & Psytrance Continuum',
+          bias: '432Hz HARMONIC BIAS',
+          isDefault: true
+        }
+      ];
+
       var videoIds = [
         'XrzYb1vXYJM', 'SVWHm3mYbn0', 'jvp--EFPnIA', 'lG2YIZHz-aw', 'NtCTBGeKnkE', 
         '2PiH-2kD6gk', 'lnd0-vy6rTA', 'xV6N_cjecg8', 's9yU1P1UH5E', 'tpKCqp9CALQ', 
@@ -12856,11 +13024,25 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
         'SbIIj06bvnU', '4UxRUJ-sras', 'nfro55RmXC0', '4kNfgGbutB8', 'PXHEI5v1YW8'
       ];
 
+      // Retrieve user custom playlists from localStorage
+      var customPlaylists = [];
+      try {
+        var saved = localStorage.getItem('lumbros_user_playlists');
+        if (saved) {
+          customPlaylists = JSON.parse(saved);
+        }
+      } catch(e) {}
+
+      var allPlaylists = defaultPlaylists.concat(customPlaylists);
+      var currentPlaylistIndex = 0;
+      var activePlaylist = allPlaylists[0];
+
       var ytPlayer = null;
       var isPlaying = false;
       var isMuted = false;
       var currentVolume = 38; // 38% = ~52 dB SPL (Optimal trust & conception frequency)
       var hasUnlockedAudio = false;
+      var userHasInteracted = false;
 
       // Decibel format calculation
       function computeDbSpl(vol) {
@@ -12868,6 +13050,20 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
         var spl = Math.round(35 + (vol / 100) * 37); // Maps 0..100 to 35..72 dB SPL
         var dbfs = (20 * Math.log10(vol / 100)).toFixed(1);
         return spl + ' dB SPL (' + dbfs + ' dBFS)';
+      }
+
+      // Parse YouTube Playlist ID from URL or raw ID
+      function parsePlaylistId(input) {
+        if (!input) return null;
+        input = input.trim();
+        var match = input.match(/[?&]list=([a-zA-Z0-9_-]+)/);
+        if (match) {
+          return match[1];
+        }
+        if (/^[a-zA-Z0-9_-]{10,}$/.test(input)) {
+          return input;
+        }
+        return null;
       }
 
       // UI Elements
@@ -12879,6 +13075,9 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
       var spectrumVis = document.getElementById('spectrum-visualizer');
       var pillQuickPlay = document.getElementById('pill-quick-play');
       var pillDbReadout = document.getElementById('pill-db-readout');
+      var pillTitleText = document.getElementById('pill-title-text');
+      var audioH4Title = document.getElementById('audio-h4-title');
+      var audioCreatorTag = document.getElementById('audio-creator-tag');
       var teleState = document.getElementById('tele-state-val');
       var teleTrack = document.getElementById('tele-track-val');
       var playBtn = document.getElementById('audio-play-btn');
@@ -12886,14 +13085,31 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
       var playText = document.getElementById('audio-play-text');
       var prevBtn = document.getElementById('audio-prev-btn');
       var nextBtn = document.getElementById('audio-next-btn');
+      var cycleListBtn = document.getElementById('audio-cycle-list-btn');
       var muteBtn = document.getElementById('audio-mute-btn');
       var muteIcon = document.getElementById('audio-mute-icon');
       var volSlider = document.getElementById('audio-volume-slider');
       var gaugeDbReadout = document.getElementById('gauge-db-readout');
       var presetBtns = document.querySelectorAll('.audio-preset-btn');
+      var chipsBar = document.getElementById('playlist-chips-bar');
+      var currentInd = document.getElementById('playlist-current-indicator');
+      var playlistInput = document.getElementById('custom-playlist-input');
+      var playlistAddBtn = document.getElementById('custom-playlist-btn');
 
       // Update Visuals
       function syncUiState() {
+        if (activePlaylist) {
+          if (pillTitleText) {
+            pillTitleText.textContent = '♫ ' + activePlaylist.title;
+          }
+          if (audioH4Title) {
+            audioH4Title.textContent = '⚡ ⟦ ' + activePlaylist.title + ' ⟧ // YOUTUBE AUDIO CONTINUUM';
+          }
+          if (audioCreatorTag) {
+            audioCreatorTag.textContent = 'PLAYLIST: ' + activePlaylist.id + ' // ' + (activePlaylist.subtitle || 'lk2243 (@lumbros2243)') + ' // ' + (activePlaylist.bias || '432Hz HARMONIC BIAS');
+          }
+        }
+
         if (pillDbReadout) {
           pillDbReadout.textContent = isMuted || currentVolume === 0 ? 'MUTED' : Math.round(35 + (currentVolume / 100) * 37) + ' dB // TRUST OPTIMA';
         }
@@ -12924,22 +13140,214 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
           muteIcon.textContent = isMuted || currentVolume === 0 ? '🔇' : '🔊';
         }
 
-        if (ytPlayer) if (ytPlayer.getPlaylistIndex) {
-          var idx = ytPlayer.getPlaylistIndex();
-          if (idx >= 0) if (teleTrack) {
-            teleTrack.textContent = 'CYCLING ' + (idx + 1) + ' / 60';
+        if (ytPlayer) {
+          if (typeof ytPlayer.getPlaylistIndex === 'function') {
+            try {
+              var idx = ytPlayer.getPlaylistIndex();
+              if (idx >= 0) {
+                if (teleTrack) {
+                  var total = 60;
+                  if (ytPlayer.getPlaylist) {
+                    var plList = ytPlayer.getPlaylist();
+                    if (plList) {
+                      total = plList.length;
+                    }
+                  }
+                  teleTrack.textContent = 'TRACK ' + (idx + 1) + ' / ' + total;
+                }
+              }
+            } catch(e) {}
           }
         }
       }
 
+      // Render Playlist Selector Chips
+      function renderPlaylistChips() {
+        if (currentInd) {
+          currentInd.textContent = 'PLAYLIST ' + (currentPlaylistIndex + 1) + ' OF ' + allPlaylists.length;
+        }
+        if (!chipsBar) return;
+        chipsBar.innerHTML = '';
+
+        allPlaylists.forEach(function(pl, idx) {
+          var chip = document.createElement('div');
+          chip.className = 'playlist-chip' + (idx === currentPlaylistIndex ? ' active' : '');
+          chip.title = pl.subtitle || pl.id;
+
+          var icon = document.createElement('span');
+          icon.textContent = (idx === currentPlaylistIndex ? '▶ ' : '♫ ');
+          chip.appendChild(icon);
+
+          var txt = document.createElement('span');
+          txt.textContent = pl.title;
+          chip.appendChild(txt);
+
+          if (!pl.isDefault) {
+            var del = document.createElement('span');
+            del.className = 'playlist-chip-del';
+            del.textContent = '×';
+            del.title = 'Remove custom playlist';
+            del.addEventListener('click', function(ev) {
+              ev.stopPropagation();
+              removeCustomPlaylist(pl.id);
+            });
+            chip.appendChild(del);
+          }
+
+          chip.addEventListener('click', function() {
+            switchPlaylist(idx);
+          });
+
+          chipsBar.appendChild(chip);
+        });
+      }
+
+      // Switch to a playlist by index
+      function switchPlaylist(idx) {
+        if (idx < 0) return;
+        if (idx >= allPlaylists.length) idx = 0;
+        currentPlaylistIndex = idx;
+        activePlaylist = allPlaylists[currentPlaylistIndex];
+
+        if (ytPlayer) {
+          if (typeof ytPlayer.loadPlaylist === 'function') {
+            try {
+              ytPlayer.loadPlaylist({
+                list: activePlaylist.id,
+                listType: 'playlist',
+                index: 0,
+                startSeconds: 0,
+                suggestedQuality: 'small'
+              });
+              ytPlayer.unMute();
+              isMuted = false;
+              ytPlayer.setVolume(currentVolume > 0 ? currentVolume : 38);
+              ytPlayer.playVideo();
+              isPlaying = true;
+            } catch(e) {}
+          }
+        }
+        renderPlaylistChips();
+        syncUiState();
+      }
+
+      // Remove custom playlist
+      function removeCustomPlaylist(pid) {
+        customPlaylists = customPlaylists.filter(function(p) { return p.id !== pid; });
+        allPlaylists = defaultPlaylists.concat(customPlaylists);
+        try {
+          localStorage.setItem('lumbros_user_playlists', JSON.stringify(customPlaylists));
+        } catch(e) {}
+        if (currentPlaylistIndex >= allPlaylists.length) {
+          currentPlaylistIndex = 0;
+        }
+        switchPlaylist(currentPlaylistIndex);
+      }
+
+      // Add Custom Playlist via input
+      function handleAddPlaylist() {
+        if (!playlistInput) return;
+        var val = playlistInput.value;
+        var pid = parsePlaylistId(val);
+        if (!pid) {
+          alert('Please enter a valid YouTube Playlist Link or ID (e.g. https://www.youtube.com/playlist?list=PL... or PL...)');
+          return;
+        }
+
+        // Check if playlist is already added
+        for (var i = 0; i < allPlaylists.length; i++) {
+          if (allPlaylists[i].id === pid) {
+            switchPlaylist(i);
+            playlistInput.value = '';
+            return;
+          }
+        }
+
+        var newPl = {
+          id: pid,
+          title: 'PLAYLIST ' + (allPlaylists.length + 1),
+          subtitle: 'USER LOADED // ID: ' + pid,
+          bias: 'USER CONTINUUM',
+          isDefault: false
+        };
+
+        customPlaylists.push(newPl);
+        allPlaylists = defaultPlaylists.concat(customPlaylists);
+        try {
+          localStorage.setItem('lumbros_user_playlists', JSON.stringify(customPlaylists));
+        } catch(e) {}
+
+        playlistInput.value = '';
+        switchPlaylist(allPlaylists.length - 1);
+      }
+
+      if (playlistAddBtn) {
+        playlistAddBtn.addEventListener('click', handleAddPlaylist);
+      }
+      if (playlistInput) {
+        playlistInput.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter') {
+            handleAddPlaylist();
+          }
+        });
+      }
+
+      // Cycle list button
+      if (cycleListBtn) {
+        cycleListBtn.addEventListener('click', function() {
+          var nextIdx = (currentPlaylistIndex + 1) % allPlaylists.length;
+          switchPlaylist(nextIdx);
+        });
+      }
+
+      // Global Autoplay & Interaction Unmute Engine
+      function triggerPlayback() {
+        if (!ytPlayer) return;
+        if (typeof ytPlayer.playVideo !== 'function') return;
+        try {
+          ytPlayer.unMute();
+          isMuted = false;
+          ytPlayer.setVolume(currentVolume > 0 ? currentVolume : 38);
+          ytPlayer.playVideo();
+          isPlaying = true;
+        } catch(e) {}
+        syncUiState();
+      }
+
+      function handleGlobalInteraction() {
+        userHasInteracted = true;
+        if (hasUnlockedAudio) return;
+        if (ytPlayer) {
+          if (typeof ytPlayer.playVideo === 'function') {
+            hasUnlockedAudio = true;
+            triggerPlayback();
+            cleanupListeners();
+          }
+        }
+      }
+
+      var unlockEvents = ['pointerdown', 'mousedown', 'touchstart', 'touchend', 'click', 'keydown', 'wheel', 'scroll'];
+      function cleanupListeners() {
+        unlockEvents.forEach(function(evt) {
+          window.removeEventListener(evt, handleGlobalInteraction);
+          document.removeEventListener(evt, handleGlobalInteraction);
+        });
+      }
+
+      unlockEvents.forEach(function(evt) {
+        window.addEventListener(evt, handleGlobalInteraction, { passive: true });
+        document.addEventListener(evt, handleGlobalInteraction, { passive: true });
+      });
+
       // Initialize YouTube API
       window.initYtAudio = function() {
+        if (ytPlayer) return;
         ytPlayer = new YT.Player('yt-audio-player', {
-          height: '100',
-          width: '100',
+          height: '200',
+          width: '200',
           playerVars: {
             listType: 'playlist',
-            list: playlistId,
+            list: activePlaylist.id,
             autoplay: 1,
             controls: 0,
             disablekb: 1,
@@ -12947,7 +13355,9 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
             modestbranding: 1,
             playsinline: 1,
             rel: 0,
-            loop: 1
+            loop: 1,
+            enablejsapi: 1,
+            origin: window.location.origin
           },
           events: {
             'onReady': onYtReady,
@@ -12958,11 +13368,10 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
       };
 
       function onYtReady(event) {
-        // Fallback playlist queue in case of domain playlist blocking
         try {
           if (ytPlayer.loadPlaylist) {
             ytPlayer.loadPlaylist({
-              list: playlistId,
+              list: activePlaylist.id,
               listType: 'playlist',
               index: 0,
               startSeconds: 0,
@@ -12977,13 +13386,28 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
 
         ytPlayer.setVolume(currentVolume);
 
-        // Attempt silent prime autoplay
-        try {
-          ytPlayer.mute();
-          isMuted = true;
-          ytPlayer.playVideo();
-        } catch(e) {}
+        if (userHasInteracted) {
+          hasUnlockedAudio = true;
+          triggerPlayback();
+          cleanupListeners();
+        } else {
+          // Attempt immediate unmuted autoplay
+          try {
+            ytPlayer.unMute();
+            isMuted = false;
+            ytPlayer.playVideo();
+            isPlaying = true;
+          } catch(e) {
+            // Muted autoplay fallback if browser MEI policy initially blocks audio
+            try {
+              ytPlayer.mute();
+              isMuted = true;
+              ytPlayer.playVideo();
+            } catch(err) {}
+          }
+        }
 
+        renderPlaylistChips();
         syncUiState();
       }
 
@@ -12993,45 +13417,27 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
         } else if (event.data === YT.PlayerState.PAUSED) {
           isPlaying = false;
         } else if (event.data === YT.PlayerState.ENDED) {
-          // Advance and loop
-          if (ytPlayer) if (ytPlayer.nextVideo) {
-            ytPlayer.nextVideo();
+          if (ytPlayer) {
+            if (ytPlayer.nextVideo) {
+              ytPlayer.nextVideo();
+            }
           }
         }
         syncUiState();
       }
 
       function onYtError(event) {
-        // If a track is blocked or deleted, immediately cycle to the next track
         console.warn('[Audio Engine] Track error code ' + event.data + ', cycling to next track...');
-        if (ytPlayer) if (ytPlayer.nextVideo) {
-          ytPlayer.nextVideo();
-        }
-      }
-
-      // First-Interaction User Gesture Audio Unblock
-      function unlockAudio() {
-        if (hasUnlockedAudio) return;
-        hasUnlockedAudio = true;
         if (ytPlayer) {
-          try {
-            ytPlayer.unMute();
-            isMuted = false;
-            ytPlayer.setVolume(currentVolume);
-            ytPlayer.playVideo();
-            isPlaying = true;
-          } catch(e) {}
+          if (ytPlayer.nextVideo) {
+            ytPlayer.nextVideo();
+          }
         }
-        syncUiState();
       }
-
-      ['click', 'touchstart', 'keydown'].forEach(function(evt) {
-        window.addEventListener(evt, unlockAudio, { once: true, passive: true });
-      });
 
       // Transport Click Handlers
       function togglePlayPause() {
-        unlockAudio();
+        handleGlobalInteraction();
         if (!ytPlayer) return;
         try {
           if (isPlaying) {
@@ -13061,25 +13467,29 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
 
       if (prevBtn) {
         prevBtn.addEventListener('click', function() {
-          unlockAudio();
-          if (ytPlayer) if (ytPlayer.previousVideo) {
-            ytPlayer.previousVideo();
+          handleGlobalInteraction();
+          if (ytPlayer) {
+            if (ytPlayer.previousVideo) {
+              ytPlayer.previousVideo();
+            }
           }
         });
       }
 
       if (nextBtn) {
         nextBtn.addEventListener('click', function() {
-          unlockAudio();
-          if (ytPlayer) if (ytPlayer.nextVideo) {
-            ytPlayer.nextVideo();
+          handleGlobalInteraction();
+          if (ytPlayer) {
+            if (ytPlayer.nextVideo) {
+              ytPlayer.nextVideo();
+            }
           }
         });
       }
 
       if (muteBtn) {
         muteBtn.addEventListener('click', function() {
-          unlockAudio();
+          handleGlobalInteraction();
           if (!ytPlayer) return;
           if (isMuted) {
             ytPlayer.unMute();
@@ -13096,7 +13506,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
       // Volume Slider
       if (volSlider) {
         volSlider.addEventListener('input', function() {
-          unlockAudio();
+          handleGlobalInteraction();
           currentVolume = parseInt(this.value, 10);
           if (ytPlayer) {
             if (currentVolume === 0) {
@@ -13110,7 +13520,6 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
               ytPlayer.setVolume(currentVolume);
             }
           }
-          // Update active preset styling
           presetBtns.forEach(function(btn) {
             btn.classList.toggle('active', parseInt(btn.getAttribute('data-vol'), 10) === currentVolume);
           });
@@ -13121,7 +13530,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
       // Presets
       presetBtns.forEach(function(btn) {
         btn.addEventListener('click', function() {
-          unlockAudio();
+          handleGlobalInteraction();
           var target = parseInt(this.getAttribute('data-vol'), 10);
           currentVolume = target;
           if (ytPlayer) {
@@ -13165,11 +13574,14 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
         if (prevYtReady) prevYtReady();
         window.initYtAudio();
       };
-      if (window.YT) if (window.YT.Player) {
-        window.initYtAudio();
+      if (window.YT) {
+        if (window.YT.Player) {
+          window.initYtAudio();
+        }
       }
 
-      // Initial UI Sync
+      // Initial Render
+      renderPlaylistChips();
       syncUiState();
     })();
 
