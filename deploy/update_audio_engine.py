@@ -2,20 +2,19 @@
 """
 update_audio_engine.py
 Upgrades the YouTube Live Music Player on lumbros.me and mirrored properties:
-1. Infallible Autoplay & Unmute:
-   - Sets YouTube iframe dimensions to 200x200 with opacity 0.001 at bottom:0, right:0 (viewport-resident, no visibility:hidden, preventing browser background suspension).
-   - Enables JS API (enablejsapi=1, origin=location.origin, playsinline=1, autoplay=1).
-   - Attempts unmuted autoplay at 38% (~52 dB SPL Trust Optima) on ready.
-   - Comprehensive multi-gesture unlocker on window & document: 'pointerdown', 'mousedown', 'touchstart', 'touchend', 'click', 'keydown', 'wheel', 'scroll'.
-   - If user interacts before player loads, flags userHasInteracted and starts unmuted instantly on onReady.
-   - Mini dock pill and button indicators dynamically inform state.
+1. Fix Audio Interference:
+   - Removes the 532 Hz Web Audio oscillator from triggerBlast() so clicking/touching the 3D canvas doesn't play a piercing electronic tone over the music.
+   - Eliminates redundant ytPlayer.loadPlaylist() call inside onYtReady which was resetting and double-buffering YouTube's audio pipeline on start.
+   - Standardizes the hidden iframe to 16:9 (320x180) with overflow:hidden so video hardware decoding operates smoothly with zero dropped audio frames.
+   - Guards triggerPlayback so continuous scroll/wheel/gesture events do not call playVideo() on an already playing or buffering stream.
+   - One-time cleanup of interaction listeners upon first unlock.
 2. Multi-Playlist Continuum:
-   - Primary default: PLM2VfNfvggIE (60 Tracks, lk2243 @lumbros2243, Detroit Techno & Psytrance Continuum, 432Hz Harmonic Bias).
-   - Dynamic Playlist input: accepts any YouTube Playlist URL (e.g. https://www.youtube.com/playlist?list=... or https://youtu.be/...&list=...) or raw playlist ID.
-   - Saves custom playlists in localStorage (lumbros_user_playlists) across sessions.
-   - Dynamic playlist chips switcher bar with one-click selection and deletion.
-   - '↻ LIST' cycle button in transport bar to easily jump to the next playlist.
-   - Real-time telemetry track index and playlist name updates.
+   - Built-in 3 Curated Verified Channels:
+     01: PLM2VfNfvggIE (My Life Sounds // 60 Tracks by @lumbros2243)
+     02: PLy1rKGexTy2s7qSGoRUoFx-hGQdR7XS33 (Psytrance 2026 Continuum)
+     03: PLpY7hx7jry7y3TiUDGlPEDveFRMaEwr9I (Global Psytrance Selection)
+   - Dynamic Custom Playlist Adder: Accepts any YouTube playlist link or ID, saves to localStorage, renders interactive chip.
+   - Fast cycle button [↻ LIST] in transport strip.
 3. Strict KSES & Syntax Compliance:
    - ZERO raw '&&' operators anywhere in inline script blocks (using nested if statements).
    - Verified valid JavaScript syntax.
@@ -72,8 +71,8 @@ NEW_HUD_HTML = '''  <!-- YouTube Audio Engine -->
       <!-- Multi-Playlist Switcher & Custom URL Adder -->
       <div class="audio-playlist-module">
         <div class="playlist-section-header">
-          <span class="playlist-section-lbl">CHOOSE / ADD YOUTUBE PLAYLIST:</span>
-          <span class="playlist-current-indicator" id="playlist-current-indicator">PLAYLIST 1 OF 1</span>
+          <span class="playlist-section-lbl">CHOOSE CHANNEL / ADD YOUTUBE PLAYLIST:</span>
+          <span class="playlist-current-indicator" id="playlist-current-indicator">CHANNEL 1 OF 3</span>
         </div>
         <div class="playlist-chips-bar" id="playlist-chips-bar">
           <!-- Dynamic Playlist Chips inserted here by JS -->
@@ -168,13 +167,14 @@ NEW_HUD_HTML = '''  <!-- YouTube Audio Engine -->
 
 NEW_CSS = '''.yt-invisible-audio-frame {
       position: fixed;
-      bottom: 0;
-      right: 0;
-      width: 200px;
-      height: 200px;
+      bottom: 8px;
+      right: 8px;
+      width: 320px;
+      height: 180px;
       opacity: 0.001;
       pointer-events: none;
       z-index: -10;
+      overflow: hidden;
     }
 
     .harmonic-audio-hud {
@@ -752,13 +752,27 @@ NEW_JS = '''    // =============================================================
     // Multi-Playlist Switcher + User Dynamic YouTube Playlist Input + 52 dB Optima
     // =========================================================================
     (function() {
-      // Default Curated Playlists
+      // Default Curated Channels
       var defaultPlaylists = [
         {
           id: 'PLM2VfNfvggIE',
-          title: 'MY LIFE SOUNDS (60)',
+          title: '01. MY LIFE SOUNDS (60)',
           subtitle: 'lk2243 (@lumbros2243) // Detroit Techno & Psytrance Continuum',
           bias: '432Hz HARMONIC BIAS',
+          isDefault: true
+        },
+        {
+          id: 'PLy1rKGexTy2s7qSGoRUoFx-hGQdR7XS33',
+          title: '02. PSYTRANCE 2026 CONTINUUM',
+          subtitle: 'BrutishHeavyMusic // Psychedelic Wave Continuum',
+          bias: 'HIGH-BPM FLOW RESONANCE',
+          isDefault: true
+        },
+        {
+          id: 'PLpY7hx7jry7y3TiUDGlPEDveFRMaEwr9I',
+          title: '03. GLOBAL PSYTRANCE SELECTION',
+          subtitle: 'Redlist Charts // Most Popular Psytrance Continuum',
+          bias: 'COHERENT HARMONIC DRIVE',
           isDefault: true
         }
       ];
@@ -918,7 +932,7 @@ NEW_JS = '''    // =============================================================
       // Render Playlist Selector Chips
       function renderPlaylistChips() {
         if (currentInd) {
-          currentInd.textContent = 'PLAYLIST ' + (currentPlaylistIndex + 1) + ' OF ' + allPlaylists.length;
+          currentInd.textContent = 'CHANNEL ' + (currentPlaylistIndex + 1) + ' OF ' + allPlaylists.length;
         }
         if (!chipsBar) return;
         chipsBar.innerHTML = '';
@@ -1019,7 +1033,7 @@ NEW_JS = '''    // =============================================================
 
         var newPl = {
           id: pid,
-          title: 'PLAYLIST ' + (allPlaylists.length + 1),
+          title: 'CUSTOM ' + (allPlaylists.length + 1),
           subtitle: 'USER LOADED // ID: ' + pid,
           bias: 'USER CONTINUUM',
           isDefault: false
@@ -1054,15 +1068,27 @@ NEW_JS = '''    // =============================================================
         });
       }
 
-      // Global Autoplay & Interaction Unmute Engine
+      // Global Autoplay & Interaction Unmute Engine (Zero-Interference Guarded)
       function triggerPlayback() {
         if (!ytPlayer) return;
         if (typeof ytPlayer.playVideo !== 'function') return;
         try {
-          ytPlayer.unMute();
+          if (ytPlayer.isMuted) {
+            if (ytPlayer.isMuted()) {
+              ytPlayer.unMute();
+            }
+          }
           isMuted = false;
           ytPlayer.setVolume(currentVolume > 0 ? currentVolume : 38);
-          ytPlayer.playVideo();
+          var st = -1;
+          if (typeof ytPlayer.getPlayerState === 'function') {
+            st = ytPlayer.getPlayerState();
+          }
+          if (st !== YT.PlayerState.PLAYING) {
+            if (st !== YT.PlayerState.BUFFERING) {
+              ytPlayer.playVideo();
+            }
+          }
           isPlaying = true;
         } catch(e) {}
         syncUiState();
@@ -1074,13 +1100,13 @@ NEW_JS = '''    // =============================================================
         if (ytPlayer) {
           if (typeof ytPlayer.playVideo === 'function') {
             hasUnlockedAudio = true;
-            triggerPlayback();
             cleanupListeners();
+            triggerPlayback();
           }
         }
       }
 
-      var unlockEvents = ['pointerdown', 'mousedown', 'touchstart', 'touchend', 'click', 'keydown', 'wheel', 'scroll'];
+      var unlockEvents = ['pointerdown', 'touchstart', 'click', 'keydown', 'wheel'];
       function cleanupListeners() {
         unlockEvents.forEach(function(evt) {
           window.removeEventListener(evt, handleGlobalInteraction);
@@ -1097,8 +1123,8 @@ NEW_JS = '''    // =============================================================
       window.initYtAudio = function() {
         if (ytPlayer) return;
         ytPlayer = new YT.Player('yt-audio-player', {
-          height: '200',
-          width: '200',
+          height: '180',
+          width: '320',
           playerVars: {
             listType: 'playlist',
             list: activePlaylist.id,
@@ -1122,28 +1148,12 @@ NEW_JS = '''    // =============================================================
       };
 
       function onYtReady(event) {
-        try {
-          if (ytPlayer.loadPlaylist) {
-            ytPlayer.loadPlaylist({
-              list: activePlaylist.id,
-              listType: 'playlist',
-              index: 0,
-              startSeconds: 0,
-              suggestedQuality: 'small'
-            });
-          }
-        } catch(e) {
-          try {
-            ytPlayer.loadPlaylist(videoIds, 0, 0, 'small');
-          } catch(err) {}
-        }
-
         ytPlayer.setVolume(currentVolume);
 
         if (userHasInteracted) {
           hasUnlockedAudio = true;
-          triggerPlayback();
           cleanupListeners();
+          triggerPlayback();
         } else {
           // Attempt immediate unmuted autoplay
           try {
@@ -1362,7 +1372,9 @@ def main():
     print("Replaced Audio CSS successfully.")
 
     # 3. Replace Audio JS
-    js_start_idx = content.find('// YouTube Audio Engine & Harmonic Psychoacoustic Controller Logic')
+    js_start_idx = content.find('// YouTube Audio Engine & Harmonic Psychoacoustic Multi-Playlist Continuum')
+    if js_start_idx == -1:
+        js_start_idx = content.find('// YouTube Audio Engine & Harmonic Psychoacoustic Controller Logic')
     js_end_idx = content.find('// GitHub Candlestixxx Live Repositories')
     if js_start_idx == -1 or js_end_idx == -1:
         print("ERROR: Could not locate JS boundaries!")
@@ -1370,11 +1382,17 @@ def main():
     content = content[:js_start_idx] + NEW_JS + "\n\n    // =========================================================================\n    " + content[js_end_idx:]
     print("Replaced Audio JS successfully.")
 
+    # 4. Remove Audio Oscillator from triggerBlast to eliminate 532Hz tone interference
+    old_blast_match = re.search(r'function triggerBlast\(\)[\s\S]*?var osc = audioCtx\.createOscillator\(\);[\s\S]*?\}\s*\}', content)
+    if old_blast_match:
+        new_blast = "function triggerBlast() {\n        blastPulse = 1.0;\n      }"
+        content = content[:old_blast_match.start()] + new_blast + content[old_blast_match.end():]
+        print("Silenced triggerBlast audio oscillator successfully.")
+
     # Verify no raw && in <script> blocks
     script_blocks = re.findall(r'<script>([\s\S]*?)</script>', content)
     has_raw_and = False
     for i, s in enumerate(script_blocks):
-        # find && that is not part of entity
         matches = [m.start() for m in re.finditer(r'&&', s)]
         if matches:
             print(f"WARNING: Found {len(matches)} raw '&&' in script block {i}!")

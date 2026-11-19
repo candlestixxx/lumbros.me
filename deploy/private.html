@@ -491,8 +491,8 @@
       <!-- Multi-Playlist Switcher & Custom URL Adder -->
       <div class="audio-playlist-module">
         <div class="playlist-section-header">
-          <span class="playlist-section-lbl">CHOOSE / ADD YOUTUBE PLAYLIST:</span>
-          <span class="playlist-current-indicator" id="playlist-current-indicator">PLAYLIST 1 OF 1</span>
+          <span class="playlist-section-lbl">CHOOSE CHANNEL / ADD YOUTUBE PLAYLIST:</span>
+          <span class="playlist-current-indicator" id="playlist-current-indicator">CHANNEL 1 OF 3</span>
         </div>
         <div class="playlist-chips-bar" id="playlist-chips-bar">
           <!-- Dynamic Playlist Chips inserted here by JS -->
@@ -5453,13 +5453,14 @@
        ========================================================================= */
     .yt-invisible-audio-frame {
       position: fixed;
-      bottom: 0;
-      right: 0;
-      width: 200px;
-      height: 200px;
+      bottom: 8px;
+      right: 8px;
+      width: 320px;
+      height: 180px;
       opacity: 0.001;
       pointer-events: none;
       z-index: -10;
+      overflow: hidden;
     }
 
     .harmonic-audio-hud {
@@ -10998,18 +10999,33 @@
 
     // =========================================================================
         // =========================================================================
+        // =========================================================================
     // YouTube Audio Engine & Harmonic Psychoacoustic Multi-Playlist Continuum
     // Playlist: "My Life Sounds" (PLM2VfNfvggIE // 60 Tracks) by @lumbros2243
     // Multi-Playlist Switcher + User Dynamic YouTube Playlist Input + 52 dB Optima
     // =========================================================================
     (function() {
-      // Default Curated Playlists
+      // Default Curated Channels
       var defaultPlaylists = [
         {
           id: 'PLM2VfNfvggIE',
-          title: 'MY LIFE SOUNDS (60)',
+          title: '01. MY LIFE SOUNDS (60)',
           subtitle: 'lk2243 (@lumbros2243) // Detroit Techno & Psytrance Continuum',
           bias: '432Hz HARMONIC BIAS',
+          isDefault: true
+        },
+        {
+          id: 'PLy1rKGexTy2s7qSGoRUoFx-hGQdR7XS33',
+          title: '02. PSYTRANCE 2026 CONTINUUM',
+          subtitle: 'BrutishHeavyMusic // Psychedelic Wave Continuum',
+          bias: 'HIGH-BPM FLOW RESONANCE',
+          isDefault: true
+        },
+        {
+          id: 'PLpY7hx7jry7y3TiUDGlPEDveFRMaEwr9I',
+          title: '03. GLOBAL PSYTRANCE SELECTION',
+          subtitle: 'Redlist Charts // Most Popular Psytrance Continuum',
+          bias: 'COHERENT HARMONIC DRIVE',
           isDefault: true
         }
       ];
@@ -11169,7 +11185,7 @@
       // Render Playlist Selector Chips
       function renderPlaylistChips() {
         if (currentInd) {
-          currentInd.textContent = 'PLAYLIST ' + (currentPlaylistIndex + 1) + ' OF ' + allPlaylists.length;
+          currentInd.textContent = 'CHANNEL ' + (currentPlaylistIndex + 1) + ' OF ' + allPlaylists.length;
         }
         if (!chipsBar) return;
         chipsBar.innerHTML = '';
@@ -11270,7 +11286,7 @@
 
         var newPl = {
           id: pid,
-          title: 'PLAYLIST ' + (allPlaylists.length + 1),
+          title: 'CUSTOM ' + (allPlaylists.length + 1),
           subtitle: 'USER LOADED // ID: ' + pid,
           bias: 'USER CONTINUUM',
           isDefault: false
@@ -11305,15 +11321,27 @@
         });
       }
 
-      // Global Autoplay & Interaction Unmute Engine
+      // Global Autoplay & Interaction Unmute Engine (Zero-Interference Guarded)
       function triggerPlayback() {
         if (!ytPlayer) return;
         if (typeof ytPlayer.playVideo !== 'function') return;
         try {
-          ytPlayer.unMute();
+          if (ytPlayer.isMuted) {
+            if (ytPlayer.isMuted()) {
+              ytPlayer.unMute();
+            }
+          }
           isMuted = false;
           ytPlayer.setVolume(currentVolume > 0 ? currentVolume : 38);
-          ytPlayer.playVideo();
+          var st = -1;
+          if (typeof ytPlayer.getPlayerState === 'function') {
+            st = ytPlayer.getPlayerState();
+          }
+          if (st !== YT.PlayerState.PLAYING) {
+            if (st !== YT.PlayerState.BUFFERING) {
+              ytPlayer.playVideo();
+            }
+          }
           isPlaying = true;
         } catch(e) {}
         syncUiState();
@@ -11325,13 +11353,13 @@
         if (ytPlayer) {
           if (typeof ytPlayer.playVideo === 'function') {
             hasUnlockedAudio = true;
-            triggerPlayback();
             cleanupListeners();
+            triggerPlayback();
           }
         }
       }
 
-      var unlockEvents = ['pointerdown', 'mousedown', 'touchstart', 'touchend', 'click', 'keydown', 'wheel', 'scroll'];
+      var unlockEvents = ['pointerdown', 'touchstart', 'click', 'keydown', 'wheel'];
       function cleanupListeners() {
         unlockEvents.forEach(function(evt) {
           window.removeEventListener(evt, handleGlobalInteraction);
@@ -11348,8 +11376,8 @@
       window.initYtAudio = function() {
         if (ytPlayer) return;
         ytPlayer = new YT.Player('yt-audio-player', {
-          height: '200',
-          width: '200',
+          height: '180',
+          width: '320',
           playerVars: {
             listType: 'playlist',
             list: activePlaylist.id,
@@ -11373,28 +11401,12 @@
       };
 
       function onYtReady(event) {
-        try {
-          if (ytPlayer.loadPlaylist) {
-            ytPlayer.loadPlaylist({
-              list: activePlaylist.id,
-              listType: 'playlist',
-              index: 0,
-              startSeconds: 0,
-              suggestedQuality: 'small'
-            });
-          }
-        } catch(e) {
-          try {
-            ytPlayer.loadPlaylist(videoIds, 0, 0, 'small');
-          } catch(err) {}
-        }
-
         ytPlayer.setVolume(currentVolume);
 
         if (userHasInteracted) {
           hasUnlockedAudio = true;
-          triggerPlayback();
           cleanupListeners();
+          triggerPlayback();
         } else {
           // Attempt immediate unmuted autoplay
           try {
@@ -12472,19 +12484,6 @@
       // Blast Emitter Action with 532Hz Harmonic Sound
       function triggerBlast() {
         blastPulse = 1.0;
-        try {
-          var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-          var osc = audioCtx.createOscillator();
-          var gain = audioCtx.createGain();
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(532.0, audioCtx.currentTime); // 532 Hz Green Harmonic
-          gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.6);
-          osc.connect(gain);
-          gain.connect(audioCtx.destination);
-          osc.start();
-          osc.stop(audioCtx.currentTime + 0.6);
-        } catch(e) {}
       }
 
       var blastBtn = document.getElementById('btn-blast-trigger');
